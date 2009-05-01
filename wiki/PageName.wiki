@@ -1,13 +1,9 @@
 #summary toStart
 
-= Introduction =
+= To Start =
 
-Add your content here.
+Download jboss 5.1.0.CR1:
 
+ http://www.jboss.org/jbossas/downloads/
 
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+In this project I use Web Beans: http://seamframework.org/WebBeans
