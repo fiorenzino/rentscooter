@@ -1,0 +1,103 @@
+<project basedir="." name="prenotazioniScooter" default="ear">
+
+	<property name="example.name" value="prenotazioniScooter" />
+	<property environment="env" />
+	<property name="src.dir" location="src" />
+
+	<property name="dd.dir" location="dd" />
+	<property name="build" location="build" />
+	<property name="build.dir" location="build/code" />
+	<property name="bundle" location="bundle" />
+	<property name="buildjar.dir" location="build/jars" />
+	<property name="build.classes.dir" value="${build.dir}" />
+	<property name="build.classes.test.dir" value="${build}/test" />
+	<property name="war.dir" value="${build}/${ant.project.name}.war/" />
+
+	<property name="war.classes.dir" value="${war.dir}/WEB-INF/classes" />
+
+	<property name="web.dir" location="WebContent" />
+	<property name="lib.dir" location="${web.dir}/WEB-INF/lib" />
+	<property name="java.home" value="/usr/lib/jvm/java-6-sun" />
+	<property name="jboss.home" value="/usr/jboss/jboss-5.1.0.CR1" />
+	<property name="jboss.server" value="default" />
+	<property name="jboss.deploy.dir" location="${jboss.home}/server/${jboss.server}/deploy" />
+	<property name="jboss.conf.dir" location="${jboss.home}/server/${jboss.server}/conf" />
+
+	<path id="compile.path">
+		<pathelement location="${build.classes.dir}" />
+		<pathelement location="${build.classes.test.dir}" />
+		<fileset dir="${lib.dir}" includes="*.jar" />
+		<fileset dir="/usr/jboss/jboss-5.1.0.CR1/server/default/deployers/webbeans.deployer" includes="*.jar" />
+		<fileset dir="/usr/jboss/jboss-5.1.0.CR1/server/default/deploy/jbossweb.sar" includes="*.jar" />
+		<fileset dir="${jboss.home}/client" includes="*.jar" />
+		<fileset dir="${jboss.home}/lib" includes="*.jar" />
+		<fileset dir="${jboss.home}/common/lib" includes="*.jar" />
+		<fileset dir="${jboss.home}/server/${jboss.server}/lib" includes="*.jar" />
+		<fileset dir="${jboss.home}/server/${jboss.server}/deploy/jbossweb.sar/jsf-libs" includes="*.jar" />
+		<fileset dir="/home/fiorenzo/workspace7/PrenotazioniScooter/WebContent/WEB-INF/lib" includes="*.jar" />
+	</path>
+	<target name="clean">
+		<delete dir="${build.dir}" />
+		<delete dir="${buildjar.dir}" />
+		<delete dir="${pdf.dir}" />
+		<delete dir="build" />
+	</target>
+	<target name="build" depends="compile">
+	</target>
+	<target name="compile">
+		<mkdir dir="${build.dir}" />
+		<javac destdir="${build.dir}" classpathref="compile.path" debug="true">
+			<src path="${src.dir}" />
+		</javac>
+	</target>
+	<target name="ejb3jar">
+		<mkdir dir="${buildjar.dir}" />
+		<jar destfile="${buildjar.dir}/${ant.project.name}.jar">
+			<metainf dir="META-INF">
+				<include name="persistence.xml" />
+			</metainf>
+			<fileset dir="${build.dir}">
+				<include name="**/ejb3/**/*.class" />
+				<include name="**/jms/**/*.class" />
+				<include name="**/jmx/**/*.class" />
+				<include name="**/par/**/*.class" />
+				<include name="**/web/**/*.class" />
+			</fileset>
+		</jar>
+	</target>
+	<target name="war" depends="compile">
+		<mkdir dir="${buildjar.dir}" />
+
+		<war destfile="${buildjar.dir}/${ant.project.name}.war" webxml="${web.dir}/WEB-INF/web.xml">
+			<classes dir="${build.dir}">
+				<include name="**/web/**/*.class" />
+				<exclude name="**/ejb3/**/*.class" />
+				<exclude name="**/par/**/*.class" />
+			</classes>
+			<fileset dir="${web.dir}" />
+		</war>
+	</target>
+	<target name="ear" depends="compile, ejb3jar,war">
+		<ear destfile="${buildjar.dir}/${ant.project.name}.ear" appxml="META-INF/application.xml">
+			<metainf dir="META-INF">
+				<include name="beans.xml" />
+			</metainf>
+			<fileset dir="${buildjar.dir}">
+				<include name="*.war" />
+			</fileset>
+			<fileset dir="${buildjar.dir}">
+				<include name="*.jar" />
+			</fileset>
+		</ear>
+	</target>
+
+	<target name="deploy" depends="ear">
+		<copy todir="${jboss.deploy.dir}" file="${buildjar.dir}/${ant.project.name}.ear" />
+		<echo message="DEPLOY" />
+	</target>
+
+	<target name="undeploy">
+		<delete dir="${jboss.deploy.dir}/${ant.project.name}.war" failonerror="false" />
+	</target>
+
+</project>

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://topnet.it/facelets">
+
+<ui:composition template="../template.xhtml">
+	<ui:define name="title">User</ui:define>
+	<ui:define name="content">
+		<p style="align: center;">User</p>
+		<h:form id="form">
+			<rich:panel id="prenotazioneScooter">
+				<a:field id="Nome" label="Nome(*):" fieldName="nome"
+					entity="#{userHandler.user}" required="true" />
+
+				<a:field id="cognome" label="Cognome(*):" fieldName="cognome"
+					entity="#{userHandler.user}" required="true" />
+
+				<a:field id="ci" label="Carta d'Identita'(*):"
+					fieldName="cartaidentita" entity="#{userHandler.user}"
+					required="false" />
+
+				<a:field id="indirizzo" label="Indirizzo(*):" fieldName="indirizzo"
+					entity="#{userHandler.user}" required="true" type="inputTextArea" />
+
+				<a4j:region renderRegionOnly="false">
+					<a:field id="provinciauserHandler"
+						label="Provincia di residenza(*):" type="selOneAjax"
+						entityId="#{userHandler.user}" fieldName="provincia"
+						fieldNameList="#{propertiesHandler.provinceList}"
+						reRender="cityuserHandler, capuserHandler" required="true" />
+				</a4j:region>
+				<a4j:region>
+					<a:field id="cityuserHandler" label="Città di residenza(*):"
+						type="selOneM_Aitems" entityId="#{userHandler.user}"
+						fieldName="city" fieldNameList="#{propertiesHandler.comuniItems}"
+						reRender="capuserHandler" required="true" />
+
+					<a:field id="capuserHandler" label="Cap(*):" type="selOneM_items"
+						entityId="#{userHandler.user}" fieldName="cap"
+						fieldNameList="#{propertiesHandler.capItems}" required="true" />
+
+				</a4j:region>
+				<a:field id="nazioneuserHandler" label="Nazione di residenza(*):"
+					type="selOneM" entityId="#{userHandler.user}" fieldName="nazione"
+					entityList="#{propertiesHandler}" fieldNameList="nazioniList"
+					required="true" />
+
+				<a:field id="dataNascita" label="Data di Nascita(*):"
+					fieldName="dataNascita" type="calendar"
+					entity="#{userHandler.user}" required="true" />
+			</rich:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
