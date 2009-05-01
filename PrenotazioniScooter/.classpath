@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/WB"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/rich330ga"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/WB10"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/RICH"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JBOSS51CR1"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/richfaces-api-3.3.0.GA.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/richfaces-impl-3.3.0.GA.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/richfaces-ui-3.3.0.GA.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

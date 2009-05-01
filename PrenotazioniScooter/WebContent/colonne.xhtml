@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="title">Calendario</ui:define>
+	<ui:define name="content">
+		<p style="align: center;">CERCA PER COLONNE</p>
+		<h:form id="leftForm">
+			<h1>Ricerca</h1>
+			<div>
+			<p>data dal: <rich:calendar id="dataDal"
+				value="#{reservationHandler.dal}" popup="true" showInput="true"
+				enableManualInput="true" datePattern="dd/MM/yyyy"
+				showApplyButton="true" /></p>
+			<p>data al: <rich:calendar id="dataAl"
+				value="#{reservationHandler.al}" popup="true" showInput="true"
+				enableManualInput="true" datePattern="dd/MM/yyyy"
+				showApplyButton="true" /></p>
+			<h:commandButton id="submit"
+				action="#{reservationHandler.resetLista}" value="Cerca"
+				immediate="false" /></div>
+		</h:form>
+		<rich:panel header="Prenotazioni">
+			<h:form id="centerForm">
+				<rich:dataTable id="colTable" value="#{reservationHandler.model}"
+					var="res">
+
+					<f:facet name="header">
+						<h:outputText value="Prentazioni"></h:outputText>
+					</f:facet>
+
+					<rich:columns value="#{reservationHandler.columns}" var="columns"
+						index="ind" begin="#{reservationHandler.begin}"
+						end="#{reservationHandler.end}">
+
+						<f:facet name="header">
+							<h:outputText value="#{columns.header}" />
+						</f:facet>
+						<h:outputText value="#{res[ind].scooterName} " />
+					</rich:columns>
+				</rich:dataTable>
+			</h:form>
+		</rich:panel>
+	</ui:define>
+</ui:composition>
+</html>
