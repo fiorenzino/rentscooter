@@ -21,4 +21,5 @@
 			it.reservations.web.navigation.NavigationHandler
 		</navigation-handler>
 	</application>
+
 </faces-config>
