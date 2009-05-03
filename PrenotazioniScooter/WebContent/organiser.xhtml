@@ -17,12 +17,12 @@
 				<a4j:jsFunction name="ajaxSubmit"
 					oncomplete="#{rich:component('panel')}.show()"
 					reRender="editContent" />
-				<rich:calendar value="#{calendarModel.currentDate}" popup="false"
+				<rich:calendar value="#{organizerHandler.currentDate}" popup="false"
 					showApplyButton="false" cellWidth="100px" cellHeight="100px"
 					boundaryDatesMode="none" showWeeksBar="false"
-					dataModel="#{calendarModel}" oncurrentdateselected="updateName();"
+					dataModel="#{organizerHandler}" oncurrentdateselected="updateName();"
 					id="organizer" onchanged="if (event.rich.date) {ajaxSubmit();}"
-					valueChangeListener="#{calendarModel.valueChanged}"
+					valueChangeListener="#{organizerHandler.valueChanged}"
 					showFooter="false">
 
 					<a4j:outputPanel layout="block" id="cell"
@@ -36,7 +36,7 @@
 				</rich:calendar>
 			</rich:panel>
 			<a4j:jsFunction name="updateName" reRender="calendario"
-				action="#{calendarModel.reset}">
+				action="#{organizerHandler.reset}">
 			</a4j:jsFunction>
 		</h:form>
 		<rich:modalPanel id="panel" resizeable="false">
@@ -51,14 +51,14 @@
 			</f:facet>
 			<h:form>
 				<h:panelGrid columns="2" id="editContent">
-					<h:outputText value="Giorno: #{calendarModel.currentDate}" />
+					<h:outputText value="Giorno: #{organizerHandler.currentDate}" />
 					<h:inputText
-						value="Titolo: #{calendarModel.currentShortDescription}" />
-					<h:outputText value="Note: #{calendarModel.currentDescription}" />
+						value="Titolo: #{organizerHandler.currentShortDescription}" />
+					<h:outputText value="Note: #{organizerHandler.currentDescription}" />
 					<h:commandLink id="addEvento" action="colonne.jsf" immediate="true"
 						value="aggiungi" />
 					<a4j:commandButton value="Store"
-						action="#{calendarModel.storeDayDetails}" id="storebutton"
+						action="#{organizerHandler.storeDayDetails}" id="storebutton"
 						oncomplete="#{rich:component('panel')}.hide()"
 						reRender="organizer" />
 				</h:panelGrid>
