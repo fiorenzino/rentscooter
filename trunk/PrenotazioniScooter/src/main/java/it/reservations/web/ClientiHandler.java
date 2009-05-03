@@ -9,13 +9,13 @@ import javax.context.SessionScoped;
 
 @SessionScoped
 @Named
-public class UserHandler implements Serializable{
+public class ClientiHandler implements Serializable{
 
 	private User user;
 
 	public String addUser1() {
 		this.user = new User();
-		return "/clienti/addModCliente.xhtml";
+		return "/clienti/aggiungi-cliente.xhtml";
 	}
 
 	public String addUser2() {

@@ -14,7 +14,7 @@ import javax.inject.Produces;
 public class Generator implements Serializable {
 
 	@Current
-	ReservationHandler reservationHandler;
+	PrenotazioniHandler reservationHandler;
 
 	private ArrayList<Facet> columns;
 
