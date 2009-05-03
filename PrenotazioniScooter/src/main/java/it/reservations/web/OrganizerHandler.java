@@ -24,7 +24,7 @@ import org.richfaces.model.CalendarDataModelItem;
 
 @SessionScoped
 @Named
-public class CalendarModel implements CalendarDataModel, Serializable {
+public class OrganizerHandler implements CalendarDataModel, Serializable {
 
 	@EJB
 	ReservationManager reservationManager;

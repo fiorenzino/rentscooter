@@ -7,6 +7,6 @@ import javax.context.SessionScoped;
 
 @SessionScoped
 @Named
-public class ScooterHandler implements Serializable {
+public class ScootersHandler implements Serializable {
 
 }

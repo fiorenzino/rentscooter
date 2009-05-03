@@ -9,14 +9,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Named;
 import javax.context.SessionScoped;
 import javax.ejb.EJB;
+import javax.faces.model.ArrayDataModel;
+import javax.faces.model.DataModel;
 
 @SessionScoped
 @Named
-public class ReservationHandler implements Serializable {
+public class PrenotazioniHandler implements Serializable {
 
 	@EJB
 	ReservationManager reservationManager;
@@ -29,7 +32,9 @@ public class ReservationHandler implements Serializable {
 	private int begin;
 	private int end;
 
-	public ReservationHandler() {
+	List<Reservation> reservationsList;
+
+	public PrenotazioniHandler() {
 	}
 
 	public ArrayList<Facet> getColumns() {
@@ -140,6 +145,31 @@ public class ReservationHandler implements Serializable {
 
 	public void setEnd(int end) {
 		this.end = end;
+	}
+
+	public DataModel getReservations() {
+		// SE NULLO LO RICREO
+		ArrayDataModel data = new ArrayDataModel();
+		data.setWrappedData(getReservationsList());
+		return data;
+	}
+
+	public void addReservation(Reservation reservation) {
+		getReservationsList().add(reservation);
+	}
+
+	public List<Reservation> getReservationsList() {
+		if (reservationsList == null) {
+			reservationsList = new ArrayList<Reservation>();
+			Reservation res = new Reservation();
+			reservationsList.add(res);
+
+		}
+		return reservationsList;
+	}
+
+	public void setReservationsList(List<Reservation> reservationsList) {
+		this.reservationsList = reservationsList;
 	}
 
 }
