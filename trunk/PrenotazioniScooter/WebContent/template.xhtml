@@ -21,10 +21,12 @@
 
 <div id="container">
 <div id="header"><ui:insert name="header">
-	<a href="calendario.jsf">calendario</a> - <a href="colonne.jsf">colonne</a> - <a
-		href="clienti/">clienti</a>
-	<h:commandLink id="addEvento" action="#{userHandler.addUSer1}" immediate="true"
-		value="aggiungiUser" />
+	<h:form id="alto">
+		<a href="calendario.jsf">calendario</a> - <a href="colonne.jsf">colonne</a> - <a
+			href="clienti/">clienti</a>
+		<h:commandLink id="addEvento" action="#{userHandler.addUSer1}"
+			immediate="true" value="aggiungiUser" />
+	</h:form>
 </ui:insert></div>
 
 <div id="sidebar"><ui:insert name="sidebar">

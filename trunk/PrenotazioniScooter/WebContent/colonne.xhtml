@@ -10,21 +10,25 @@
 	<ui:define name="title">Calendario</ui:define>
 	<ui:define name="content">
 		<p style="align: center;">CERCA PER COLONNE</p>
-		<h:form id="leftForm">
-			<h1>Ricerca</h1>
-			<div>
-			<p>data dal: <rich:calendar id="dataDal"
-				value="#{reservationHandler.dal}" popup="true" showInput="true"
-				enableManualInput="true" datePattern="dd/MM/yyyy"
-				showApplyButton="true" /></p>
-			<p>data al: <rich:calendar id="dataAl"
-				value="#{reservationHandler.al}" popup="true" showInput="true"
-				enableManualInput="true" datePattern="dd/MM/yyyy"
-				showApplyButton="true" /></p>
-			<h:commandButton id="submit"
-				action="#{reservationHandler.resetLista}" value="Cerca"
-				immediate="false" /></div>
-		</h:form>
+		<rich:panel id="vediamo">
+			<h:form id="leftForm">
+				<div>data dal: <rich:calendar id="dataDal"
+					value="#{reservationHandler.dal}" popup="true" showInput="true"
+					enableManualInput="true" datePattern="dd/MM/yyyy"
+					showApplyButton="true">
+					<a4j:support event="onchanged" ajaxSingle="true" />
+				</rich:calendar></div>
+				<div>data al: <rich:calendar id="dataAl"
+					value="#{reservationHandler.al}" popup="true" showInput="true"
+					enableManualInput="true" datePattern="dd/MM/yyyy"
+					showApplyButton="true">
+					<a4j:support event="onchanged" ajaxSingle="true" />
+				</rich:calendar></div>
+				<h:commandButton id="submit"
+					action="#{reservationHandler.resetLista}" value="Cerca"
+					immediate="false" />
+			</h:form>
+		</rich:panel>
 		<rich:panel header="Prenotazioni">
 			<h:form id="centerForm">
 				<rich:dataTable id="colTable" value="#{reservationHandler.model}"
