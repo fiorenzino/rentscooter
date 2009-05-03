@@ -27,7 +27,7 @@
 	background: #EFEFEF;
 	font-family: Georgia, "Times New Roman", Times, serif;
 	font-size: 0.9em;
-	padding: 30px 20px 20px 10px;
+	padding: 5px 20px 20px 10px;
 	margin-right: auto;
 	margin-left: auto;
 }
@@ -94,4 +94,11 @@
 #navbar a:hover {
 	background: #EFE2E2;
 	font-size: 0.8em;
+}
+.libero {
+	background-color: green;
+}
+
+.occupato {
+	background-color: red;
 }
