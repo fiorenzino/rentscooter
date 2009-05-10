@@ -2,8 +2,7 @@ package it.reservations.web;
 
 import java.io.Serializable;
 
-import it.reservations.par.User;
-
+import it.reservations.par.Client;
 import javax.annotation.Named;
 import javax.context.SessionScoped;
 
@@ -11,37 +10,37 @@ import javax.context.SessionScoped;
 @Named
 public class ClientiHandler implements Serializable{
 
-	private User user;
+	private Client client;
 
-	public String addUser1() {
-		this.user = new User();
+	public String addClient1() {
+		this.client = new Client();
 		return "/clienti/aggiungi-cliente.xhtml";
 	}
 
-	public String addUser2() {
+	public String addClient2() {
 		return "";
 	}
 
-	public String modUser1() {
+	public String modClient1() {
 		return "";
 	}
 
-	public String modUser2() {
+	public String modClient2() {
 		return "";
 	}
 
-	public String detailUser() {
+	public String detailClient() {
 		return "";
 	}
 
-	public User getUser() {
-		if (user == null)
-			this.user = new User();
-		return user;
+	public Client getClient() {
+		if (client == null)
+			this.client = new Client();
+		return client;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(Client client) {
+		this.client = client;
 	}
 
 }

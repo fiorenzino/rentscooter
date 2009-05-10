@@ -47,7 +47,7 @@ public class PropertiesHandler implements Serializable {
 	Configurator configurator;
 
 	@Current
-	UserHandler userHandler;
+	ClientiHandler clientiHandler;
 
 	public SelectItem[] getRowItems() {
 		// 10 - 20 -50 -100
@@ -64,8 +64,8 @@ public class PropertiesHandler implements Serializable {
 		Long provincia = new Long(0);
 		Long comune = new Long(0);
 		// LI PRENDO DALL'UTENTE IN SESSIONE
-		comune = userHandler.getUser().getCity();
-		provincia = userHandler.getUser().getProvincia();
+		comune = clientiHandler.getClient().getCity();
+		provincia = clientiHandler.getClient().getProvincia();
 		capItems = new SelectItem[] { new SelectItem(" -- ") };
 		if ((comune == 0) && (provincia != 0)) {
 			comune = getMappaProvinciaComuni().get(provincia).get(0);
@@ -95,8 +95,8 @@ public class PropertiesHandler implements Serializable {
 
 		Long provincia = new Long(0);
 		// log.info("getComuniItems2 - " + provincia);
-		provincia = userHandler.getUser().getProvincia();
-		
+		provincia = clientiHandler.getClient().getProvincia();
+
 		comuniItems = new SelectItem[] { new SelectItem(new Long(0), " -- ") };
 		if (provincia == null || provincia == 0) {
 			return comuniItems;

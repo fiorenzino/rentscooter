@@ -16,7 +16,7 @@ public class Reservation implements Serializable {
 
 	private Long id;
 	private Date singleDay;
-	private User user;
+	private Client client;
 	private Scooter scooter;
 	private String singleDayName;
 	private String scooterName;
@@ -32,12 +32,12 @@ public class Reservation implements Serializable {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
+	public Client getClient() {
+		return client;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	@ManyToOne
