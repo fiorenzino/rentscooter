@@ -6,10 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-@Local(ScooterManager.class)
-public class ScooterManagerBean implements ScooterManager {
+@Local(ClientiManager.class)
+public class ClientiManagerBean implements ClientiManager {
 
 	@PersistenceContext(unitName = "TestManager")
 	EntityManager em;
-
 }

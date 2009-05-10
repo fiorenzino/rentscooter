@@ -19,7 +19,7 @@ public class Contract implements Serializable {
 	private Long id;
 	private Date dataInit;
 	private Date dataEnd;
-	private User user;
+	private Client client;
 	private String note;
 	private Float importoIniziale;
 	private Float importoFinale;
@@ -53,12 +53,12 @@ public class Contract implements Serializable {
 		this.dataEnd = dataEnd;
 	}
 
-	public User getUser() {
-		return user;
+	public Client getClient() {
+		return client;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	@Lob

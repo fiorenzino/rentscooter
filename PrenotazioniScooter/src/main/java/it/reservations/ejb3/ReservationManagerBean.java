@@ -4,10 +4,10 @@ import it.reservations.par.Contract;
 import it.reservations.par.DaySummary;
 import it.reservations.par.Reservation;
 import it.reservations.par.Scooter;
+import it.smartflower.ejb3.EJBManagerBean;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -21,7 +21,8 @@ import javax.persistence.PersistenceContext;
 
 @Stateless
 @Local(ReservationManager.class)
-public class ReservationManagerBean implements ReservationManager {
+public class ReservationManagerBean extends EJBManagerBean implements
+		ReservationManager {
 
 	@PersistenceContext(unitName = "TestManager")
 	EntityManager em;
@@ -129,5 +130,11 @@ public class ReservationManagerBean implements ReservationManager {
 			em.remove(reservation);
 		}
 		em.remove(contract);
+	}
+
+	@Override
+	public EntityManager getEm() {
+		// TODO Auto-generated method stub
+		return em;
 	}
 }

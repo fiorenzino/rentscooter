@@ -2,11 +2,12 @@ package it.reservations.ejb3;
 
 import it.reservations.par.Contract;
 import it.reservations.par.DaySummary;
+import it.smartflower.ejb3.EJBManager;
 
 import java.util.Date;
 import java.util.Map;
 
-public interface ReservationManager {
+public interface ReservationManager extends EJBManager{
 
 	public Map<String, Map<String, Boolean>> getReservationList(Date dal,
 			Date al, String cilindrata);

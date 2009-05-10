@@ -22,10 +22,14 @@ import org.richfaces.event.CurrentDateChangeEvent;
 import org.richfaces.model.CalendarDataModel;
 import org.richfaces.model.CalendarDataModelItem;
 
+import it.smartflower.ejb3.utils.ClassCreator;
+import it.smartflower.par.RicercaI;
+import it.smartflower.web.utils.JSFHandler;
+
 @SessionScoped
 @Named
-public class OrganizerHandler implements CalendarDataModel, Serializable {
-
+public class OrganizerHandler extends JSFHandler implements CalendarDataModel,
+		Serializable {
 	@EJB
 	ReservationManager reservationManager;
 	private CalendarDataModelItem[] items;
@@ -35,6 +39,25 @@ public class OrganizerHandler implements CalendarDataModel, Serializable {
 	private boolean currentDisabled;
 	private Date dataInit;
 	private Date dataEnd;
+
+	@Override
+	public void initRicerca() {
+		try {
+			this.ricerca = (RicercaI) ClassCreator
+					.creaRicerca("it.somaro.par.RicercaEmail");
+			this.ricerca.setSelect("SELECT * FROM EMAIL");
+			System.out.println("ecco qui: " + this.ricerca.getSelect());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public OrganizerHandler() {
+		eJBManager = reservationManager;
+		rowsPerPage = 10;
+		initRicerca();
+	}
 
 	public Date getDataInit() {
 		if (dataInit == null)
@@ -112,7 +135,7 @@ public class OrganizerHandler implements CalendarDataModel, Serializable {
 		Map<Date, DaySummary> mapp = reservationManager.getReservationData(
 				init, end);
 		for (Date data : mapp.keySet()) {
-			System.out.println("DATA: " + data);
+			// System.out.println("DATA: " + data);
 			DaySummary dayS = mapp.get(data);
 			lista.add(createDataModelItem(data, "occupate:" + dayS.getNum(),
 					dayS.getDescription(), dayS.getNum()));
@@ -265,4 +288,5 @@ public class OrganizerHandler implements CalendarDataModel, Serializable {
 	public void setCurrentDate(Date currentDate) {
 		this.currentDate = currentDate;
 	}
+
 }

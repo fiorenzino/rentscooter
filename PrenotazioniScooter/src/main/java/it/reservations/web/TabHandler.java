@@ -3,9 +3,6 @@ package it.reservations.web;
 import it.reservations.web.utils.Util;
 
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 
 import javax.annotation.Named;
 import javax.context.SessionScoped;
