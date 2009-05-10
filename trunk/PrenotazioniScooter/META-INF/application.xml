@@ -6,6 +6,9 @@
 		<ejb>prenotazioniScooter.jar</ejb>
 	</module>
 	<module>
+		<ejb>smartflower.jar</ejb>
+	</module>
+	<module>
 		<web>
 			<web-uri>prenotazioniScooter.war</web-uri>
 			<context-root>/prenotazioniScooter</context-root>

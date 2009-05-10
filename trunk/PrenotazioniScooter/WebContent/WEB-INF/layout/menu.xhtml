@@ -4,10 +4,11 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
-	<a href="/index.html">Home</a>
-	<a href="clienti/">Clienti</a>
-	<a href="scooters/">Scooter</a>
-	<a href="prenotazioni/">Prenotazioni</a>
-	<a href="contratti/">Contratti</a>
+	<a href="#{facesContext.externalContext.requestContextPath}/index.html">Home</a>
+	<a href="#{facesContext.externalContext.requestContextPath}/clienti/">Clienti</a>
+	<a href="#{facesContext.externalContext.requestContextPath}/scooters/">Scooter</a>
+	<a
+		href="#{facesContext.externalContext.requestContextPath}/prenotazioni/">Prenotazioni</a>
+	<a href="#{facesContext.externalContext.requestContextPath}/contratti/">Contratti</a>
 	<a href="#">Logout</a>
 </h:form>
