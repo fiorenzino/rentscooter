@@ -1,13 +1,20 @@
-#summary One-sentence summary of this page.
+#summary To Start with RentScooter
 
-= Introduction =
+= To Start =
 
-Add your content here.
+Download jboss 5.1.0.CR1:
 
+ http://www.jboss.org/jbossas/downloads/
+---- 
 
-= Details =
+In this project I use Web Beans: http://seamframework.org/WebBeans
+---- 
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+In the docs folder you can find:
+- dump of database rentScooter.sql (you should create database: rentScooter and user rentScooter with password rentScooter
+
+---- 
+
+- datasource file rentScooter-ds.xml (you should copy in jboss/server/default/deploy)
+
+---- 
