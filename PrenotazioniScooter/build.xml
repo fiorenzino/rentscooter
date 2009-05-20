@@ -1,4 +1,4 @@
-<project basedir="." name="prenotazioniScooter" default="ear">
+<project basedir="." name="prenotazioniScooter" default="ear_dir">
 
 	<property name="example.name" value="prenotazioniScooter" />
 	<property environment="env" />
@@ -14,11 +14,11 @@
 	<property name="war.dir" value="${build}/${ant.project.name}.war/" />
 
 	<property name="war.classes.dir" value="${war.dir}/WEB-INF/classes" />
-
+	<property name="ear.dir" value="${build}/${ant.project.name}.ear/" />
 	<property name="web.dir" location="WebContent" />
 	<property name="lib.dir" location="${web.dir}/WEB-INF/lib" />
-	<property name="java.home" value="/usr/lib/jvm/java-6-sun" />
-	<property name="jboss.home" value="/usr/jboss/jboss-5.1.0.CR1" />
+	<property name="lib.deploy" location="lib/deploy" />
+	<property name="jboss.home" value="C:\jboss-5.1.0.CR1" />
 	<property name="jboss.server" value="default" />
 	<property name="jboss.deploy.dir" location="${jboss.home}/server/${jboss.server}/deploy" />
 	<property name="jboss.conf.dir" location="${jboss.home}/server/${jboss.server}/conf" />
@@ -27,14 +27,15 @@
 		<pathelement location="${build.classes.dir}" />
 		<pathelement location="${build.classes.test.dir}" />
 		<fileset dir="${lib.dir}" includes="*.jar" />
-		<fileset dir="/usr/jboss/jboss-5.1.0.CR1/server/default/deployers/webbeans.deployer" includes="*.jar" />
-		<fileset dir="/usr/jboss/jboss-5.1.0.CR1/server/default/deploy/jbossweb.sar" includes="*.jar" />
+		<fileset dir="${lib.deploy}" includes="*.jar" />
+		<fileset dir="${jboss.home}/server/default/deployers/webbeans.deployer" includes="*.jar" />
+		<fileset dir="${jboss.home}/server/default/deploy/jbossweb.sar" includes="*.jar" />
 		<fileset dir="${jboss.home}/client" includes="*.jar" />
 		<fileset dir="${jboss.home}/lib" includes="*.jar" />
 		<fileset dir="${jboss.home}/common/lib" includes="*.jar" />
 		<fileset dir="${jboss.home}/server/${jboss.server}/lib" includes="*.jar" />
 		<fileset dir="${jboss.home}/server/${jboss.server}/deploy/jbossweb.sar/jsf-libs" includes="*.jar" />
-		<fileset dir="/home/fiorenzo/workspace7/PrenotazioniScooter/WebContent/WEB-INF/lib" includes="*.jar" />
+		<fileset dir="WebContent/WEB-INF/lib" includes="*.jar" />
 	</path>
 	<target name="clean">
 		<delete dir="${build.dir}" />
@@ -82,22 +83,31 @@
 			<metainf dir="META-INF">
 				<include name="beans.xml" />
 			</metainf>
+			<metainf dir="META-INF">
+				<include name="*.properties" />
+			</metainf>
 			<fileset dir="${buildjar.dir}">
 				<include name="*.war" />
 			</fileset>
 			<fileset dir="${buildjar.dir}">
 				<include name="*.jar" />
 			</fileset>
+			<fileset dir="${lib.deploy}" includes="*.jar" />
 		</ear>
 	</target>
-
-	<target name="deploy" depends="ear">
-		<copy todir="${jboss.deploy.dir}" file="${buildjar.dir}/${ant.project.name}.ear" />
-		<echo message="DEPLOY" />
+	<target name="ear_dir" depends="ear">
+		<unjar src="${buildjar.dir}/${ant.project.name}.ear" dest="${ear.dir}" />
 	</target>
 
+	<target name="deploy">
+		<copy todir="${jboss.deploy.dir}" file="${ear.dir}" />
+		<echo message="DEPLOY" />
+	</target>
+	<target name="deploy-dir">
+		<copydir src="${ear.dir}" dest="${jboss.deploy.dir}/${ant.project.name}.ear" />
+	</target>
 	<target name="undeploy">
-		<delete dir="${jboss.deploy.dir}/${ant.project.name}.war" failonerror="false" />
+		<delete dir="${jboss.deploy.dir}/${ant.project.name}.ear" failonerror="false" />
 	</target>
 
 </project>
