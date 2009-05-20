@@ -28,8 +28,7 @@ import it.smartflower.web.utils.JSFHandler;
 
 @SessionScoped
 @Named
-public class OrganizerHandler extends JSFHandler implements CalendarDataModel,
-		Serializable {
+public class OrganizerHandler implements CalendarDataModel, Serializable {
 	@EJB
 	ReservationManager reservationManager;
 	private CalendarDataModelItem[] items;
@@ -39,25 +38,6 @@ public class OrganizerHandler extends JSFHandler implements CalendarDataModel,
 	private boolean currentDisabled;
 	private Date dataInit;
 	private Date dataEnd;
-
-	@Override
-	public void initRicerca() {
-		try {
-			this.ricerca = (RicercaI) ClassCreator
-					.creaRicerca("it.somaro.par.RicercaEmail");
-			this.ricerca.setSelect("SELECT * FROM EMAIL");
-			System.out.println("ecco qui: " + this.ricerca.getSelect());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public OrganizerHandler() {
-		eJBManager = reservationManager;
-		rowsPerPage = 10;
-		initRicerca();
-	}
 
 	public Date getDataInit() {
 		if (dataInit == null)

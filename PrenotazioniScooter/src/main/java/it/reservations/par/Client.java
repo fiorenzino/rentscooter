@@ -20,12 +20,14 @@ public class Client implements Serializable {
 	private Long city;
 	private Long provincia;
 	private Long cap;
+	private Long nazione;
 	private Date dataNascita;
 
 	public Client() {
 		this.city = new Long(0);
 		this.provincia = new Long(0);
 		this.cap = new Long(0);
+		this.nazione = new Long(0);
 	}
 
 	@Id
@@ -101,6 +103,14 @@ public class Client implements Serializable {
 
 	public void setDataNascita(Date dataNascita) {
 		this.dataNascita = dataNascita;
+	}
+
+	public Long getNazione() {
+		return nazione;
+	}
+
+	public void setNazione(Long nazione) {
+		this.nazione = nazione;
 	}
 
 }
