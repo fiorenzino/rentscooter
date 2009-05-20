@@ -1,11 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jstl/core"
-	xmlns:t="http://myfaces.apache.org/tomahawk"
 	xmlns:a="http://topnet.it/facelets"
 	xmlns:fn="http://topnet.it/functions"
 	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
@@ -97,12 +95,7 @@ THIS TEXT WILL BE REMOVED
 					<h:outputLabel id="${id}Label" value="${label}" for="#{id}" />
 					<h:inputTextarea id="#{id}" value="#{entity[fieldName]}"
 						rows="#{rows}" cols="#{cols}" required="${required}"
-						readonly="#{readonly}" escape="false"/>
-				</c:when>
-				<c:when test='${type == "inputDate"}'>
-					<h:outputLabel id="${id}Label" value="${label}" for="#{id}" />
-					<t:inputDate id="#{id}" type="date" value="#{entity[fieldName]}"
-						popupCalendar="false" />
+						readonly="#{readonly}" escape="false" />
 				</c:when>
 				<c:when test='${type == "link"}'>
 					<h:outputLink value="${val}">
@@ -122,11 +115,7 @@ THIS TEXT WILL BE REMOVED
 				</c:when>
 				<c:when test='${type == "calendar"}'>
 					<h:outputLabel id="${id}Label" value="${label}" for="#{id}" />
-					<!--  <t:inputCalendar id="#{id}" monthYearRowClass="yearMonthHeader"
-						weekRowClass="weekHeader" popupButtonStyleClass="standard_bold"
-						currentDayCellClass="currentDayCell" value="#{entity[fieldName]}"
-						renderAsPopup="true" popupDateFormat="dd/MM/yyyy"
-						helpText="dd/MM/yyyy" /> -->
+
 					<rich:calendar value="#{entity[fieldName]}" id="#{id}" popup="true"
 						datePattern="d/M/yyyy" enableManualInput="true"
 						showApplyButton="false" style="width:200px"

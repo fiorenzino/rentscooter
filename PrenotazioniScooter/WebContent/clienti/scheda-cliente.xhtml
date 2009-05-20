@@ -3,20 +3,43 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich">
+	xmlns:a="http://topnet.it/facelets"
+	xmlns:fn="http://topnet.it/functions"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax">
 
 <ui:composition template="/WEB-INF/layout/t_single.xhtml">
 	<ui:define name="title">Gestione Clienti</ui:define>
 	<ui:define name="content">
-		<p style="align: center;">Organizer</p>
+		<p style="align: center;">Gestione Clienti</p>
 		<h:form id="form">
-
 			<rich:panel id="prenotazioneScooter">
-				<!-- CERCA NEL DB DA DATAINIT A DATAEND -->
-			</rich:panel>
-			<rich:panel>
-				<!-- AGGIUNGI RIGA SCOOTER - DATAINIT - DATAEND -->
+				<a:fieldView label="Nome:" fieldName="nome" id="nome"
+					entity="#{clientiHandler.client}" />
+
+				<a:fieldView label="Cognome:" fieldName="cognome" id="cognome"
+					entity="#{clientiHandler.client}" />
+
+				<a:fieldView label="Data Nascita" fieldName="dataNascita"
+					id="datanascita" entity="#{clientiHandler.client}" />
+
+				<a:fieldView id="ci" label="Carta d'Identita':"
+					fieldName="cartaidentita" entity="#{clientiHandler.client}" />
+
+				<a:fieldView id="indirizzo" label="Indirizzo:" fieldName="indirizzo"
+					entity="#{clientiHandler.client}" />
+
+				<a:fieldView id="provincia" label="provincia:" fieldName="provincia"
+					entity="#{clientiHandler.client}" />
+
+				<a:fieldView id="city" label="Citta'" fieldName="city"
+					entity="#{clientiHandler.client}" />
+
+				<a:fieldView id="cap" label="Cap:" fieldName="cap"
+					entity="#{clientiHandler.client}" />
+
+				<a:fieldView id="nazione" label="Nazione:" fieldName="nazione"
+					entity="#{clientiHandler.client}" />
 			</rich:panel>
 		</h:form>
 	</ui:define>

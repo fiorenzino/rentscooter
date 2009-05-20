@@ -88,20 +88,18 @@
 		<dispatcher>INCLUDE</dispatcher>
 		<dispatcher>ERROR</dispatcher>
 	</filter-mapping>
-
-	<filter>
-		<filter-name>RendererFilter</filter-name>
+	<!--
+		<filter> <filter-name>RendererFilter</filter-name>
 		<filter-class>it.reservations.web.printer.RendererFilter</filter-class>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>RendererFilter</filter-name>
-		<url-pattern>*.jsf</url-pattern>
-	</filter-mapping>
-
+		</filter> <filter-mapping> <filter-name>RendererFilter</filter-name>
+		<url-pattern>*.jsf</url-pattern> </filter-mapping>
+	-->
 	<context-param>
 		<param-name>facelets.LIBRARIES</param-name>
-		<param-value>/WEB-INF/taglib/topnet.taglib.xml;</param-value>
+		<param-value>
+			/WEB-INF/facelets/taglib/topnet.taglib.xml;
+			/WEB-INF/facelets/taglib/topnet.functions.taglib.xml
+		</param-value>
 	</context-param>
 
 	<servlet>

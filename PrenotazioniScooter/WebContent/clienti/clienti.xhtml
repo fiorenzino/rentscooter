@@ -3,21 +3,72 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich">
+	xmlns:a="http://topnet.it/facelets"
+	xmlns:fn="http://topnet.it/functions"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax">
 
 <ui:composition template="/WEB-INF/layout/t_single.xhtml">
 	<ui:define name="title">Gestione Clienti</ui:define>
 	<ui:define name="content">
-		<p style="align: center;">Organizer</p>
-		<h:form id="form">
+		<p style="align: center;">Gestione Clienti</p>
+		<h:outputText
+			value="#{fn:init('clientiHandler','it.reservations.par.Client', 'cercaClienti')}" />
+		<h:form id="centerForm">
+			<rich:spacer height="30" />
+			<h:panelGrid columns="4" width="70%">
+				<f:facet name="header">
+					<h:outputText value="Cerca Clienti" />
+				</f:facet>
+				<h:panelGroup>
+					<h:outputLabel id="nomeLabel1" value="Nome:" for="nome1" />
+					<h:inputText id="nome1" value="#{clientiHandler.ricerca.cognome}"
+						size="15">
+						<a4j:support event="onkeyup" ajaxSingle="true"
+							reRender="ClientiList" action="#{clientiHandler.aggModel}" />
+					</h:inputText>
+				</h:panelGroup>
+				<h:panelGroup>
+					<h:outputLabel value="Num. Righe:" for="numRighe" />
+					<h:selectOneMenu id="numRighe"
+						value="#{clientiHandler.rowsPerPage}">
+						<f:selectItems value="#{propertiesHandler.rowItems}" />
+						<a4j:support event="onchange"
+							reRender="clientiList,scollerDominiList" />
+					</h:selectOneMenu>
+				</h:panelGroup>
+				<f:facet name="footer">
+					<h:outputText value="La tabella sotto si aggiorna automaticamente." />
+				</f:facet>
+			</h:panelGrid>
+			<rich:dataTable id="clientiList" rows="#{clientiHandler.rowsPerPage}"
+				columnClasses="col" value="#{clientiHandler.model}" var="cliente">
+				<f:facet name="header">
+					<h:outputText value="Lista Clienti" />
+				</f:facet>
+				<a:column entity="${cliente}" fieldName="cognome" sort="${false}"
+					label="cognome" />
 
-			<rich:panel id="prenotazioneScooter">
-				<!-- CERCA NEL DB DA DATAINIT A DATAEND -->
-			</rich:panel>
-			<rich:panel>
-				<!-- AGGIUNGI RIGA SCOOTER - DATAINIT - DATAEND -->
-			</rich:panel>
+				<a:column entity="${cliente}" fieldName="nome" sort="${false}"
+					label="nome" />
+
+				<a:column entity="${cliente}" fieldName="indirizzo" sort="${false}"
+					label="indirizzo" />
+				<a:column entity="${cliente}" fieldName="city" sort="${false}"
+					label="city" />
+
+				<a:column entity="${cliente}" fieldName="provincia" sort="${false}"
+					label="provincia" />
+				<a:columnCommand label="Modifica" action="modClient1"
+					backingBean="${clientiHandler}" />
+
+			</rich:dataTable>
+			<rich:spacer height="30" />
+			<rich:datascroller id="scollerDominiList" for="clientiList"
+				maxPages="10" page="#{clientiHandler.scrollerPage}" />
+			<rich:spacer height="30" />
+			<h:commandLink id="addCliente" action="#{clientiHandler.addClient1}"
+				value="Aggiungi Cliente" />
 		</h:form>
 	</ui:define>
 </ui:composition>
