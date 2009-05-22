@@ -3,6 +3,7 @@ package it.reservations.par;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -53,7 +54,7 @@ public class Scooter implements Serializable {
 		this.cilindrata = cilindrata;
 	}
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	public Tariffa getTariffa() {
 		if (tariffa == null)
 			tariffa = new Tariffa();

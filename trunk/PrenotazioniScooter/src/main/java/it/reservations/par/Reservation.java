@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,8 +17,6 @@ public class Reservation implements Serializable {
 
 	private Long id;
 	private Date singleDay;
-	private Client client;
-	private Scooter scooter;
 	private String singleDayName;
 	private String scooterName;
 	private Contract contratto;
@@ -30,25 +29,6 @@ public class Reservation implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Client getClient() {
-		return client;
-	}
-
-	public void setClient(Client client) {
-		this.client = client;
-	}
-
-	@ManyToOne
-	public Scooter getScooter() {
-		if (scooter == null)
-			scooter = new Scooter();
-		return scooter;
-	}
-
-	public void setScooter(Scooter scooter) {
-		this.scooter = scooter;
 	}
 
 	public Date getSingleDay() {
@@ -75,19 +55,16 @@ public class Reservation implements Serializable {
 		this.singleDayName = singleDayName;
 	}
 
-	@Transient
 	public String getScooterName() {
-		if (scooter != null) {
-			return scooter.getName();
-		}
-		return "";
+		return this.scooterName;
 	}
 
 	public void setScooterName(String scooterName) {
 		this.scooterName = scooterName;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST,
+			CascadeType.MERGE })
 	public Contract getContratto() {
 		return contratto;
 	}

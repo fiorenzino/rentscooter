@@ -20,6 +20,7 @@ public class Contract implements Serializable {
 	private Date dataInit;
 	private Date dataEnd;
 	private Client client;
+	private Scooter scooter;
 	private String note;
 	private Float importoIniziale;
 	private Float importoFinale;
@@ -119,6 +120,14 @@ public class Contract implements Serializable {
 
 	public void setPrenotazioni(List<Reservation> prenotazioni) {
 		this.prenotazioni = prenotazioni;
+	}
+
+	public Scooter getScooter() {
+		return scooter;
+	}
+
+	public void setScooter(Scooter scooter) {
+		this.scooter = scooter;
 	}
 
 }
