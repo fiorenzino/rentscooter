@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://topnet.it/facelets"
+	xmlns:fn="http://topnet.it/functions"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax">
+
+<ui:composition template="/WEB-INF/layout/t_single.xhtml">
+	<ui:define name="title">Gestione Scooter</ui:define>
+	<ui:define name="content">
+		<p style="align: center;">Gestione Scooter</p>
+		<h:form id="form">
+			<rich:panel id="prenotazioneScooter">
+
+				<a:field id="Marca" label="Marca(*):" fieldName="marca"
+					entity="#{scootersHandler.scooter}" required="true" />
+
+				<a:field id="modello" label="Modello(*):" fieldName="modello"
+					entity="#{scootersHandler.scooter}" required="true" />
+
+				<a:field id="cilindrata" label="Cilindrata(*):"
+					fieldName="cilindrata" entity="#{scootersHandler.scooter}"
+					required="false" />
+
+			</rich:panel>
+			<rich:spacer height="30" />
+			<div><h:commandButton id="submitAdd"
+				action="#{scootersHandler.addScooter2}" value="Crea Nuovo Scooter"
+				rendered="#{not scootersHandler.editMode}" /> <h:commandButton
+				id="submitUpdate" action="#{scootersHandler.modScooter2}"
+				value="Salva Modifiche" rendered="#{scootersHandler.editMode}" /> <h:commandButton
+				id="delUpdate" action="#{scootersHandler.delScooter}"
+				value="Elimina" rendered="#{scootersHandler.editMode}" /></div>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
