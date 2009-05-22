@@ -11,14 +11,19 @@
 <ui:composition template="/WEB-INF/layout/t_single.xhtml">
 	<ui:define name="title">Gestione Scooter</ui:define>
 	<ui:define name="content">
-		<p style="align: center;">Organizer</p>
+		<p style="align: center;">Gestione Scooter</p>
 		<h:form id="form">
-
 			<rich:panel id="prenotazioneScooter">
-				<!-- CERCA NEL DB DA DATAINIT A DATAEND -->
-			</rich:panel>
-			<rich:panel>
-				<!-- AGGIUNGI RIGA SCOOTER - DATAINIT - DATAEND -->
+
+				<a:fieldView id="Marca" label="Marca(*):" fieldName="marca"
+					entity="#{scootersHandler.scooter}" />
+
+				<a:fieldView id="modello" label="Modello(*):" fieldName="modello"
+					entity="#{scootersHandler.scooter}" />
+
+				<a:fieldView id="cilindrata" label="Cilindrata(*):"
+					fieldName="cilindrata" entity="#{scootersHandler.scooter}" />
+
 			</rich:panel>
 		</h:form>
 	</ui:define>
