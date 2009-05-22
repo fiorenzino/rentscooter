@@ -1,8 +1,6 @@
 package it.reservations.web;
 
-import it.reservations.ejb3.ScooterManager;
 import it.reservations.ejb3.utils.JNDIUtils;
-import it.reservations.par.Client;
 import it.reservations.par.Scooter;
 import it.smartflower.ejb3.utils.ClassCreator;
 import it.smartflower.par.RicercaI;
@@ -12,11 +10,10 @@ import java.io.Serializable;
 
 import javax.annotation.Named;
 import javax.context.SessionScoped;
-import javax.ejb.EJB;
 
 @SessionScoped
 @Named
-public class ScootersHandler extends JSFHandler implements Serializable {
+public class TariffeHandler extends JSFHandler implements Serializable {
 
 	private Scooter scooter;
 
@@ -64,7 +61,7 @@ public class ScootersHandler extends JSFHandler implements Serializable {
 		}
 	}
 
-	public ScootersHandler() {
+	public TariffeHandler() {
 		eJBManager = JNDIUtils.getScooterManager();
 		rowsPerPage = 10;
 		initRicerca();
