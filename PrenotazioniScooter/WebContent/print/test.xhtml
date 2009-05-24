@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:obas="http://mycomp.org/form/jsf">
+<head>
+<title>Bla</title>
+<style type="text/css">
+.strong {
+	font-weight: bold;
+}
+
+.left {
+	text-align: left;
+}
+
+.center {
+	text-align: center;
+}
+
+.right {
+	text-align: right;
+}
+
+body {
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 11px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+@page {
+	size: portrait; /* portrait landscape*/
+	margin: 3cm 1.5cm 2cm 1.5cm;
+	-fs-flow-top: "header";
+	-fs-flow-bottom: "footer";
+}
+
+#header {
+	font-weight: bold;
+	font-size: 13pt;
+	position: absolute;
+	top: 1.5cm;
+	left: 0;
+	width: 26.7cm;
+	-fs-move-to-flow: "header";
+}
+
+#footer {
+	font-weight: bold;
+	position: absolute;
+	bottom: 1cm;
+	left: 0;
+	width: 26.7cm;
+	-fs-move-to-flow: "footer";
+}
+
+#pagenumber :before {
+	content: counter(page);
+}
+
+#pagecount :before {
+	content: counter(pages);
+}
+
+.avoidBreakInside {
+	page-break-inside: avoid;
+}
+
+#sysUsersTbl tr td {
+	border-bottom: solid 0.01mm #000;
+	padding: 0.3mm 0;
+	vertical-align: top;
+}
+
+#sysUsersTblHeader tr td {
+	padding: 0.1cm 0;
+	vertical-align: top;
+}
+</style>
+</head>
+<body>
+
+<div id="header" style="float: left; border-bottom: solid 0.01mm #000;">
+<div style="float: left;">Benutzer-Verwaltung</div>
+<div style="float: right; font-size: 11px;">Datum:&#160; <h:outputText
+	value="24-05-2009" /></div>
+<div id="tblHeader" style="float: left; clear: left;">
+<table id="sysUsersTblHeader" cellpadding="0" cellspacing="0" border="0"
+	style="font-size: 11px;">
+	<tr>
+		<td>
+		<div style="width: 3cm" class="left strong">Name</div>
+		</td>
+		<td>
+		<div style="width: 10cm" class="left strong">Name<br />
+		Vollstaendiger Name</div>
+		</td>
+		<td>
+		<div style="width: 3cm" class="left strong">Aktiv</div>
+		</td>
+		<td>
+		<div style="width: 5.5cm" class="right strong">Gueltig Ab<br />
+		Gueltig Bis</div>
+		</td>
+		<td>
+		<div style="width: 5.15cm" class="right strong">Bilder Test</div>
+		</td>
+	</tr>
+</table>
+</div>
+</div>
+<div id="footer"
+	style="border-top: solid 0.01mm #000; padding-top: 0.2cm;">
+<div style="float: left"><img src="/obas/img/appl/codes.gif"
+	alt=" " width="32px" height="32px" border="0" /></div>
+<div style="float: left; margin-left: 5px;">Wegelin und Co.
+Bankiers</div>
+<div style="float: right; text-align: right;">Seite <span
+	id="pagenumber" /> von <span id="pagecount" /></div>
+</div>
+
+
+<div style="width: 600px; text-align: justify; border: #000 solid 0px;">
+<h2>Contratto di Locazione - Simonelli Moto</h2>
+<p></p>
+<p></p>
+<p>Tra la ditta <b>Simonelli Moto SAS</b> ed il signor <b>Mario
+Rossi</b>, nato il <b>24-12-1976</b> a <b>San Benedetto del Tronto (AP)</b>,
+residente in via <b>Roma 23</b>, cod. fiscale <b>PZZFNZ75B11H769T</b> ed
+identificato con PATENTE N. <b>LU5064881D</b> emessa dal MCTC di Lucca
+in data 25/01/2003, avente numero di telefono: 53453-243423 e cellulare:
+328.8293230,</p>
+<p></p>
+<p><b>si accetta e si stipula quanto segue:</b></p>
+<ul>
+	<li>la ditta simonelli moto cede in locazione a <b>Mario Rossi</b>
+	lo scooter <b>MARCA, MODELLO</b> avente targa <b>TXT656</b> intestato a
+	Simonelli Moto SAS
+	<p></p>
+	</li>
+	<li>il signor Mario Rossi prende in locazione lo scooter <b>ItalJet
+	Kimko Agility 125</b> accettando tutte le clausole del presente contratto,
+	nessuna esclusa od eccettuatae dichiarando espressamente di ritirare lo
+	scooter in ottime condizioni di uso e manutanezione, sia di carrozzeria
+	che di meccanica, con tutte le parti in perfetto ordine ed in tale
+	stato si impegna ad osservare la diligenza del buon padre di famiglia,
+	nell'uso della cosae nei limiti stabiliti dal presente contratto ed a
+	restituire lo scooter alla scadenza del contratto.
+	<p></p>
+	</li>
+	<li>lo scooter deve essere restituito alla predetta scadenza nello
+	stesso stato in cui viene consegnato al locatario.
+	<p></p>
+	</li>
+	<li>lo scooter verrà restituito entro <b>le ore 16 del giorno
+	05/08/2009</b>, presso Simonelli Moto e dovrà essere riconsegnato con il
+	pieno del carburante o con il livello con cui lo stesso viene
+	consegnato al locatario; diversamente verrà addebitato al locatario un
+	supplemento di euro 10 per il servizio di rifornimento oltre al
+	carburante mancante
+	<p></p>
+	</li>
+	<li>è prevista una tolleranza massima di 59 minuti nella
+	riconsegna dello scooter, oltre la quale verrà addebitata uina giornata
+	di noleggio extra; ogni giornata di ritardo non preventivamente
+	accordata con la ditta Simonelli moto SAS, darà luogo ad una penale del
+	30% oltre al pagamento della tariffa dovuta per ogni giorno di ritardo<p></p></li>
+	<li>il signor Mario Rossi lascia la somma di euro 89, a titolo di
+	saldo per l'importo dovuto
+	<p></p>
+	</li>
+	<li>il prezzo della locazione è di euro 10 per ogni ora, di euro
+	23 per ogni giorno, di euro 33 per 3 gg, di euro 66 per 5 giorni, di
+	euro 140 per ogni settimana.
+	<p></p>
+	</li>
+	<li>è stabilito il divieto assoluto di sublocazione<p></p></li>
+	<li>lo scooter può essere controllato dal locatore ogni volta che
+	lo ritiene opportuno
+	<p></p>
+	</li>
+	<li>il locatario dichiara di essere perfettamente abilitato alla
+	conduzione dello scoooter che gli verrà consegnato, come da patente n.
+	32423423 che esibisce al momento della stipula del presente contratto e
+	che dichiara essere in perfetto corso di validità, non essendo egli
+	sottoposto a restrizione di legge o provvedimenti dell'autorità
+	amministrativa o giudiziaria.
+	<p></p>
+	</li>
+	<li>eventuali multi , sanzioni pecuniarie amministrative derivanti
+	dalla circolazione dello scooter, addebitabili al locatario, faranno
+	carico a quest'ultimo che fin d'ora si impegna a pagare.
+	<p></p>
+	</li>
+	<li>per quanto qui non espressamente previsto si fa rinvio agli
+	art. 1571 e seguenti del codice civile
+	<p></p>
+	</li>
+	<li>per ogni eventuale controversia, che dovesse insorgere tra le
+	parti è esclusivamente competente il foro di Ascoli Piceno, sezione
+	distaccata di San Benedetto del Tronto
+	<p></p>
+	</li>
+</ul>
+<p></p>
+<!--   
+<div style="page-break-after: always"></div> 
+-->
+<p></p>
+<p><b>San Benedetto del Tronto, li 03/10/2008</b></p>
+
+<p>il locatore <b>Simonelli Moto SAS</b> ___________________________</p>
+
+<p></p>
+<p></p>
+<p>il locatario <b>Mario Rossi </b>___________________________</p>
+
+<p><b> per espressa approvazione delle clausole
+1,2,3,4,5,6,7,8,9,10,11,12,13 </b></p>
+</div>
+
+
+<div
+	style="page-break-before: always; clear: left; float: left; margin-top: 50px;">
+<strong>Das ist ein Disclamer:</strong><br />
+&#160;<br />
+und nun kommt der Text....</div>
+</body>
+</html>
