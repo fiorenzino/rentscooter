@@ -82,18 +82,23 @@
 
 	<filter-mapping>
 		<filter-name>ajax4jsf</filter-name>
-		<servlet-name>Faces Servlet</servlet-name>
-		<dispatcher>FORWARD</dispatcher>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>INCLUDE</dispatcher>
-		<dispatcher>ERROR</dispatcher>
+		<url-pattern>*.jsf</url-pattern>
+		<!--
+			<servlet-name>Faces Servlet</servlet-name>
+			<dispatcher>FORWARD</dispatcher> <dispatcher>REQUEST</dispatcher>
+			<dispatcher>INCLUDE</dispatcher> <dispatcher>ERROR</dispatcher>
+		-->
 	</filter-mapping>
-	<!--
-		<filter> <filter-name>RendererFilter</filter-name>
+
+	<filter>
+		<filter-name>RendererFilter</filter-name>
 		<filter-class>it.reservations.web.printer.RendererFilter</filter-class>
-		</filter> <filter-mapping> <filter-name>RendererFilter</filter-name>
-		<url-pattern>*.jsf</url-pattern> </filter-mapping>
-	-->
+	</filter>
+	<filter-mapping>
+		<filter-name>RendererFilter</filter-name>
+		<url-pattern>/print/*</url-pattern>
+	</filter-mapping>
+
 	<context-param>
 		<param-name>facelets.LIBRARIES</param-name>
 		<param-value>
