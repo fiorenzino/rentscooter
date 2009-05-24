@@ -28,6 +28,7 @@ public class Contratto implements Serializable {
 	private Float importoFinale;
 	private Float extra;
 	private Float totale;
+	private Long sconto;
 	private List<Prenotazione> prenotazioni;
 
 	@Id
@@ -132,6 +133,14 @@ public class Contratto implements Serializable {
 
 	public void setScooter(Scooter scooter) {
 		this.scooter = scooter;
+	}
+
+	public Long getSconto() {
+		return sconto;
+	}
+
+	public void setSconto(Long sconto) {
+		this.sconto = sconto;
 	}
 
 }

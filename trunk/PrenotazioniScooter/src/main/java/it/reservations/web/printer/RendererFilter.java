@@ -29,6 +29,8 @@ public class RendererFilter implements Filter {
 	private DocumentBuilder documentBuilder;
 
 	public void init(FilterConfig config) throws ServletException {
+		System.setProperty("xr.util-logging.loggingEnabled", "false");
+
 		try {
 			this.config = config;
 			DocumentBuilderFactory factory = DocumentBuilderFactory
@@ -41,47 +43,45 @@ public class RendererFilter implements Filter {
 
 	public void doFilter(ServletRequest req, ServletResponse resp,
 			FilterChain filterChain) throws IOException, ServletException {
-
+		System.out.println("PRINTER PDF");
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
 
 		// Check to see if this filter should apply.
 		String renderType = request.getParameter("RenderOutputType");
-		if (renderType != null) {
-			// Capture the content for this request
-			ContentCaptureServletResponse capContent = new ContentCaptureServletResponse(
-					response);
-			filterChain.doFilter(request, capContent);
+		// if (renderType != null) {
+		// Capture the content for this request
+		ContentCaptureServletResponse capContent = new ContentCaptureServletResponse(
+				response);
+		filterChain.doFilter(request, capContent);
 
-			try {
-				// Parse the XHTML content to a document that is readable by the
-				// XHTML renderer.
-				StringReader contentReader = new StringReader(capContent
-						.getContent());
-				InputSource source = new InputSource(contentReader);
-				Document xhtmlContent = documentBuilder.parse(source);
+		try {
+			// Parse the XHTML content to a document that is readable by the
+			// XHTML renderer.
+			StringReader contentReader = new StringReader(capContent
+					.getContent());
+			InputSource source = new InputSource(contentReader);
+			Document xhtmlContent = documentBuilder.parse(source);
 
-				if (renderType.equals("pdf")) {
-					ITextRenderer renderer = new ITextRenderer();
-					renderer.setDocument(xhtmlContent, "");
-					renderer.layout();
+			ITextRenderer renderer = new ITextRenderer();
+			renderer.setDocument(xhtmlContent, "");
+			renderer.layout();
 
-					response.setContentType("application/pdf");
-					OutputStream browserStream = response.getOutputStream();
-					renderer.createPDF(browserStream);
-					return;
-				}
+			response.setContentType("application/pdf");
+			OutputStream browserStream = response.getOutputStream();
+			renderer.createPDF(browserStream);
+			return;
 
-			} catch (SAXException e) {
-				throw new ServletException(e);
-			} catch (DocumentException e) {
-				throw new ServletException(e);
-			}
-
-		} else {
-			// Normal processing
-			filterChain.doFilter(request, response);
+		} catch (SAXException e) {
+			throw new ServletException(e);
+		} catch (DocumentException e) {
+			throw new ServletException(e);
 		}
+
+		// } else {
+		// // Normal processing
+		// filterChain.doFilter(request, response);
+		// }
 	}
 
 	public void destroy() {

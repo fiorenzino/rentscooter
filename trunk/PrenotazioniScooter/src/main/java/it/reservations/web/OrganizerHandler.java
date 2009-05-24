@@ -34,6 +34,7 @@ public class OrganizerHandler implements CalendarDataModel, Serializable {
 	private boolean currentDisabled;
 	private Date dataInit;
 	private Date dataEnd;
+	private Long scooterFilter;
 
 	public Date getDataInit() {
 		if (dataInit == null)
@@ -263,6 +264,14 @@ public class OrganizerHandler implements CalendarDataModel, Serializable {
 	 */
 	public void setCurrentDate(Date currentDate) {
 		this.currentDate = currentDate;
+	}
+
+	public Long getScooterFilter() {
+		return scooterFilter;
+	}
+
+	public void setScooterFilter(Long scooterFilter) {
+		this.scooterFilter = scooterFilter;
 	}
 
 }
