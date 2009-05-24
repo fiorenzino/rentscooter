@@ -13,7 +13,7 @@
 	<ui:define name="content">
 		<p style="align: center;">Gestione Tariffe</p>
 		<h:outputText
-			value="#{fn:init('tariffeHandler','it.reservations.par.Tariffa', 'cercaTariffa')}" />
+			value="#{fn:init('tariffeHandler','it.reservations.par.Tariffa', 'cercaTariffe')}" />
 		<h:form id="centerForm">
 			<rich:spacer height="30" />
 			<h:panelGrid columns="4" width="70%">
@@ -46,14 +46,17 @@
 					<h:outputText value="Lista Tariffa" />
 				</f:facet>
 
-				<a:column entity="${Tariffa}" fieldName="marca" sort="${false}"
-					label="marca" />
+				<a:column entity="${Tariffa}" fieldName="nome" sort="${false}"
+					label="nome" />
 
-				<a:column entity="${Tariffa}" fieldName="modello" sort="${false}"
-					label="modello" />
+				<a:column entity="${Tariffa}" fieldName="d1" sort="${false}"
+					label="d1" />
 
-				<a:column entity="${Tariffa}" fieldName="cilindrata" sort="${false}"
-					label="cilindrata" />
+				<a:column entity="${Tariffa}" fieldName="d7" sort="${false}"
+					label="d7" />
+					
+				<a:column entity="${Tariffa}" fieldName="d30" sort="${false}"
+					label="d30" />
 
 				<a:columnCommand label="Modifica" action="modTariffa1"
 					backingBean="${tariffeHandler}" />
