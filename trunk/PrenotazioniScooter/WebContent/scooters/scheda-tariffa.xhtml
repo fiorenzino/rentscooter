@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://topnet.it/facelets"
+	xmlns:fn="http://topnet.it/functions"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax">
+
+<ui:composition template="/WEB-INF/layout/t_single.xhtml">
+	<ui:define name="title">Gestione Scooter</ui:define>
+	<ui:define name="content">
+		<p style="align: center;">Gestione Scooter</p>
+		<h:form id="form">
+			<rich:panel id="prenotazioneScooter">
+
+				<a:fieldView id="Nome" label="Nome(*):" fieldName="nome"
+					entity="#{tariffeHandler.tariffa}" />
+
+				<a:fieldView id="d1" label="Costo 1gg(*):" fieldName="d1"
+					entity="#{tariffeHandler.tariffa}" />
+
+				<a:fieldView id="d2" label="Costo 2gg(*):" fieldName="d2"
+					entity="#{tariffeHandler.tariffa}" />
+
+				<a:fieldView id="d3" label="Costo 3gg(*):" fieldName="d3"
+					entity="#{tariffeHandler.tariffa}" />
+
+				<a:fieldView id="d4" label="Costo 4gg(*):" fieldName="d4"
+					entity="#{tariffeHandler.tariffa}" />
+
+				<a:fieldView id="d5" label="Costo 5gg(*):" fieldName="d5"
+					entity="#{tariffeHandler.tariffa}" />
+
+				<a:fieldView id="d7" label="Costo 7gg(*):" fieldName="d7"
+					entity="#{tariffeHandler.tariffa}" />
+
+				<a:fieldView id="d30" label="Costo 30gg(*):" fieldName="d30"
+					entity="#{tariffeHandler.tariffa}" />
+
+
+				<a:fieldView id="dd1ex" label="Costo 1exgg(*):" fieldName="d1ex"
+					entity="#{tariffeHandler.tariffa}" />
+
+				<a:fieldView id="maxKm" label="Num. max Km(*):" fieldName="maxKm"
+					entity="#{tariffeHandler.tariffa}" />
+
+				<a:fieldView id="costoKm" label="Costo Km extra(*):"
+					fieldName="costoKm" entity="#{tariffeHandler.tariffa}" />
+
+			</rich:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
