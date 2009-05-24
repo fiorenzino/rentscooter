@@ -1,7 +1,7 @@
 package it.reservations.web;
 
-import it.reservations.ejb3.ReservationManager;
-import it.reservations.par.Reservation;
+import it.reservations.ejb3.PrenotazioniManager;
+import it.reservations.par.Prenotazione;
 import it.reservations.web.data.Columns;
 import it.reservations.web.data.Facet;
 
@@ -22,8 +22,8 @@ import javax.faces.model.DataModel;
 public class PrenotazioniHandler implements Serializable {
 
 	@EJB
-	ReservationManager reservationManager;
-	private ArrayList<Reservation[]> lista;
+	PrenotazioniManager reservationManager;
+	private ArrayList<Prenotazione[]> lista;
 	@Columns
 	private ArrayList<Facet> columns;
 
@@ -32,7 +32,7 @@ public class PrenotazioniHandler implements Serializable {
 	private int begin;
 	private int end;
 
-	List<Reservation> reservationsList;
+	List<Prenotazione> reservationsList;
 
 	public PrenotazioniHandler() {
 	}
@@ -88,22 +88,20 @@ public class PrenotazioniHandler implements Serializable {
 		this.al = al;
 	}
 
-	public ArrayList<Reservation[]> getModel() {
+	public ArrayList<Prenotazione[]> getModel() {
 		if (getDal() != null && getAl() != null) {
 
 			for (int i = 0; i < 10; i++) {
 				System.out.println("i:" + i);
-				Reservation[] res = new Reservation[getColumns().size()];
+				Prenotazione[] res = new Prenotazione[getColumns().size()];
 				for (int j = 0; j < getColumns().size(); j++) {
 					if (j == 0) {
-						res[j] = new Reservation();
-						res[j].setScooterName("SCOCOTER" + i);
+						res[j] = new Prenotazione();
 					} else {
 						System.out.println("j:" + j + "-"
 								+ getColumns().get(j).getHeader());
-						res[j] = new Reservation();
-						res[j].setScooterName("SCOCOTER"
-								+ getColumns().get(j).getHeader());
+						res[j] = new Prenotazione();
+						
 					}
 				}
 				getLista().add(res);
@@ -114,19 +112,19 @@ public class PrenotazioniHandler implements Serializable {
 		return lista;
 	}
 
-	public ArrayList<Reservation[]> getLista() {
+	public ArrayList<Prenotazione[]> getLista() {
 		if (lista == null)
-			lista = new ArrayList<Reservation[]>();
+			lista = new ArrayList<Prenotazione[]>();
 		return lista;
 	}
 
-	public void setLista(ArrayList<Reservation[]> lista) {
+	public void setLista(ArrayList<Prenotazione[]> lista) {
 		this.lista = lista;
 	}
 
 	public void resetLista() {
 		initColumns();
-		lista = new ArrayList<Reservation[]>();
+		lista = new ArrayList<Prenotazione[]>();
 	}
 
 	public int getBegin() {
@@ -154,21 +152,21 @@ public class PrenotazioniHandler implements Serializable {
 		return data;
 	}
 
-	public void addReservation(Reservation reservation) {
+	public void addReservation(Prenotazione reservation) {
 		getReservationsList().add(reservation);
 	}
 
-	public List<Reservation> getReservationsList() {
+	public List<Prenotazione> getReservationsList() {
 		if (reservationsList == null) {
-			reservationsList = new ArrayList<Reservation>();
-			Reservation res = new Reservation();
+			reservationsList = new ArrayList<Prenotazione>();
+			Prenotazione res = new Prenotazione();
 			reservationsList.add(res);
 
 		}
 		return reservationsList;
 	}
 
-	public void setReservationsList(List<Reservation> reservationsList) {
+	public void setReservationsList(List<Prenotazione> reservationsList) {
 		this.reservationsList = reservationsList;
 	}
 

@@ -6,27 +6,29 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 @Entity
-public class Contract implements Serializable {
+public class Contratto implements Serializable {
 
 	private Long id;
 	private Date dataInit;
 	private Date dataEnd;
-	private Client client;
+	private Cliente cliente;
 	private Scooter scooter;
 	private String note;
 	private Float importoIniziale;
 	private Float importoFinale;
 	private Float extra;
 	private Float totale;
-	private List<Reservation> prenotazioni;
+	private List<Prenotazione> prenotazioni;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,12 +56,13 @@ public class Contract implements Serializable {
 		this.dataEnd = dataEnd;
 	}
 
-	public Client getClient() {
-		return client;
+	@ManyToOne(fetch = FetchType.EAGER)
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setClient(Client client) {
-		this.client = client;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	@Lob
@@ -111,17 +114,18 @@ public class Contract implements Serializable {
 		this.totale = totale;
 	}
 
-	@OneToMany
-	public List<Reservation> getPrenotazioni() {
+	@OneToMany(fetch = FetchType.LAZY)
+	public List<Prenotazione> getPrenotazioni() {
 		if (prenotazioni == null)
-			prenotazioni = new ArrayList<Reservation>();
+			prenotazioni = new ArrayList<Prenotazione>();
 		return prenotazioni;
 	}
 
-	public void setPrenotazioni(List<Reservation> prenotazioni) {
+	public void setPrenotazioni(List<Prenotazione> prenotazioni) {
 		this.prenotazioni = prenotazioni;
 	}
 
+	@ManyToOne(fetch = FetchType.EAGER)
 	public Scooter getScooter() {
 		return scooter;
 	}

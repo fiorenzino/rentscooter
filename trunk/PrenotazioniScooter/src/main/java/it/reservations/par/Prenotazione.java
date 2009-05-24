@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,13 +14,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 @Entity
-public class Reservation implements Serializable {
+public class Prenotazione implements Serializable {
 
 	private Long id;
 	private Date singleDay;
 	private String singleDayName;
-	private String scooterName;
-	private Contract contratto;
+	private Contratto contratto;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,21 +55,12 @@ public class Reservation implements Serializable {
 		this.singleDayName = singleDayName;
 	}
 
-	public String getScooterName() {
-		return this.scooterName;
-	}
-
-	public void setScooterName(String scooterName) {
-		this.scooterName = scooterName;
-	}
-
-	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST,
-			CascadeType.MERGE })
-	public Contract getContratto() {
+	@ManyToOne(fetch = FetchType.EAGER)
+	public Contratto getContratto() {
 		return contratto;
 	}
 
-	public void setContratto(Contract contratto) {
+	public void setContratto(Contratto contratto) {
 		this.contratto = contratto;
 	}
 

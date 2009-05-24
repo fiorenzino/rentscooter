@@ -1,17 +1,13 @@
 package it.reservations.ejb3;
 
-import it.reservations.par.Cliente;
+import it.reservations.par.Contratto;
 import it.smartflower.ejb3.EJBManagerBean;
 
-import javax.ejb.Local;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@Stateless
-@Local(ClientiManager.class)
-public class ClientiManagerBean extends EJBManagerBean implements
-		ClientiManager {
+public class ContrattiManagerBean extends EJBManagerBean implements
+		ContrattiManager {
 
 	@PersistenceContext(unitName = "TestManager")
 	EntityManager em;
@@ -23,33 +19,34 @@ public class ClientiManagerBean extends EJBManagerBean implements
 	}
 
 	@Override
-	public void persist(Cliente cliente) {
+	public void delete(Contratto contract) {
 		try {
-			em.persist(cliente);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	@Override
-	public void update(Cliente cliente) {
-		try {
-			em.merge(cliente);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	@Override
-	public void delete(Cliente cliente) {
-		try {
-			Cliente cl = em.find(Cliente.class, cliente.getId());
+			Contratto cl = em.find(Contratto.class, contract.getId());
 			em.remove(cl);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
+
+	@Override
+	public void persist(Contratto contract) {
+		try {
+			em.persist(contract);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void update(Contratto contract) {
+		try {
+			em.merge(contract);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
 }

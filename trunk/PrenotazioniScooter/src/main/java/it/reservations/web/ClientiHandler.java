@@ -1,7 +1,7 @@
 package it.reservations.web;
 
 import it.reservations.ejb3.utils.JNDIUtils;
-import it.reservations.par.Client;
+import it.reservations.par.Cliente;
 import it.smartflower.ejb3.utils.ClassCreator;
 import it.smartflower.par.RicercaI;
 import it.smartflower.web.utils.JSFHandler;
@@ -15,50 +15,50 @@ import javax.context.SessionScoped;
 @Named
 public class ClientiHandler extends JSFHandler implements Serializable {
 
-	private Client client;
+	private Cliente cliente;
 
-	public String addClient1() {
-		this.client = new Client();
+	public String addCliente1() {
+		this.cliente = new Cliente();
 		return "/clienti/gestione-cliente.xhtml";
 	}
 
-	public String addClient2() {
-		JNDIUtils.getClientiManager().persist(this.client);
+	public String addCliente2() {
+		JNDIUtils.getClientiManager().persist(this.cliente);
 		aggModel();
 		return "/clienti/scheda-cliente.xhtml";
 	}
 
-	public String modClient1() {
-		this.client = (Client) getModel().getRowData();
+	public String modCliente1() {
+		this.cliente = (Cliente) getModel().getRowData();
 		this.editMode = true;
 		return "/clienti/gestione-cliente.xhtml";
 	}
 
-	public String modClient2() {
-		JNDIUtils.getClientiManager().update(this.client);
+	public String modCliente2() {
+		JNDIUtils.getClientiManager().update(this.cliente);
 		aggModel();
 		return "/clienti/scheda-cliente.xhtml";
 	}
 
-	public String delClient() {
-		JNDIUtils.getClientiManager().update(this.client);
+	public String delCliente() {
+		JNDIUtils.getClientiManager().update(this.cliente);
 		aggModel();
 		return "/clienti/scheda-cliente.xhtml";
 	}
 
-	public String detailClient() {
-		this.client = (Client) getModel().getRowData();
+	public String detailCliente() {
+		this.cliente = (Cliente) getModel().getRowData();
 		return "/clienti/scheda-cliente.xhtml";
 	}
 
-	public Client getClient() {
-		if (client == null)
-			this.client = new Client();
-		return client;
+	public Cliente getCliente() {
+		if (cliente == null)
+			this.cliente = new Cliente();
+		return cliente;
 	}
 
-	public void setUser(Client client) {
-		this.client = client;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	@Override

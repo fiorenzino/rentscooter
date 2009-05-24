@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 
 @Entity
-public class Client implements Serializable {
+public class Cliente implements Serializable {
 
 	private Long id;
 	private String nome;
@@ -23,7 +23,7 @@ public class Client implements Serializable {
 	private Long nazione;
 	private Date dataNascita;
 
-	public Client() {
+	public Cliente() {
 		this.city = new Long(0);
 		this.provincia = new Long(0);
 		this.cap = new Long(0);

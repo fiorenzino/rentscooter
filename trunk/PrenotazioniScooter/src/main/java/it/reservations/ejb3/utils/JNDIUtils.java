@@ -1,8 +1,9 @@
 package it.reservations.ejb3.utils;
 
 import it.reservations.ejb3.ClientiManager;
+import it.reservations.ejb3.ContrattiManager;
 import it.reservations.ejb3.ScooterManager;
-import it.smartflower.ejb3.EJBManager;
+import it.reservations.ejb3.TariffeManager;
 
 import javax.naming.InitialContext;
 
@@ -12,7 +13,47 @@ public class JNDIUtils {
 
 	static Logger log = Logger.getLogger(JNDIUtils.class.getName());
 	private static ClientiManager clientiManager = null;
-	public static ScooterManager scooterManager;
+	public static ScooterManager scooterManager = null;
+	public static TariffeManager tariffeManager = null;
+	public static ContrattiManager contrattiManager = null;
+
+	public static ContrattiManager getContrattiManager() {
+		if (contrattiManager != null) {
+			return contrattiManager;
+		} else {
+			try {
+				InitialContext ctx = new InitialContext();
+				contrattiManager = (ContrattiManager) ctx
+						.lookup("prenotazioniScooter/ContrattiManagerBean/local");
+				if (contrattiManager != null) {
+					log.info("comp: " + contrattiManager);
+				}
+				return contrattiManager;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+	}
+
+	public static TariffeManager getTariffeManager() {
+		if (tariffeManager != null) {
+			return tariffeManager;
+		} else {
+			try {
+				InitialContext ctx = new InitialContext();
+				tariffeManager = (TariffeManager) ctx
+						.lookup("prenotazioniScooter/TariffeManagerBean/local");
+				if (tariffeManager != null) {
+					log.info("comp: " + tariffeManager);
+				}
+				return tariffeManager;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+	}
 
 	public static ClientiManager getClientiManager() {
 		if (clientiManager != null) {
