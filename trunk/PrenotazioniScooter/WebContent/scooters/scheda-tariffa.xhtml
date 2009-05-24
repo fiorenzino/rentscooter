@@ -15,14 +15,39 @@
 		<h:form id="form">
 			<rich:panel id="prenotazioneScooter">
 
-				<a:fieldView id="Marca" label="Marca(*):" fieldName="marca"
-					entity="#{scootersHandler.scooter}" />
+				<a:fieldView id="Nome" label="Nome(*):" fieldName="nome"
+					entity="#{tariffeHandler.tariffa}" />
 
-				<a:fieldView id="modello" label="Modello(*):" fieldName="modello"
-					entity="#{scootersHandler.scooter}" />
+				<a:fieldView id="d1" label="Costo 1gg(*):" fieldName="d1"
+					entity="#{tariffeHandler.tariffa}" />
 
-				<a:fieldView id="cilindrata" label="Cilindrata(*):"
-					fieldName="cilindrata" entity="#{scootersHandler.scooter}" />
+				<a:fieldView id="d2" label="Costo 2gg(*):" fieldName="d2"
+					entity="#{tariffeHandler.tariffa}" />
+
+				<a:fieldView id="d3" label="Costo 3gg(*):" fieldName="d3"
+					entity="#{tariffeHandler.tariffa}" />
+
+				<a:fieldView id="d4" label="Costo 4gg(*):" fieldName="d4"
+					entity="#{tariffeHandler.tariffa}" />
+
+				<a:fieldView id="d5" label="Costo 5gg(*):" fieldName="d5"
+					entity="#{tariffeHandler.tariffa}" />
+
+				<a:fieldView id="d7" label="Costo 7gg(*):" fieldName="d7"
+					entity="#{tariffeHandler.tariffa}" />
+
+				<a:fieldView id="d30" label="Costo 30gg(*):" fieldName="d30"
+					entity="#{tariffeHandler.tariffa}" />
+
+
+				<a:fieldView id="dd1ex" label="Costo 1exgg(*):" fieldName="d1ex"
+					entity="#{tariffeHandler.tariffa}" />
+
+				<a:fieldView id="maxKm" label="Num. max Km(*):" fieldName="maxKm"
+					entity="#{tariffeHandler.tariffa}" />
+
+				<a:fieldView id="costoKm" label="Costo Km extra(*):"
+					fieldName="costoKm" entity="#{tariffeHandler.tariffa}" />
 
 			</rich:panel>
 		</h:form>
