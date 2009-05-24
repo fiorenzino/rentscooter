@@ -15,36 +15,36 @@
 		<h:form id="form">
 			<rich:panel id="prenotazioneScooter">
 				<a:field id="Nome" label="Nome(*):" fieldName="nome"
-					entity="#{clientiHandler.client}" required="true" />
+					entity="#{clientiHandler.cliente}" required="true" />
 
 				<a:field id="cognome" label="Cognome(*):" fieldName="cognome"
-					entity="#{clientiHandler.client}" required="true" />
+					entity="#{clientiHandler.cliente}" required="true" />
 
 				<a:field id="ci" label="Carta d Identita(*):"
-					fieldName="cartaidentita" entity="#{clientiHandler.client}"
+					fieldName="cartaidentita" entity="#{clientiHandler.cliente}"
 					required="false" />
 
 				<a:field id="indirizzo" label="Indirizzo(*):" fieldName="indirizzo"
-					entity="#{clientiHandler.client}" required="true"
+					entity="#{clientiHandler.cliente}" required="true"
 					type="inputTextArea" />
 
 				
 				<a:field id="nazioneuserHandler" label="Nazione di residenza(*):"
-					type="selOneM" entityId="#{clientiHandler.client}"
+					type="selOneM" entityId="#{clientiHandler.cliente}"
 					fieldName="nazione" entityList="#{propertiesHandler}"
 					fieldNameList="nazioniList" required="true" />
 
 				<a:field id="dataNascita" label="Data di Nascita(*):"
 					fieldName="dataNascita" type="calendar"
-					entity="#{clientiHandler.client}" required="true" />
+					entity="#{clientiHandler.cliente}" required="true" />
 			</rich:panel>
 			<rich:spacer height="30" />
 			<div><h:commandButton id="submitAdd"
-				action="#{clientiHandler.addClient2}" value="Crea Nuovo Cliente"
+				action="#{clientiHandler.addCliente2}" value="Crea Nuovo Cliente"
 				rendered="#{not clientiHandler.editMode}" /> <h:commandButton
-				id="submitUpdate" action="#{clientiHandler.modClient2}"
+				id="submitUpdate" action="#{clientiHandler.modCliente2}"
 				value="Salva Modifiche" rendered="#{clientiHandler.editMode}" /> <h:commandButton
-				id="delUpdate" action="#{clientiHandler.delClient}" value="Elimina"
+				id="delUpdate" action="#{clientiHandler.delCliente}" value="Elimina"
 				rendered="#{clientiHandler.editMode}" /></div>
 
 		</h:form>

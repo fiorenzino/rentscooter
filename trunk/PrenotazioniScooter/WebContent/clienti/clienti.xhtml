@@ -13,7 +13,7 @@
 	<ui:define name="content">
 		<p style="align: center;">Gestione Clienti</p>
 		<h:outputText
-			value="#{fn:init('clientiHandler','it.reservations.par.Client', 'cercaClienti')}" />
+			value="#{fn:init('clientiHandler','it.reservations.par.Cliente', 'cercaClienti')}" />
 		<h:form id="centerForm">
 			<rich:spacer height="30" />
 			<h:panelGrid columns="4" width="70%">
@@ -59,7 +59,7 @@
 
 				<a:column entity="${cliente}" fieldName="provincia" sort="${false}"
 					label="provincia" />
-				<a:columnCommand label="Modifica" action="modClient1"
+				<a:columnCommand label="Modifica" action="modCliente1"
 					backingBean="${clientiHandler}" />
 
 			</rich:dataTable>
@@ -67,7 +67,7 @@
 			<rich:datascroller id="scollerDominiList" for="clientiList"
 				maxPages="10" page="#{clientiHandler.scrollerPage}" />
 			<rich:spacer height="30" />
-			<h:commandLink id="addCliente" action="#{clientiHandler.addClient1}"
+			<h:commandLink id="addCliente" action="#{clientiHandler.addCliente1}"
 				value="Aggiungi Cliente" />
 		</h:form>
 	</ui:define>
