@@ -71,7 +71,7 @@ public class ScooterManagerBean extends EJBManagerBean implements
 	public List<Scooter> getAllScooter() {
 		List<Scooter> result = new ArrayList<Scooter>();
 		try {
-			result = em.createQuery("select t from Scooter t order by t.nome")
+			result = em.createQuery("select t from Scooter t order by t.marca, t.modello")
 					.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();

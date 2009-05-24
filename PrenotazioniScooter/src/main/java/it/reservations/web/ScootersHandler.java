@@ -22,7 +22,7 @@ public class ScootersHandler extends JSFHandler implements Serializable {
 
 	private SelectItem[] scooterItems;
 
-	public SelectItem[] getScooterList() {
+	public SelectItem[] getScooterItems() {
 		if (scooterItems == null) {
 			List<Scooter> scooters = JNDIUtils.getScooterManager()
 					.getAllScooter();
