@@ -13,6 +13,19 @@
 		<h:form id="form">
 
 			<rich:panel id="calendario">
+				<h:panelGrid columns="4" width="70%">
+					<f:facet name="header">
+						<h:outputText value="Cerca per Scooter" />
+					</f:facet>
+					<h:panelGroup>
+						<h:outputLabel value="Scooter:" for="numRighe" />
+						<h:selectOneMenu id="numRighe"
+							value="#{scootersHandler.scooterItems}">
+							<f:selectItems value="#{scootersHandler.rowItems}" />
+							<a4j:support event="onchange" reRender="organizer" />
+						</h:selectOneMenu>
+					</h:panelGroup>
+				</h:panelGrid>
 				<rich:messages />
 				<a4j:jsFunction name="ajaxSubmit"
 					oncomplete="#{rich:component('panel')}.show()"
@@ -20,8 +33,9 @@
 				<rich:calendar value="#{organizerHandler.currentDate}" popup="false"
 					showApplyButton="false" cellWidth="100px" cellHeight="100px"
 					boundaryDatesMode="none" showWeeksBar="false"
-					dataModel="#{organizerHandler}" oncurrentdateselected="updateName();"
-					id="organizer" onchanged="if (event.rich.date) {ajaxSubmit();}"
+					dataModel="#{organizerHandler}"
+					oncurrentdateselected="updateName();" id="organizer"
+					onchanged="if (event.rich.date) {ajaxSubmit();}"
 					valueChangeListener="#{organizerHandler.valueChanged}"
 					showFooter="false">
 
