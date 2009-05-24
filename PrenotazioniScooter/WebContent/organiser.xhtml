@@ -18,10 +18,10 @@
 						<h:outputText value="Cerca per Scooter" />
 					</f:facet>
 					<h:panelGroup>
-						<h:outputLabel value="Scooter:" for="numRighe" />
-						<h:selectOneMenu id="numRighe"
-							value="#{scootersHandler.scooterItems}">
-							<f:selectItems value="#{scootersHandler.rowItems}" />
+						<h:outputLabel value="Scooter:" for="idScooter" />
+						<h:selectOneMenu id="idScooter"
+							value="#{organizerHandler.scooterFilter}">
+							<f:selectItems value="#{scootersHandler.scooterItems}" />
 							<a4j:support event="onchange" reRender="organizer" />
 						</h:selectOneMenu>
 					</h:panelGroup>
