@@ -1,26 +1,28 @@
 package it.reservations.par;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Tariffa implements Serializable {
+
 	private Long id;
-	private String name;
-	private Float extragg;
+	private String nome;
+	private Float d1;
+	private Float d2;
+	private Float d3;
+	private Float d4;
+	private Float d5;
+	private Float d7;
+	private Float d30;
+	private Float d1ex;
+
 	private Long maxKm;
 	private Float costoKm;
-	private List<TariffaPeriodo> periodi;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,14 +32,6 @@ public class Tariffa implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Float getExtragg() {
-		return extragg;
-	}
-
-	public void setExtragg(Float extragg) {
-		this.extragg = extragg;
 	}
 
 	public Long getMaxKm() {
@@ -56,23 +50,75 @@ public class Tariffa implements Serializable {
 		this.costoKm = costoKm;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.REFRESH,
-			CascadeType.PERSIST, CascadeType.MERGE })
-	public List<TariffaPeriodo> getPeriodi() {
-		if (this.periodi == null)
-			this.periodi = new ArrayList<TariffaPeriodo>();
-		return periodi;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setPeriodi(List<TariffaPeriodo> periodi) {
-		this.periodi = periodi;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getName() {
-		return name;
+	public Float getD1() {
+		return d1;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setD1(Float d1) {
+		this.d1 = d1;
+	}
+
+	public Float getD2() {
+		return d2;
+	}
+
+	public void setD2(Float d2) {
+		this.d2 = d2;
+	}
+
+	public Float getD3() {
+		return d3;
+	}
+
+	public void setD3(Float d3) {
+		this.d3 = d3;
+	}
+
+	public Float getD4() {
+		return d4;
+	}
+
+	public void setD4(Float d4) {
+		this.d4 = d4;
+	}
+
+	public Float getD5() {
+		return d5;
+	}
+
+	public void setD5(Float d5) {
+		this.d5 = d5;
+	}
+
+	public Float getD7() {
+		return d7;
+	}
+
+	public void setD7(Float d7) {
+		this.d7 = d7;
+	}
+
+	public Float getD30() {
+		return d30;
+	}
+
+	public void setD30(Float d30) {
+		this.d30 = d30;
+	}
+
+	public Float getD1ex() {
+		return d1ex;
+	}
+
+	public void setD1ex(Float d1ex) {
+		this.d1ex = d1ex;
 	}
 }

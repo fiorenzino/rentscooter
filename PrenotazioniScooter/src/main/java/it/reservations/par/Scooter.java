@@ -54,7 +54,7 @@ public class Scooter implements Serializable {
 		this.cilindrata = cilindrata;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	public Tariffa getTariffa() {
 		if (tariffa == null)
 			tariffa = new Tariffa();

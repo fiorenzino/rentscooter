@@ -1,5 +1,8 @@
 package it.reservations.ejb3;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import it.reservations.par.Tariffa;
 import it.smartflower.ejb3.EJBManagerBean;
 
@@ -53,4 +56,26 @@ public class TariffeManagerBean extends EJBManagerBean implements
 
 	}
 
+	@Override
+	public List<Tariffa> getAllTariffe() {
+		List<Tariffa> result = new ArrayList<Tariffa>();
+		try {
+			result = em.createQuery("select t from Tariffa t order by t.nome")
+					.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+
+	@Override
+	public Tariffa find(Long id) {
+		try {
+			return em.find(Tariffa.class, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

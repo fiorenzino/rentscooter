@@ -1,8 +1,8 @@
 package it.reservations.ejb3;
 
-import it.reservations.par.Contract;
+import it.reservations.par.Contratto;
 import it.reservations.par.DaySummary;
-import it.reservations.par.Reservation;
+import it.reservations.par.Prenotazione;
 import it.reservations.par.Scooter;
 import it.smartflower.ejb3.EJBManagerBean;
 
@@ -20,9 +20,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-@Local(ReservationManager.class)
-public class ReservationManagerBean extends EJBManagerBean implements
-		ReservationManager {
+@Local(PrenotazioniManager.class)
+public class PrenotazioniManagerBean extends EJBManagerBean implements
+		PrenotazioniManager {
 
 	@PersistenceContext(unitName = "TestManager")
 	EntityManager em;
@@ -48,14 +48,15 @@ public class ReservationManagerBean extends EJBManagerBean implements
 			prenotazioniTot.put(scooter.getName(), resMap);
 		}
 		// SELEZIONI LE PRENOTAZIONI NEL PERIODO
-		List<Reservation> prenotazioni = (List<Reservation>) em
+		List<Prenotazione> prenotazioni = (List<Prenotazione>) em
 				.createNamedQuery("GET_RESERVATIONS_BY_DATA_AND_CILINDRATA")
 				.setParameter("DAL", dal).setParameter("AL", al).setParameter(
 						"CILINDRATA", cilindrata).getResultList();
-		for (Reservation reservation : prenotazioni) {
-			if (prenotazioniTot.containsKey(reservation.getScooterName())) {
+		for (Prenotazione reservation : prenotazioni) {
+			if (prenotazioniTot.containsKey(reservation.getContratto()
+					.getScooter().getName())) {
 				Map<String, Boolean> listaPre = prenotazioniTot.get(reservation
-						.getScooterName());
+						.getContratto().getScooter().getName());
 				listaPre.put(reservation.getSingleDayName(), true);
 			}
 		}
@@ -78,15 +79,16 @@ public class ReservationManagerBean extends EJBManagerBean implements
 			System.out.println("DAL: " + dal);
 			System.out.println("AL: " + al);
 			System.out.println("qUERY GET_RESERVATIONS_BY_DATA");
-			List<Reservation> prenotazioni = (List<Reservation>) em
+			List<Prenotazione> prenotazioni = (List<Prenotazione>) em
 					.createNamedQuery("GET_RESERVATIONS_BY_DATA").setParameter(
 							"DAL", dal).setParameter("AL", al).getResultList();
-			for (Reservation reservation : prenotazioni) {
+			for (Prenotazione reservation : prenotazioni) {
 				System.out.println("DAY: " + reservation.getSingleDay());
 				if (resMap.containsKey(reservation.getSingleDay())) {
 					DaySummary day = resMap.get(reservation.getSingleDay());
 					day.inc();
-					day.addDescription(reservation.getScooterName());
+					day.addDescription(reservation.getContratto().getScooter()
+							.getName());
 					resMap.put(reservation.getSingleDay(), day);
 				}
 			}
@@ -98,12 +100,12 @@ public class ReservationManagerBean extends EJBManagerBean implements
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void addReservation(Contract contract) {
+	public void addReservation(Contratto contract) {
 		Date dal = contract.getDataInit();
 		Date al = contract.getDataEnd();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(dal);
-		for (Reservation reservation : contract.getPrenotazioni()) {
+		for (Prenotazione reservation : contract.getPrenotazioni()) {
 			em.persist(reservation);
 		}
 		// while (cal.getTime().compareTo(al) <= 0) {
@@ -121,12 +123,12 @@ public class ReservationManagerBean extends EJBManagerBean implements
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void removeReservation(Contract contract) {
-		List<Reservation> prenotazioni = (List<Reservation>) em
+	public void removeReservation(Contratto contract) {
+		List<Prenotazione> prenotazioni = (List<Prenotazione>) em
 				.createNamedQuery("GET_RESERVATIONS_BY_DATA").setParameter(
 						"DAL", contract.getDataInit()).setParameter("AL",
 						contract.getDataEnd()).getResultList();
-		for (Reservation reservation : prenotazioni) {
+		for (Prenotazione reservation : prenotazioni) {
 			em.remove(reservation);
 		}
 		em.remove(contract);

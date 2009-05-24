@@ -1,6 +1,6 @@
 package it.reservations.web;
 
-import it.reservations.ejb3.ReservationManager;
+import it.reservations.ejb3.PrenotazioniManager;
 import it.reservations.par.DaySummary;
 import it.reservations.web.model.CalendarDataModelItemImpl;
 
@@ -22,15 +22,11 @@ import org.richfaces.event.CurrentDateChangeEvent;
 import org.richfaces.model.CalendarDataModel;
 import org.richfaces.model.CalendarDataModelItem;
 
-import it.smartflower.ejb3.utils.ClassCreator;
-import it.smartflower.par.RicercaI;
-import it.smartflower.web.utils.JSFHandler;
-
 @SessionScoped
 @Named
 public class OrganizerHandler implements CalendarDataModel, Serializable {
 	@EJB
-	ReservationManager reservationManager;
+	PrenotazioniManager prenotazioniManager;
 	private CalendarDataModelItem[] items;
 	private String currentDescription;
 	private String currentShortDescription;
@@ -112,7 +108,7 @@ public class OrganizerHandler implements CalendarDataModel, Serializable {
 		// CREO LISTA CHE VERRA' VISUALIZZATA
 		List<CalendarDataModelItem> lista = new ArrayList<CalendarDataModelItem>();
 
-		Map<Date, DaySummary> mapp = reservationManager.getReservationData(
+		Map<Date, DaySummary> mapp = prenotazioniManager.getReservationData(
 				init, end);
 		for (Date data : mapp.keySet()) {
 			// System.out.println("DATA: " + data);
