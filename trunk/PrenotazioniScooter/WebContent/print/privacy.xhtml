@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core">
+
+<head>
+
+<style type="text/css">
+@page {
+	size: A4 portrait;
+	margin-top: 10%;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-bottom: 10%;
+}
+
+body {
+	font-size: 14px;
+	font-family: arial;
+	width: 800px;
+}
+
+li {
+	list-style-type: decimal;
+}
+
+h2 {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+a,a:visited {
+	text-decoration: none;
+	color: black;
+}
+
+p {
+	margin: 15px;
+}
+
+.odd-row {
+	background-color: #FFFFE0;
+}
+
+.even-row {
+	background-color: #FFFFFF;
+}
+
+.companiesTable {
+	width: 800px;
+	font-size: 12px;
+	font-family: arial;
+	border: 1px solid #C1DAD7;
+	border-collapse: collapse;
+}
+
+.companiesTable td,.companiesTable th {
+	padding: 3px;
+	border: 1px solid #C1DAD7;
+}
+
+.header {
+	background-color: #CAE8EA;
+	font-weight: bold;
+	width: auto;
+}
+
+.centeredCol {
+	text-align: center;
+}
+
+.leftCol {
+	text-align: left;
+}
+
+.rightCol {
+	text-align: right;
+}
+
+.col1 {
+	width: 15px;
+	text-align: center;
+}
+
+.colDescr1 {
+	width: 220px;
+	text-align: left;
+}
+
+.colDescr2 {
+	width: 130px;
+	text-align: left;
+}
+
+.colValues {
+	width: 75px;
+	text-align: right;
+}
+</style>
+
+</head>
+
+<body>
+
+
+<div style="width: 600px; text-align: justify; border: #000 solid 0px;">
+<table style="width: 600px;">
+	<tr>
+		<td><img
+			src="#{facesContext.externalContext.requestContextPath}/images/logo.jpg"
+			width="44" height="22" /></td>
+		<td><span
+			style="font-size: 10px; font-family: arial; font-weight: bold;">Simonelli
+		Moto s.a.s. di Ranalli Guido e Gianfranco - via Silvio Pellico, 198 -
+		63039 - San Benedetto del Tronto (AP) - p.i. 01681320444 telefono
+		+39.073586967 fax +39.0735789187 e-mail: info@simonellimoto.it</span></td>
+		<td><img
+			src="#{facesContext.externalContext.requestContextPath}/images/guzzi.png"
+			width="75" height="44" /></td>
+	</tr>
+	<tr>
+		<td colspan="3">
+		<h2>Modulo di Accettazione della Privacy</h2>
+		</td>
+	</tr>
+</table>
+
+<p></p>
+<p></p>
+
+
+<p>Il sottoscritto #{clientiHandler.cliente.nomeCognome}, nato a il
+#{clientiHandler.cliente.dataNascita}, residente a
+#{clientiHandler.cliente.city} (#{clientiHandler.cliente.provincia}), in
+#{clientiHandler.cliente.indirizzo}, #{clientiHandler.cliente.cap}</p>
+<p>presa visione di:</p>
+<p>Informativa legge Privacy 196/2003. I suoi dati saranno oggetto
+di trattamento da parte di Simonelli Moto S.a.s., nella qualità di
+titolari ai fini della presente proposta e/o per l'invio di informazioni
+a esso relative, nonchè per aggiornamento su prodotti, iniziative,
+servizi e ricerche di mercato da parte della titolare, nel rispetto
+della normativa sulla tutela dei dati personali di cui al D.Lgs
+196/2003. Essi potranno altresì essere comunicati ad altre aziende
+operanti nei settori editoriale, largo consumo e distribuzione,
+finanziario, assicurativo, motociclistico, dei servizi e ad
+organizzazioni umanitarie e benefiche le quali potranno adoperarli per
+le medesime finalità sopra illustrate. Per eventuali rettifiche e/o
+cancellazioni dei suoi dati personali, o nel caso in cui desiderasse
+esercitare il diritto di opposizione a ricevere le informazioni di
+provenienza Simonelli Moto S.a.s. di cui sopra, potrà farlo
+gratuitamente comunicandolo alla ditta Simonelli Moto S.a.s..</p>
+<p></p>
+<p><b>acconsento che i titolari utilizzino i miei dati per le
+finalità e secondo le modalità illustrate nell'informativa: [_] si [_] no</b></p>
+<p></p>
+<p><b>acconsento alla comunicazione dei miei dati ed al loro
+successivo uso ai suddetti soggetti terzi secondo quanto specificato
+nell'informativa: [_] si [_] no</b></p>
+<!--   
+<div style="page-break-after: always"></div> 
+-->
+<p></p>
+
+<p></p>
+<p></p>
+<p><b>#{clientiHandler.cliente.nomeCognome} </b>___________________________</p>
+
+<p></p>
+</div>
+
+</body>
+
+
+</html>
