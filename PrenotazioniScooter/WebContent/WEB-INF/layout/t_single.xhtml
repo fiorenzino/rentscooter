@@ -10,7 +10,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title><ui:insert name="title" /></title>
-<link href="#{facesContext.externalContext.requestContextPath}/style/bugsstyles.css" rel="stylesheet" type="text/css" />
+<link
+	href="#{facesContext.externalContext.requestContextPath}/style/bugsstyles.css"
+	rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -19,7 +21,9 @@
 <div id="navbar"><ui:insert name="menu">
 	<ui:include src="menu.xhtml" />
 </ui:insert></div>
-<div id="contentarea">bredcrumb - bred1<ui:insert name="content">
+<div id="contentarea"><h:outputText
+	value="#{propertiesHandler.currentPage}" escape="false" /><ui:insert
+	name="content">
 	<ui:include src="content.xhtml" />
 </ui:insert>
 <div id="footer">
