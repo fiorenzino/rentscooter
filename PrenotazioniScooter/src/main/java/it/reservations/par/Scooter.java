@@ -18,7 +18,9 @@ public class Scooter implements Serializable {
 	private String modello;
 	private String cilindrata;
 	private Tariffa tariffa;
-	private String name;
+	private String marcaModello;
+	private Float caparra;
+	private String targa;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,7 +56,7 @@ public class Scooter implements Serializable {
 		this.cilindrata = cilindrata;
 	}
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	public Tariffa getTariffa() {
 		if (tariffa == null)
 			tariffa = new Tariffa();
@@ -66,11 +68,27 @@ public class Scooter implements Serializable {
 	}
 
 	@Transient
-	public String getName() {
+	public String getMarcaModello() {
 		return marca + " " + modello;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setMarcaModello(String marcaModello) {
+		this.marcaModello = marcaModello;
+	}
+
+	public String getTarga() {
+		return targa;
+	}
+
+	public void setTarga(String targa) {
+		this.targa = targa;
+	}
+
+	public Float getCaparra() {
+		return caparra;
+	}
+
+	public void setCaparra(Float caparra) {
+		this.caparra = caparra;
 	}
 }
