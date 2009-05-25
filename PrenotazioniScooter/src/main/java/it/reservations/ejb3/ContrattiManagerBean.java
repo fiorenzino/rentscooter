@@ -1,11 +1,16 @@
 package it.reservations.ejb3;
 
 import it.reservations.par.Contratto;
+import it.reservations.par.Prenotazione;
 import it.smartflower.ejb3.EJBManagerBean;
 
+import javax.ejb.Local;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+@Stateless
+@Local(ContrattiManager.class)
 public class ContrattiManagerBean extends EJBManagerBean implements
 		ContrattiManager {
 
@@ -19,9 +24,9 @@ public class ContrattiManagerBean extends EJBManagerBean implements
 	}
 
 	@Override
-	public void delete(Contratto contract) {
+	public void delete(Contratto contratto) {
 		try {
-			Contratto cl = em.find(Contratto.class, contract.getId());
+			Contratto cl = em.find(Contratto.class, contratto.getId());
 			em.remove(cl);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -30,9 +35,9 @@ public class ContrattiManagerBean extends EJBManagerBean implements
 	}
 
 	@Override
-	public void persist(Contratto contract) {
+	public void persist(Contratto contratto) {
 		try {
-			em.persist(contract);
+			em.persist(contratto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -40,9 +45,9 @@ public class ContrattiManagerBean extends EJBManagerBean implements
 	}
 
 	@Override
-	public void update(Contratto contract) {
+	public void update(Contratto contratto) {
 		try {
-			em.merge(contract);
+			em.merge(contratto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

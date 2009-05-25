@@ -6,6 +6,7 @@ import it.reservations.par.Prenotazione;
 import it.reservations.par.Scooter;
 import it.smartflower.ejb3.EJBManagerBean;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -45,7 +46,7 @@ public class PrenotazioniManagerBean extends EJBManagerBean implements
 						+ cal.get(Calendar.YEAR), false);
 				cal.add(Calendar.DAY_OF_MONTH, 1);
 			}
-			prenotazioniTot.put(scooter.getName(), resMap);
+			prenotazioniTot.put(scooter.getMarcaModello(), resMap);
 		}
 		// SELEZIONI LE PRENOTAZIONI NEL PERIODO
 		List<Prenotazione> prenotazioni = (List<Prenotazione>) em
@@ -54,16 +55,17 @@ public class PrenotazioniManagerBean extends EJBManagerBean implements
 						"CILINDRATA", cilindrata).getResultList();
 		for (Prenotazione reservation : prenotazioni) {
 			if (prenotazioniTot.containsKey(reservation.getContratto()
-					.getScooter().getName())) {
+					.getScooter().getMarcaModello())) {
 				Map<String, Boolean> listaPre = prenotazioniTot.get(reservation
-						.getContratto().getScooter().getName());
+						.getContratto().getScooter().getMarcaModello());
 				listaPre.put(reservation.getSingleDayName(), true);
 			}
 		}
 		return prenotazioniTot;
 	}
 
-	public Map<Date, DaySummary> getReservationData(Date dal, Date al) {
+	public Map<Date, DaySummary> getReservationData(Long scooterFilter,
+			Date dal, Date al) {
 		Map<Date, DaySummary> resMap = new TreeMap<Date, DaySummary>();
 		try {
 
@@ -78,17 +80,33 @@ public class PrenotazioniManagerBean extends EJBManagerBean implements
 			}
 			System.out.println("DAL: " + dal);
 			System.out.println("AL: " + al);
-			System.out.println("qUERY GET_RESERVATIONS_BY_DATA");
-			List<Prenotazione> prenotazioni = (List<Prenotazione>) em
-					.createNamedQuery("GET_RESERVATIONS_BY_DATA").setParameter(
-							"DAL", dal).setParameter("AL", al).getResultList();
+			System.out.println("FILTER: " + scooterFilter);
+			
+			List<Prenotazione> prenotazioni = new ArrayList<Prenotazione>();
+			if (scooterFilter != null && scooterFilter > 0) {
+				System.out.println("QUERY GET_RESERVATIONS_BY_DATA_AND_IDSCOOTER");
+				prenotazioni = (List<Prenotazione>) em.createNamedQuery(
+						"GET_RESERVATIONS_BY_DATA_AND_IDSCOOTER").setParameter(
+						"DAL", dal).setParameter("AL", al).setParameter(
+						"IDSCOOTER", scooterFilter).getResultList();
+			} else {
+				System.out.println("QUERY GET_RESERVATIONS_BY_DATA");
+				prenotazioni = (List<Prenotazione>) em.createNamedQuery(
+						"GET_RESERVATIONS_BY_DATA").setParameter("DAL", dal)
+						.setParameter("AL", al).getResultList();
+			}
+			System.out.println("NUM RES: " + prenotazioni.size());
 			for (Prenotazione reservation : prenotazioni) {
 				System.out.println("DAY: " + reservation.getSingleDay());
 				if (resMap.containsKey(reservation.getSingleDay())) {
 					DaySummary day = resMap.get(reservation.getSingleDay());
 					day.inc();
 					day.addDescription(reservation.getContratto().getScooter()
-							.getName());
+							.getMarcaModello());
+					resMap.put(reservation.getSingleDay(), day);
+				} else {
+					DaySummary day = new DaySummary(new Long(1), reservation
+							.getContratto().getScooter().getMarcaModello());
 					resMap.put(reservation.getSingleDay(), day);
 				}
 			}
