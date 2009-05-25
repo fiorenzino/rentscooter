@@ -59,7 +59,9 @@ public class ScooterManagerBean extends EJBManagerBean implements
 
 	@Override
 	public Scooter find(Long id) {
+		System.out.println("FIND SCOOTER ID: " + id);
 		try {
+
 			return em.find(Scooter.class, id);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,7 +73,8 @@ public class ScooterManagerBean extends EJBManagerBean implements
 	public List<Scooter> getAllScooter() {
 		List<Scooter> result = new ArrayList<Scooter>();
 		try {
-			result = em.createQuery("select t from Scooter t order by t.marca, t.modello")
+			result = em.createQuery(
+					"select t from Scooter t order by t.marca, t.modello")
 					.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
