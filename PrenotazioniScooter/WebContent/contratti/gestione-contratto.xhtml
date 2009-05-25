@@ -14,29 +14,30 @@
 		<p style="align: center;">Gestione Contratti</p>
 		<h:form id="form">
 			<rich:panel id="prenotazioneScooter">
+				<a4j:region id="r1toa2">
+					<a:field id="cliente" label="Cliente(*):" type="selOneM"
+						entityId="#{contrattiHandler.contratto.cliente}" fieldName="id"
+						entityList="#{clientiHandler}" fieldNameList="clientiItems"
+						required="true" />
 
-				<a:field id="Cliente" label="Cliente(*):" type="selOneM"
-					entityId="#{contrattiHandler.contratto.cliente}" fieldName="id"
-					entityList="#{clientiHandler}" fieldNameList="clientiItems"
-					required="true" />
+					<a:field id="scooter" label="Scooter(*):" type="selOneM"
+						entityId="#{contrattiHandler.contratto.scooter}" fieldName="id"
+						entityList="#{scootersHandler}" fieldNameList="scootersItems"
+						required="true" />
 
 
+					<a:field id="dataInit" label="Data Inizio(*):" fieldName="dataInit"
+						type="calendar" entity="#{contrattiHandler.contratto}"
+						required="true" />
+
+					<a:field id="dataEnd" label="Data Riconsegna(*):"
+						fieldName="dataEnd" type="calendar"
+						entity="#{contrattiHandler.contratto}" required="true" />
+
+				</a4j:region>
 				<a:field id="note" label="Note(*):" fieldName="note"
 					entity="#{contrattiHandler.contratto}" required="false"
 					type="inputTextArea" />
-
-				<a:field id="dataInit" label="Data Inizio(*):" fieldName="dataInit"
-					type="calendar" entity="#{contrattiHandler.contratto}"
-					required="true" />
-
-				<a:field id="dataEnd" label="Data Riconsegna(*):"
-					fieldName="dataEnd" type="calendar"
-					entity="#{contrattiHandler.contratto}" required="true" />
-
-				<a:field id="scooter" label="Scooter(*):" type="selOneM"
-					entityId="#{contrattiHandler.contratto.scooter}" fieldName="id"
-					entityList="#{scootersHandler}" fieldNameList="scootersItems"
-					required="true" />
 
 				<a4j:commandButton id="calculateSum"
 					action="#{contrattiHandler.calcolaSomma}" value="calcola prezzo"
@@ -45,20 +46,40 @@
 			</rich:panel>
 
 			<rich:panel id="sommaPanel">
+				<f:facet name="header">
+					<h:outputText value="Somma delle voci" />
+				</f:facet>
+
+
+
+				<a:fieldView id="numDays" label="Numero di giorni:"
+					fieldName="numDays" entity="#{contrattiHandler}" />
 
 				<a:field id="importoIniziale" label="Importo Iniziale(*):"
-					fieldName="importoIniziale"
-					dataInit"" entity="#{contrattiHandler.contratto}" required="false" />
+					fieldName="importoIniziale" entity="#{contrattiHandler.contratto}"
+					required="false" />
 
 				<a:field id="sconto" label="Sconto(*):" fieldName="sconto"
-					dataInit"" entity="#{contrattiHandler.contratto}" required="false" />
+					entity="#{contrattiHandler.contratto}" required="false" />
 
-				<a:field id="extra" label="Extra(*):" fieldName="extra"
-					dataInit"" entity="#{contrattiHandler.contratto}" required="false" />
+				<a:field id="cascoExtra" label="Secondo Casco:"
+					fieldName="cascoExtra" entity="#{contrattiHandler.contratto}"
+					required="false" />
 
-				<a:field id="totale" label="Totale(*):" fieldName="totale"
-					dataInit"" entity="#{contrattiHandler.contratto}" required="false" />
+				<a:field id="importoSottoCasco" label="Sotto Casco:"
+					fieldName="importoSottoCasco"
+					entity="#{contrattiHandler.contratto}" required="false" />
+					
+				<a:field id="importoCaparra" label="Importo Caparra:"
+					fieldName="importoCaparra"
+					entity="#{contrattiHandler.contratto}" required="false" />
 
+				<a:fieldView id="totale" label="Totale(*):" fieldName="totale"
+					entity="#{contrattiHandler.contratto}" />
+
+				<a4j:commandButton id="aggiorna"
+					action="#{contrattiHandler.calcolaSomma}" value="aggiorna"
+					reRender="sommaPanel" immediate="false" />
 			</rich:panel>
 
 			<rich:spacer height="30" />
@@ -66,12 +87,9 @@
 				action="#{contrattiHandler.addContratto2}"
 				value="Crea Nuovo Contratto"
 				rendered="#{not contrattiHandler.editMode}" /> <h:commandButton
-				id="submitUpdate" action="#{contrattiHandler.modContratto2}"
-				value="Salva Modifiche" rendered="#{contrattiHandler.editMode}" />
-			<h:commandButton id="delUpdate"
-				action="#{contrattiHandler.delContratto}" value="Elimina"
-				rendered="#{contrattiHandler.editMode}" /></div>
-
+				id="exit" action="/contratti/" value="Esci" /> <h:commandButton
+				id="delUpdate" action="#{contrattiHandler.delContratto}"
+				value="Elimina" rendered="#{contrattiHandler.editMode}" /></div>
 		</h:form>
 	</ui:define>
 </ui:composition>
