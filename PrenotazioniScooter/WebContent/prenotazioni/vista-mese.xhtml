@@ -65,10 +65,12 @@
 			</f:facet>
 			<h:form>
 				<h:panelGrid columns="2" id="editContent">
-					<h:outputText value="Giorno: #{organizerHandler.currentDate}" />
-					<h:inputText
-						value="Titolo: #{organizerHandler.currentShortDescription}" />
-					<h:outputText value="Note: #{organizerHandler.currentDescription}" />
+					<p><h:outputText
+						value="Giorno: #{organizerHandler.currentDate}" /></p>
+					<p><h:outputText
+						value="Titolo: #{organizerHandler.currentShortDescription}" /></p>
+					<p><h:outputText
+						value="Note: #{organizerHandler.currentDescription}" /></p>
 				</h:panelGrid>
 			</h:form>
 		</rich:modalPanel>
