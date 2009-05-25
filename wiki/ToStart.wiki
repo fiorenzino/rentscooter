@@ -2,10 +2,11 @@
 
 = To Start =
 
-Download jboss 5.1.0.CR1:
+Download jboss jboss-5.1.0.GA:
 
  http://www.jboss.org/jbossas/downloads/
 ---- 
+In commons/lib you should add StringTemplate.jar library!
 
 In this project I use Web Beans: http://seamframework.org/WebBeans
 ---- 
