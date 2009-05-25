@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Transient;
 
 @Entity
 public class Cliente implements Serializable {
@@ -15,20 +16,22 @@ public class Cliente implements Serializable {
 	private Long id;
 	private String nome;
 	private String cognome;
+	private String nomeCognome;
 	private String cartaidentita;
+	private String codicefiscale;
+	private String rilasciataDa;
+	private Date rilasciataData;
+	private String rilasciataDove;
 	private String indirizzo;
 	private Long city;
 	private Long provincia;
 	private Long cap;
 	private Long nazione;
 	private Date dataNascita;
-
-	public Cliente() {
-		this.city = new Long(0);
-		this.provincia = new Long(0);
-		this.cap = new Long(0);
-		this.nazione = new Long(0);
-	}
+	private Long cityNascita;
+	private Long provinciaNascita;
+	private String telefono;
+	private String cellulare;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -111,6 +114,79 @@ public class Cliente implements Serializable {
 
 	public void setNazione(Long nazione) {
 		this.nazione = nazione;
+	}
+
+	@Transient
+	public String getNomeCognome() {
+		return getNome() + " " + getCognome();
+	}
+
+	public void setNomeCognome(String nomeCognome) {
+		this.nomeCognome = nomeCognome;
+	}
+
+	public String getRilasciataDa() {
+		return rilasciataDa;
+	}
+
+	public void setRilasciataDa(String rilasciataDa) {
+		this.rilasciataDa = rilasciataDa;
+	}
+
+	public Date getRilasciataData() {
+		return rilasciataData;
+	}
+
+	public void setRilasciataData(Date rilasciataData) {
+		this.rilasciataData = rilasciataData;
+	}
+
+	public String getRilasciataDove() {
+		return rilasciataDove;
+	}
+
+	public void setRilasciataDove(String rilasciataDove) {
+		this.rilasciataDove = rilasciataDove;
+	}
+
+	public Long getCityNascita() {
+		return cityNascita;
+	}
+
+	public void setCityNascita(Long cityNascita) {
+		this.cityNascita = cityNascita;
+	}
+
+	public Long getProvinciaNascita() {
+		return provinciaNascita;
+	}
+
+	public void setProvinciaNascita(Long provinciaNascita) {
+		this.provinciaNascita = provinciaNascita;
+	}
+
+	public String getCodicefiscale() {
+		return codicefiscale;
+	}
+
+	public void setCodicefiscale(String codicefiscale) {
+		this.codicefiscale = codicefiscale;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public String getCellulare() {
+		return cellulare;
+	}
+
+	public void setCellulare(String cellulare) {
+		this.cellulare = cellulare;
 	}
 
 }

@@ -9,7 +9,7 @@ public class DaySummary implements Serializable {
 	public DaySummary(Long num, String description) {
 		this.num = num;
 		this.description = new StringBuffer();
-		this.description.append(description);
+		this.description.append(description + ".");
 	}
 
 	public Long getNum() {
@@ -31,7 +31,7 @@ public class DaySummary implements Serializable {
 	}
 
 	public void addDescription(String description) {
-		this.description.append(description + "\n");
+		this.description.append(description + ".");
 	}
 
 }
