@@ -24,7 +24,7 @@
 					<h:outputLabel id="nomeLabel" value="Nome:" for="nome" />
 					<h:inputText id="nome" value="#{tariffeHandler.ricerca.nome}"
 						size="15">
-						<a4j:support event="onkeyup" ajaxSingle="true" reRender="list"
+						<a4j:support event="onkeyup" ajaxSingle="true" reRender="list,scollerList"
 							action="#{tariffeHandler.aggModel}" />
 					</h:inputText>
 				</h:panelGroup>
