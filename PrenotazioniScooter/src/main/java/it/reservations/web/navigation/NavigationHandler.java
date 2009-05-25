@@ -14,9 +14,9 @@ public class NavigationHandler extends
 
 	public void handleNavigation(FacesContext facesContext, String fromAction,
 			String outcome) {
-		if (outcome == null)
+		if (outcome == null || outcome.compareTo("") == 0)
 			return; // no navigation
-		System.out.println("form: " + fromAction + " - outcome:" + outcome);
+		System.out.println("from: " + fromAction + " - outcome:" + outcome);
 		ViewHandler viewHandler = facesContext.getApplication()
 				.getViewHandler();
 		String targetViewId = getTargetViewId(facesContext, outcome);
@@ -30,7 +30,7 @@ public class NavigationHandler extends
 			externalContext.redirect(externalContext
 					.encodeActionURL(redirectPath));
 		} catch (IOException e) {
-			throw new FacesException(e.getMessage(), e);
+			e.printStackTrace();
 		}
 		// } else {
 		// UIViewRoot viewRoot = viewHandler.createView(facesContext,

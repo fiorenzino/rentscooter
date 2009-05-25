@@ -20,21 +20,22 @@ public class ScootersHandler extends JSFHandler implements Serializable {
 
 	private Scooter scooter;
 
-	private SelectItem[] scooterItems;
+	private SelectItem[] scootersItems;
 
-	public SelectItem[] getScooterItems() {
-		if (scooterItems == null) {
+	public SelectItem[] getScootersItems() {
+		if (scootersItems == null) {
 			List<Scooter> scooters = JNDIUtils.getScooterManager()
 					.getAllScooter();
 			SelectItem[] items = new SelectItem[scooters.size() + 1];
-			items[0] = new SelectItem(0, "tutti");
+			items[0] = new SelectItem(0, "scegli");
 			int i = 1;
 			for (Scooter scooter : scooters) {
-				items[i++] = new SelectItem(scooter.getId(), scooter.getName());
+				items[i++] = new SelectItem(scooter.getId(), scooter
+						.getMarcaModello());
 			}
-			scooterItems = items;
+			scootersItems = items;
 		}
-		return scooterItems;
+		return scootersItems;
 	}
 
 	public String addScooter1() {
@@ -49,7 +50,7 @@ public class ScootersHandler extends JSFHandler implements Serializable {
 		this.scooter.setTariffa(tariffa);
 		JNDIUtils.getScooterManager().persist(this.scooter);
 		aggModel();
-		this.scooterItems=null;
+		this.scootersItems = null;
 		return "/scooters/scheda-scooter.xhtml";
 	}
 
@@ -65,14 +66,14 @@ public class ScootersHandler extends JSFHandler implements Serializable {
 		this.scooter.setTariffa(tariffa);
 		JNDIUtils.getScooterManager().update(this.scooter);
 		aggModel();
-		this.scooterItems=null;
+		this.scootersItems = null;
 		return "/scooters/scheda-scooter.xhtml";
 	}
 
 	public String delScooter() {
 		JNDIUtils.getScooterManager().update(this.scooter);
 		aggModel();
-		this.scooterItems=null;
+		this.scootersItems = null;
 		return "/scooters/scheda-scooter.xhtml";
 	}
 
@@ -98,6 +99,8 @@ public class ScootersHandler extends JSFHandler implements Serializable {
 	}
 
 	public Scooter getScooter() {
+		if (this.scooter == null)
+			this.scooter = new Scooter();
 		return scooter;
 	}
 

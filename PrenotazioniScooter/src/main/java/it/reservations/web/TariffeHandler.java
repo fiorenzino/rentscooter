@@ -36,7 +36,7 @@ public class TariffeHandler extends JSFHandler implements Serializable {
 	}
 
 	public String addTariffa1() {
-		this.editMode=false;
+		this.editMode = false;
 		this.tariffa = new Tariffa();
 		return "/tariffe/gestione-tariffa.xhtml";
 	}
@@ -90,6 +90,8 @@ public class TariffeHandler extends JSFHandler implements Serializable {
 	}
 
 	public Tariffa getTariffa() {
+		if (this.tariffa == null)
+			this.tariffa = new Tariffa();
 		return tariffa;
 	}
 
