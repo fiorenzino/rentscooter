@@ -11,15 +11,81 @@
 <ui:composition template="/WEB-INF/layout/t_single.xhtml">
 	<ui:define name="title">Gestione Contratti</ui:define>
 	<ui:define name="content">
-		<p style="align: center;">Contratti</p>
-		<h:form id="form">
+		<p style="align: center;">Gestione Contratti</p>
+		<h:outputText
+			value="#{fn:init('contrattiHandler','it.reservations.par.Contratto', 'cercaContratti')}" />
+		<h:form id="centerForm">
+			<rich:spacer height="30" />
+			<h:panelGrid columns="4" width="70%">
+				<f:facet name="header">
+					<h:outputText value="Cerca Contratti" />
+				</f:facet>
+				<h:panelGroup>
+					<h:outputLabel id="nomeLabel1" value="Cognome:" for="nome1" />
+					<h:inputText id="nome1" value="#{clientiHandler.ricerca.cognome}"
+						size="15">
+						<a4j:support event="onkeyup" ajaxSingle="true"
+							reRender="list,scollerList" action="#{contrattiHandler.aggModel}" />
+					</h:inputText>
+				</h:panelGroup>
+				<h:panelGroup>
+					<h:outputLabel id="apertoLabel1" value="Aperto:" for="aperto1" />
+					<h:selectBooleanCheckbox id="aperto1" title="aperto o chiuso?"
+						value="#{contrattiHandler.ricerca.aperto}">
+						<a4j:support event="onclick" ajaxSingle="true"
+							reRender="list,scollerList" action="#{contrattiHandler.aggModel}" />
+					</h:selectBooleanCheckbox>
+				</h:panelGroup>
+				<h:panelGroup>
+					<h:outputLabel value="Num. Righe:" for="numRighe" />
+					<h:selectOneMenu id="numRighe"
+						value="#{contrattiHandler.rowsPerPage}">
+						<f:selectItems value="#{propertiesHandler.rowItems}" />
+						<a4j:support event="onchange" reRender="list,scollerList" />
+					</h:selectOneMenu>
+				</h:panelGroup>
+				<f:facet name="footer">
+					<h:outputText value="La tabella sotto si aggiorna automaticamente." />
+				</f:facet>
+			</h:panelGrid>
+			<rich:dataTable id="list" rows="#{contrattiHandler.rowsPerPage}"
+				columnClasses="col" value="#{contrattiHandler.model}"
+				var="contratto">
+				<f:facet name="header">
+					<h:outputText value="Lista Clienti" />
+				</f:facet>
+				<a:column entity="${contratto.cliente}" fieldName="nomeCognome"
+					sort="${false}" label="cliente" />
 
-			<rich:panel id="prenotazioneScooter">
-				<!-- CERCA NEL DB DA DATAINIT A DATAEND -->
-			</rich:panel>
-			<rich:panel>
-				<!-- AGGIUNGI RIGA SCOOTER - DATAINIT - DATAEND -->
-			</rich:panel>
+				<a:column entity="${contratto.scooter}" fieldName="marcaModello"
+					sort="${false}" label="scooter" />
+
+				<a:column entity="${contratto}" fieldName="dataInit" sort="${false}"
+					label="Data_Inizio" />
+
+				<a:column entity="${contratto}" fieldName="dataEnd" sort="${false}"
+					label="Data_Prevista" />
+
+				<a:column entity="${contratto}" fieldName="dataRiconsegna"
+					sort="${false}" label="Data_Riconsegna" />
+
+				<a:column entity="${contratto}" fieldName="aperto" sort="${false}"
+					label="Aperto" />
+
+				<a:column entity="${contratto}" fieldName="totale" sort="${false}"
+					label="totale" />
+
+				<a:columnCommand label="Vedi" action="detailContratto"
+					backingBean="${contrattiHandler}" />
+
+			</rich:dataTable>
+			<rich:spacer height="30" />
+			<rich:datascroller id="scollerList" for="list" maxPages="10"
+				page="#{contrattiHandler.scrollerPage}" />
+			<rich:spacer height="30" />
+			<h:commandLink id="addCliente"
+				action="#{contrattiHandler.addContratto1}"
+				value="Aggiungi Contratto" />
 		</h:form>
 	</ui:define>
 </ui:composition>

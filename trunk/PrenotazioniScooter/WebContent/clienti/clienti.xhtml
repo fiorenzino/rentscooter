@@ -25,7 +25,7 @@
 					<h:inputText id="nome1" value="#{clientiHandler.ricerca.cognome}"
 						size="15">
 						<a4j:support event="onkeyup" ajaxSingle="true"
-							reRender="ClientiList" action="#{clientiHandler.aggModel}" />
+							reRender="list,scollerList" action="#{clientiHandler.aggModel}" />
 					</h:inputText>
 				</h:panelGroup>
 				<h:panelGroup>
@@ -33,15 +33,14 @@
 					<h:selectOneMenu id="numRighe"
 						value="#{clientiHandler.rowsPerPage}">
 						<f:selectItems value="#{propertiesHandler.rowItems}" />
-						<a4j:support event="onchange"
-							reRender="clientiList,scollerDominiList" />
+						<a4j:support event="onchange" reRender="list,scollerList" />
 					</h:selectOneMenu>
 				</h:panelGroup>
 				<f:facet name="footer">
 					<h:outputText value="La tabella sotto si aggiorna automaticamente." />
 				</f:facet>
 			</h:panelGrid>
-			<rich:dataTable id="clientiList" rows="#{clientiHandler.rowsPerPage}"
+			<rich:dataTable id="list" rows="#{clientiHandler.rowsPerPage}"
 				columnClasses="col" value="#{clientiHandler.model}" var="cliente">
 				<f:facet name="header">
 					<h:outputText value="Lista Clienti" />
@@ -59,16 +58,23 @@
 
 				<a:column entity="${cliente}" fieldName="provincia" sort="${false}"
 					label="provincia" />
+
+				<a:columnCommand label="Vedi" action="detailCliente"
+					backingBean="${clientiHandler}" />
+
 				<a:columnCommand label="Modifica" action="modCliente1"
 					backingBean="${clientiHandler}" />
 
 			</rich:dataTable>
 			<rich:spacer height="30" />
-			<rich:datascroller id="scollerDominiList" for="clientiList"
-				maxPages="10" page="#{clientiHandler.scrollerPage}" />
+			<rich:datascroller id="scollerList" for="list" maxPages="10"
+				page="#{clientiHandler.scrollerPage}" />
 			<rich:spacer height="30" />
 			<h:commandLink id="addCliente" action="#{clientiHandler.addCliente1}"
 				value="Aggiungi Cliente" />
+
+			<h:commandLink id="privacy" action="/pdf/dichiarazione-privacy.pdf"
+				value="Dichiarazione Privacy PDF" target="_blank" />
 		</h:form>
 	</ui:define>
 </ui:composition>
