@@ -7,15 +7,35 @@ import it.smartflower.par.RicercaI;
 import it.smartflower.web.utils.JSFHandler;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.Named;
 import javax.context.SessionScoped;
+import javax.faces.model.SelectItem;
 
 @SessionScoped
 @Named
 public class ClientiHandler extends JSFHandler implements Serializable {
 
 	private Cliente cliente;
+
+	private SelectItem[] clientiItems;
+
+	public SelectItem[] getClientiItems() {
+		if (clientiItems == null) {
+			List<Cliente> clienti = JNDIUtils.getClientiManager()
+					.getAllClienti();
+			SelectItem[] items = new SelectItem[clienti.size() + 1];
+			items[0] = new SelectItem(0, "scegli");
+			int i = 1;
+			for (Cliente cliente : clienti) {
+				items[i++] = new SelectItem(cliente.getId(), cliente
+						.getCognome());
+			}
+			clientiItems = items;
+		}
+		return clientiItems;
+	}
 
 	public String addCliente1() {
 		this.cliente = new Cliente();
@@ -25,6 +45,7 @@ public class ClientiHandler extends JSFHandler implements Serializable {
 	public String addCliente2() {
 		JNDIUtils.getClientiManager().persist(this.cliente);
 		aggModel();
+		clientiItems = null;
 		return "/clienti/scheda-cliente.xhtml";
 	}
 
@@ -37,6 +58,7 @@ public class ClientiHandler extends JSFHandler implements Serializable {
 	public String modCliente2() {
 		JNDIUtils.getClientiManager().update(this.cliente);
 		aggModel();
+		clientiItems = null;
 		return "/clienti/scheda-cliente.xhtml";
 	}
 

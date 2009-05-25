@@ -1,10 +1,10 @@
 package it.reservations.web;
 
 import it.reservations.ejb3.Configurator;
-import it.reservations.web.utils.SimpleComparator;
 import it.reservations.par.Comune;
 import it.reservations.par.Nazione;
 import it.reservations.par.Provincia;
+import it.reservations.web.utils.SimpleComparator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -188,4 +188,35 @@ public class PropertiesHandler implements Serializable {
 
 	}
 
+	public String getCurrentPage() {
+		String dove = it.reservations.web.utils.Util.getCurrentPage().trim();
+		String path = it.reservations.web.utils.Util.getContextPath().replace(
+				"/", "").trim();
+		// System.out.println("PATH: " + path + "- DOVE: " + dove);
+		String[] dovs = dove.split("/");
+		StringBuffer res = new StringBuffer();
+		for (int i = 0; i < dovs.length; i++) {
+			// System.out.println(i + ")" + dovs[i] + ".");
+			if (i == 0) {
+				res.append("<a href=\"/" + path + "\">home</a>");
+			}
+
+			if ((dovs[i] != null) && (dovs[i].trim().compareTo("") != 0)
+					&& (dovs[i].trim().compareTo(path) != 0)) {
+				if ((dovs[i].trim().compareTo("") != 0)
+						&& (dovs[i].trim().compareTo(path) != 0)) {
+					// System.out.println("SCRIVO -");
+					res.append(" - ");
+				}
+				if (dovs[i].endsWith(".jsf")) {
+					res.append(dovs[i].replace(".jsf", ""));
+				} else {
+					res.append("<a href=\"/" + path + "/" + dovs[i] + "\">"
+							+ dovs[i] + "</a>");
+				}
+
+			}
+		}
+		return res.toString();
+	}
 }

@@ -5,10 +5,10 @@ import it.reservations.par.DaySummary;
 import it.reservations.web.model.CalendarDataModelItemImpl;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -88,18 +88,16 @@ public class OrganizerHandler implements CalendarDataModel, Serializable {
 				// + dateArray[dateArray.length - 1]);
 				if (dateArray[0].before(getDataInit())
 						|| dateArray[dateArray.length - 1].after(getDataEnd())) {
-					ricaricaItems(dateArray[0], dateArray[dateArray.length - 1]);
+					ricaricaItems(this.scooterFilter, dateArray[0],
+							dateArray[dateArray.length - 1]);
 				}
 			}
-			// for (int i = 0; i < dateArray.length; i++) {
-			// System.out.println("ARRAY DATA: " + dateArray[i]);
-			// }
 
 		}
 		return items;
 	}
 
-	private void ricaricaItems(Date init, Date end) {
+	private void ricaricaItems(Long scooterFilter, Date init, Date end) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(init);
 		// CARICO DATI DAL DB
@@ -107,10 +105,10 @@ public class OrganizerHandler implements CalendarDataModel, Serializable {
 		// CREO MAP CON DATA E PRENOTAZIONI
 
 		// CREO LISTA CHE VERRA' VISUALIZZATA
-		List<CalendarDataModelItem> lista = new ArrayList<CalendarDataModelItem>();
+		List<CalendarDataModelItem> lista = new LinkedList<CalendarDataModelItem>();
 
 		Map<Date, DaySummary> mapp = prenotazioniManager.getReservationData(
-				init, end);
+				scooterFilter, init, end);
 		for (Date data : mapp.keySet()) {
 			// System.out.println("DATA: " + data);
 			DaySummary dayS = mapp.get(data);
