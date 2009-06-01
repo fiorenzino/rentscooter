@@ -2,6 +2,7 @@ package it.reservations.ejb3.utils;
 
 import it.reservations.ejb3.ClientiManager;
 import it.reservations.ejb3.ContrattiManager;
+import it.reservations.ejb3.PrenotazioniManager;
 import it.reservations.ejb3.ScooterManager;
 import it.reservations.ejb3.TariffeManager;
 
@@ -16,6 +17,26 @@ public class JNDIUtils {
 	public static ScooterManager scooterManager = null;
 	public static TariffeManager tariffeManager = null;
 	public static ContrattiManager contrattiManager = null;
+	public static PrenotazioniManager prenotazioniManager = null;
+
+	public static PrenotazioniManager getPrenotazioniManager() {
+		if (prenotazioniManager != null) {
+			return prenotazioniManager;
+		} else {
+			try {
+				InitialContext ctx = new InitialContext();
+				prenotazioniManager = (PrenotazioniManager) ctx
+						.lookup("prenotazioniScooter/PrenotazioniManagerBean/local");
+				if (prenotazioniManager != null) {
+					log.info("comp: " + contrattiManager);
+				}
+				return prenotazioniManager;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+	}
 
 	public static ContrattiManager getContrattiManager() {
 		if (contrattiManager != null) {

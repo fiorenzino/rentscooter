@@ -31,9 +31,15 @@ public class PrenotazioniManagerBean extends EJBManagerBean implements
 	public Map<String, Map<String, Boolean>> getReservationList(Date dal,
 			Date al, String cilindrata) {
 		// SELEZIONO SCOOTER CHE HANNO CILINDRATA SCELTA
-		List<Scooter> lista = (List<Scooter>) em.createNamedQuery(
-				"GET_SCOTEER_BY_CILINDRATA").setParameter("CILINDRATA",
-				cilindrata).getResultList();
+		List<Scooter> lista = null;
+		if (cilindrata != null) {
+			lista = (List<Scooter>) em.createNamedQuery(
+					"GET_SCOOTER_BY_CILINDRATA").setParameter("CILINDRATA",
+					cilindrata).getResultList();
+		} else {
+			lista = (List<Scooter>) em.createNamedQuery("GET_ALL_SCOOTER")
+					.getResultList();
+		}
 		Map<String, Map<String, Boolean>> prenotazioniTot = new TreeMap<String, Map<String, Boolean>>();
 		for (Scooter scooter : lista) {
 			Map<String, Boolean> resMap = new TreeMap<String, Boolean>();
@@ -81,10 +87,11 @@ public class PrenotazioniManagerBean extends EJBManagerBean implements
 			System.out.println("DAL: " + dal);
 			System.out.println("AL: " + al);
 			System.out.println("FILTER: " + scooterFilter);
-			
+
 			List<Prenotazione> prenotazioni = new ArrayList<Prenotazione>();
 			if (scooterFilter != null && scooterFilter > 0) {
-				System.out.println("QUERY GET_RESERVATIONS_BY_DATA_AND_IDSCOOTER");
+				System.out
+						.println("QUERY GET_RESERVATIONS_BY_DATA_AND_IDSCOOTER");
 				prenotazioni = (List<Prenotazione>) em.createNamedQuery(
 						"GET_RESERVATIONS_BY_DATA_AND_IDSCOOTER").setParameter(
 						"DAL", dal).setParameter("AL", al).setParameter(

@@ -27,7 +27,7 @@ import org.richfaces.model.CalendarDataModelItem;
 public class OrganizerHandler implements CalendarDataModel, Serializable {
 	@EJB
 	PrenotazioniManager prenotazioniManager;
-	private CalendarDataModelItem[] items;
+	private CalendarDataModelItem[] items = null;
 	private String currentDescription;
 	private String currentShortDescription;
 	private Date currentDate;
@@ -35,6 +35,10 @@ public class OrganizerHandler implements CalendarDataModel, Serializable {
 	private Date dataInit;
 	private Date dataEnd;
 	private Long scooterFilter;
+
+	public OrganizerHandler() {
+		reset();
+	}
 
 	public Date getDataInit() {
 		if (dataInit == null)

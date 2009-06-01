@@ -1,9 +1,11 @@
 package it.reservations.web.data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Facet implements Serializable {
 	private String header;
+	private Date data;
 
 	/**
 	 * TODO Description goes here.
@@ -11,9 +13,10 @@ public class Facet implements Serializable {
 	 * @param header
 	 * @param footer
 	 */
-	public Facet(String header) {
+	public Facet(String header, Date data) {
 		super();
 		this.header = header;
+		this.data = data;
 	}
 
 	/**
@@ -29,6 +32,14 @@ public class Facet implements Serializable {
 	 */
 	public void setHeader(String header) {
 		this.header = header;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
 	}
 
 }
