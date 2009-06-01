@@ -1,102 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:c="http://java.sun.com/jstl/core">
+	xmlns:a="http://topnet.it/facelets"
+	xmlns:fn="http://topnet.it/functions"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax">
 
-<head>
-
-<style type="text/css">
-@page {
-	size: A4 portrait;
-	margin-top: 3cm;
-	margin-bottom: 3cm;
-	margin-left: 1.5cm;
-	margin-right: 2cm; 
-	@top-center {content: element(header)}
-	@bottom-center {content: element(footer)}
-
-}
-body {
-	font-size: 14px;
-	font-family: arial;
-	/*width: 800px;*/
-}
-
-li {
-	list-style-type: decimal;
-}
-
-h2 {
-	font-size: 16px;
-	font-weight: bold;
-}
-
-a,a:visited {
-	text-decoration: none;
-	color: black;
-}
-
-p {
-	margin: 15px;
-}
-
-#header {
-	display: block;
-	text-align: center; border-bottom : solid 0.01mm #000;
-	padding-bottom: 0.5cm;
-	position: running(header);
-	border-bottom: solid 0.01mm #000;
-}
-
-#footer {
-	display: block;
-	border-top: solid 0.01mm #000;
-	padding-top: 0.5cm;
-	padding-bottom: 0.5cm;
-	position: running(footer);
-}
-
-#pagenumber:before {
-content: counter(page); 
-}
-
-#pagecount:before {
-content: counter(pages);  
-}
-</style>
-
-</head>
-
-<body>
-<div id="footer" > 
-	<div style="text-align: center;"> pag. <span id="pagenumber"/> di <span id="pagecount"/> </div>
-</div>
-<div id="header">
-	<div style="text-align: center;">
-	<table style="width: 100%;">
-		<tr>
-			<td><img src="#{propertiesHandler.absolutePath}/images/logo.jpg"
-				width="88" height="44" /></td>
-			<td><span
-				style="font-size: 10px; font-family: arial; font-weight: bold;">Simonelli
-			Moto s.a.s. di Ranalli Guido e Gianfranco - via Silvio Pellico, 198 -
-			63039 - San Benedetto del Tronto (AP) - p.i. 01681320444 telefono
-			+39.073586967 fax +39.0735789187 e-mail: info@simonellimoto.it</span></td>
-			<td><img src="#{propertiesHandler.absolutePath}/images/guzzi.png"
-				width="75" height="44" /></td>
-		</tr>
-	</table>
-	</div>
-</div>
-
-<h2>Contratto di Locazione</h2>
-
-
-
+<ui:composition template="/WEB-INF/layout/print_layout.xhtml">
+	<ui:define name="title">Contratto di Locazione</ui:define>
+	<ui:define name="content">
+		
 <div style="width: 650px; text-align: justify; border: #000 solid 0px;">
 
 
@@ -218,8 +133,6 @@ Lucca in data 25/01/2003, avente numero di telefono:
 
 <p></p>
 </div>
-
-</body>
-
-
+	</ui:define>
+</ui:composition>
 </html>
