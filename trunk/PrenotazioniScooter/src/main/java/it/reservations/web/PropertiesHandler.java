@@ -5,6 +5,7 @@ import it.reservations.par.Comune;
 import it.reservations.par.Nazione;
 import it.reservations.par.Provincia;
 import it.reservations.web.utils.SimpleComparator;
+import it.reservations.web.utils.Util;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,8 +15,10 @@ import java.util.TreeMap;
 import javax.annotation.Named;
 import javax.context.SessionScoped;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Current;
+import javax.servlet.http.HttpServletRequest;
 
 import org.jboss.logging.Logger;
 
@@ -186,6 +189,11 @@ public class PropertiesHandler implements Serializable {
 			nazioni = configurator.getNazioni();
 		return nazioni;
 
+	}
+
+	public String getAbsolutePath() {
+		//System.out.println("ABS: " + Util.getAbsolutePath());
+		return Util.getAbsolutePath();
 	}
 
 	public String getCurrentPage() {
