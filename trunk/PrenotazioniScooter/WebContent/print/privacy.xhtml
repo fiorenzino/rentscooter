@@ -1,136 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:c="http://java.sun.com/jstl/core">
+	xmlns:a="http://topnet.it/facelets"
+	xmlns:fn="http://topnet.it/functions"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax">
 
-<head>
-
-<style type="text/css">
-@page {
-	size: A4 portrait;
-	margin-top: 10%;
-	margin-left: 10%;
-	margin-right: 10%;
-	margin-bottom: 10%;
-}
-
-body {
-	font-size: 14px;
-	font-family: arial;
-	width: 800px;
-}
-
-li {
-	list-style-type: decimal;
-}
-
-h2 {
-	font-size: 16px;
-	font-weight: bold;
-}
-
-a,a:visited {
-	text-decoration: none;
-	color: black;
-}
-
-p {
-	margin: 15px;
-}
-
-.odd-row {
-	background-color: #FFFFE0;
-}
-
-.even-row {
-	background-color: #FFFFFF;
-}
-
-.companiesTable {
-	width: 800px;
-	font-size: 12px;
-	font-family: arial;
-	border: 1px solid #C1DAD7;
-	border-collapse: collapse;
-}
-
-.companiesTable td,.companiesTable th {
-	padding: 3px;
-	border: 1px solid #C1DAD7;
-}
-
-.header {
-	background-color: #CAE8EA;
-	font-weight: bold;
-	width: auto;
-}
-
-.centeredCol {
-	text-align: center;
-}
-
-.leftCol {
-	text-align: left;
-}
-
-.rightCol {
-	text-align: right;
-}
-
-.col1 {
-	width: 15px;
-	text-align: center;
-}
-
-.colDescr1 {
-	width: 220px;
-	text-align: left;
-}
-
-.colDescr2 {
-	width: 130px;
-	text-align: left;
-}
-
-.colValues {
-	width: 75px;
-	text-align: right;
-}
-</style>
-
-</head>
-
-<body>
-
-
-<div style="width: 600px; text-align: justify; border: #000 solid 0px;">
-<table style="width: 600px;">
-	<tr>
-		<td><img
-			src="#{facesContext.externalContext.requestContextPath}/images/logo.jpg"
-			width="44" height="22" /></td>
-		<td><span
-			style="font-size: 10px; font-family: arial; font-weight: bold;">Simonelli
-		Moto s.a.s. di Ranalli Guido e Gianfranco - via Silvio Pellico, 198 -
-		63039 - San Benedetto del Tronto (AP) - p.i. 01681320444 telefono
-		+39.073586967 fax +39.0735789187 e-mail: info@simonellimoto.it</span></td>
-		<td><img
-			src="#{facesContext.externalContext.requestContextPath}/images/guzzi.png"
-			width="75" height="44" /></td>
-	</tr>
-	<tr>
-		<td colspan="3">
-		<h2>Modulo di Accettazione della Privacy</h2>
-		</td>
-	</tr>
-</table>
-
-<p></p>
-<p></p>
+<ui:composition template="/WEB-INF/layout/print_layout.xhtml">
+	<ui:define name="title">Modulo di Accettazione della Privacy</ui:define>
+	<ui:define name="content">
+		
+<div style="width: 650px; text-align: justify; border: #000 solid 0px;">
 
 
 <p>Il sottoscritto #{clientiHandler.cliente.nomeCognome}, nato a il
@@ -171,8 +53,6 @@ nell'informativa: [_] si [_] no</b></p>
 
 <p></p>
 </div>
-
-</body>
-
-
+	</ui:define>
+</ui:composition>
 </html>
