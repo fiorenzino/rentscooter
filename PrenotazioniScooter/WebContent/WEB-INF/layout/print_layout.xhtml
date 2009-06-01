@@ -8,28 +8,23 @@
 	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
 	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax">
 <head>
-
 <title><ui:insert name="title" /></title>
-<link
-	href="#{facesContext.externalContext.requestContextPath}/style/bugsstyles.css"
+<link href="#{propertiesHandler.absolutePath}/style/print.css"
 	rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-<div id="wrap">
-<div id="header"></div>
-<div id="navbar"><ui:insert name="menu">
-	<ui:include src="menu.xhtml" />
+<div id="footer"><ui:insert name="footer">
+	<ui:include src="footer.xhtml" />
 </ui:insert></div>
-<div id="contentarea"><h:outputText
-	value="#{propertiesHandler.currentPage}" escape="false" /><ui:insert
-	name="content">
+<div id="header"><ui:insert name="header">
+	<ui:include src="header.xhtml" />
+</ui:insert></div>
+<h2><ui:insert name="title" /></h2>
+<ui:insert name="content">
 	<ui:include src="content.xhtml" />
 </ui:insert>
-<div id="footer">
-<p>ffootteerr</p>
-</div>
-</div>
-</div>
+
+
 </body>
 </html>
