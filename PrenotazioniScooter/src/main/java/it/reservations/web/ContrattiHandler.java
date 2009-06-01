@@ -8,6 +8,7 @@ import it.reservations.par.Scooter;
 import it.reservations.par.Tariffa;
 import it.reservations.web.utils.TariffeUtil;
 import it.reservations.web.utils.TimeUtil;
+import it.reservations.web.utils.Util;
 import it.smartflower.ejb3.utils.ClassCreator;
 import it.smartflower.par.RicercaI;
 import it.smartflower.web.utils.JSFHandler;
@@ -185,6 +186,7 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 	}
 
 	public String detailContratto() {
+		System.out.println("ABS: " + Util.getAbsolutePath());
 		this.contratto = (Contratto) getModel().getRowData();
 		return "/contratti/scheda-contratto.xhtml";
 	}

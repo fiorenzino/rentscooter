@@ -1,5 +1,7 @@
 package it.reservations.web.printer;
 
+import it.reservations.web.utils.Util;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.StringReader;

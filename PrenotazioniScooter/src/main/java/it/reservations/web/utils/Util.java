@@ -76,6 +76,18 @@ public class Util {
 		return cp;
 	}
 
+	public static String getAbsolutePath() {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpServletRequest httpServletRequest = (HttpServletRequest) fc
+				.getExternalContext().getRequest();
+		String scheme = httpServletRequest.getScheme();
+		String hostName = httpServletRequest.getServerName();
+		int port = httpServletRequest.getServerPort();
+		// Because this is rendered in a <div> layer, portlets for some reason
+		// need the scheme://hostname:port part of the URL prepended.
+		return scheme + "://" + hostName + ":" + port + getContextPath();
+	}
+
 	public static String getSessionId() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		HttpServletRequest httpRequest = (HttpServletRequest) fc
