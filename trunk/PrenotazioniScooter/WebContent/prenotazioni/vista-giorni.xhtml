@@ -12,39 +12,40 @@
 	<ui:define name="title">Gestione Prenotazioni</ui:define>
 	<ui:define name="content">
 		<h2>CERCA PER COLONNE</h2>
+		<h:outputText
+			value="#{fn:init('prenotazioniHandler','it.reservations.par.Prenotazione', 'cercaPrenotazioni')}" />
 		<h:form id="leftForm">
 			<rich:panel id="vediamo">
 
 				<div>data dal: <rich:calendar id="dataDal"
-					value="#{reservationHandler.dal}" popup="true" showInput="true"
+					value="#{prenotazioniHandler.ricerca.dal}" popup="true" showInput="true"
 					enableManualInput="true" datePattern="dd/MM/yyyy"
-					showApplyButton="true">
+					showApplyButton="false">
 					<a4j:support event="onchanged" ajaxSingle="true" />
 				</rich:calendar></div>
 				<div>data al: <rich:calendar id="dataAl"
-					value="#{reservationHandler.al}" popup="true" showInput="true"
+					value="#{prenotazioniHandler.ricerca.al}" popup="true" showInput="true"
 					enableManualInput="true" datePattern="dd/MM/yyyy"
-					showApplyButton="true">
+					showApplyButton="false">
 					<a4j:support event="onchanged" ajaxSingle="true" />
 				</rich:calendar></div>
 				<h:commandButton id="submit"
-					action="#{reservationHandler.resetLista}" value="Cerca"
+					action="#{prenotazioniHandler.aggModel}" value="Cerca"
 					immediate="false" />
 
 			</rich:panel>
 
 			<rich:panel header="Prenotazioni">
 
-				<rich:dataTable id="colTable" value="#{reservationHandler.model}"
+				<rich:dataTable id="colTable" value="#{prenotazioniHandler.model}"
 					var="res">
-
 					<f:facet name="header">
 						<h:outputText value="Prentazioni"></h:outputText>
 					</f:facet>
 
-					<rich:columns value="#{reservationHandler.columns}" var="columns"
-						index="ind" begin="#{reservationHandler.begin}"
-						end="#{reservationHandler.end}">
+					<rich:columns value="#{prenotazioniHandler.columns}" var="columns"
+						index="ind" begin="#{prenotazioniHandler.begin}"
+						end="#{prenotazioniHandler.end}">
 
 						<f:facet name="header">
 							<h:outputText value="#{columns.header}" />
@@ -54,69 +55,7 @@
 				</rich:dataTable>
 
 			</rich:panel>
-			<rich:panel header="Utente">
-				<rich:inplaceSelect value="#{reservationHandler.contract.user.id}"
-					defaultLabel="Seleziona Utente">
-					<f:selectItem itemValue="0" itemLabel="Option 1" />
-					<f:selectItem itemValue="1" itemLabel="Option 2" />
-					<f:selectItem itemValue="2" itemLabel="Option 3" />
-					<f:selectItem itemValue="3" itemLabel="Option 4" />
-					<f:selectItem itemValue="4" itemLabel="Option 5" />
-				</rich:inplaceSelect>
-			</rich:panel>
-			<rich:panel header="Scooter per giorno">
-				<rich:dataTable id="scooterDay" var="res"
-					value="#{reservationHandler.reservations}"
-					preserveDataModel="false" rows="5">
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText id="ipLabel" value="scooter" />
-						</f:facet>
-						<rich:inplaceSelect value="#{res.scooter.id}"
-							defaultLabel="Seleziona Scooter">
-							<f:selectItem itemValue="0" itemLabel="Scooter 1" />
-							<f:selectItem itemValue="1" itemLabel="Scooter 2" />
-							<f:selectItem itemValue="2" itemLabel="Scooter 3" />
-							<f:selectItem itemValue="3" itemLabel="Scooter 4" />
-							<f:selectItem itemValue="4" itemLabel="Scooter 5" />
-						</rich:inplaceSelect>
-
-					</rich:column>
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText id="nameLabel" value="dal" />
-						</f:facet>
-						<rich:calendar id="dataAl" value="#{res.dal}" popup="true"
-							showInput="true" enableManualInput="true"
-							datePattern="dd/MM/yyyy" showApplyButton="true" />
-
-					</rich:column>
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText id="nameLabel" value="al" />
-						</f:facet>
-						<rich:calendar id="dataAl" value="#{res.al}" popup="true"
-							showInput="true" enableManualInput="true"
-							datePattern="dd/MM/yyyy" showApplyButton="true" />
-
-					</rich:column>
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText id="nameLabel" value="del" />
-						</f:facet>
-						<h:inputText id="nameValue" value="#{res.id}" required="false"
-							size="30" />
-						<a4j:commandButton id="remove"
-							action="#{reservationHandler.remRow}" reRender="scooterDay"
-							value="-" />
-					</rich:column>
-				</rich:dataTable>
-				<div><a4j:commandButton id="submitAddNewRow"
-					action="#{reservationHandler.addNewRes}" reRender="scooterDay"
-					value="Aggiungi Altre Righe" /> <h:commandButton
-					id="submitUpdateRows" action="#{reservationHandler.updateRows}"
-					value="Salva Contratto" /></div>
-			</rich:panel>
+			
 		</h:form>
 	</ui:define>
 </ui:composition>
