@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://topnet.it/facelets"
+	xmlns:fn="http://topnet.it/functions"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax">
+
+<ui:composition template="/WEB-INF/layout/t_single.xhtml">
+	<ui:define name="title">Test</ui:define>
+	<ui:define name="content">
+		<p style="align: center;">Test Event</p>
+
+		<h:form id="centerForm">
+			<a:field id="nota" label="Nota:" fieldName="note"
+				entity="#{noteHandler}" required="false" />
+
+			<h:commandButton id="add" action="#{noteHandler.addNote2}"
+				value="Aggiungi Nota" rendered="#{not noteHandler.editMode}" />
+
+			<h:commandButton id="mod" action="#{noteHandler.modNote2}"
+				value="Modifica Nota" rendered="#{noteHandler.editMode}" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
