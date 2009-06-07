@@ -15,10 +15,8 @@ import java.util.TreeMap;
 import javax.annotation.Named;
 import javax.context.SessionScoped;
 import javax.ejb.EJB;
-import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Current;
-import javax.servlet.http.HttpServletRequest;
 
 import org.jboss.logging.Logger;
 

@@ -1,12 +1,8 @@
 package it.reservations.web;
 
-import it.reservations.ejb3.utils.JNDIUtils;
 import it.reservations.par.Prenotazione;
 import it.reservations.web.data.Columns;
 import it.reservations.web.data.Facet;
-import it.smartflower.ejb3.utils.ClassCreator;
-import it.smartflower.par.RicercaI;
-import it.smartflower.web.utils.JSFHandler;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +17,7 @@ import javax.faces.model.DataModel;
 
 @SessionScoped
 @Named
-public class PrenotazioniHandler extends JSFHandler implements Serializable {
+public class PrenotazioniHandler implements Serializable {
 
 	private ArrayList<Prenotazione[]> lista;
 
@@ -88,15 +84,11 @@ public class PrenotazioniHandler extends JSFHandler implements Serializable {
 		this.al = al;
 	}
 
-	public ArrayList<Prenotazione[]> getOldModel() {
+	// riga[colonna][]
+	//riga[scooter1][giornoDAL] - riga[scooter1][giornoAL]
+	//riga[scooter2][giornoDAL] - riga[scooter2][giornoAL]
+	public ArrayList<Prenotazione[]> getModel() {
 		if (getDal() != null && getAl() != null) {
-			Object sata = super.getModel().getWrappedData();
-			if (sata != null) {
-				List<Prenotazione> lista = (List<Prenotazione>) sata;
-				for (Prenotazione prenotazione : lista) {
-
-				}
-			}
 
 			for (int i = 0; i < 10; i++) {
 				System.out.println("i:" + i);
@@ -177,21 +169,6 @@ public class PrenotazioniHandler extends JSFHandler implements Serializable {
 		this.reservationsList = reservationsList;
 	}
 
-	@Override
-	public void initRicerca() {
-		try {
-			this.ricerca = (RicercaI) ClassCreator
-					.creaRicerca("it.reservations.par.RicercaPrenotazioni");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public PrenotazioniHandler() {
-		eJBManager = JNDIUtils.getPrenotazioniManager();
-		rowsPerPage = 10;
-		initRicerca();
-	}
 
 	public String getCilindrata() {
 		return cilindrata;
