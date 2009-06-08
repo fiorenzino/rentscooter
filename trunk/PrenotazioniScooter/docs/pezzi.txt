@@ -1,4 +1,4 @@
-<a4j:region renderRegionOnly="false">
+			<a4j:region renderRegionOnly="false">
 					<a:field id="provinciauserHandler"
 						label="Provincia di residenza(*):" type="selOneAjax"
 						entityId="#{clientiHandler.client}" fieldName="provincia"
@@ -6,7 +6,7 @@
 						reRender="cityuserHandler, capuserHandler" required="true" />
 				</a4j:region>
 				<a4j:region>
-					<a:field id="cityuserHandler" label="Citta  di residenza(*):"
+					<a:field id="cityuserHandler" label="Cittaï¿½ di residenza(*):"
 						type="selOneM_Aitems" entityId="#{clientiHandler.client}"
 						fieldName="city" fieldNameList="#{propertiesHandler.comuniItems}"
 						reRender="capuserHandler" required="true" />
