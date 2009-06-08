@@ -29,56 +29,56 @@ THIS TEXT WILL BE REMOVED
 		<c:when test='${rendered == "true"}'>
 			<c:choose>
 				<c:when test='${type == "outputText"}'>
-					<p><h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
-					<h:outputText id="${id}" value="#{entity[fieldName]}" /></p>
+					<h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
+					<h:outputText id="${id}" value="#{entity[fieldName]}" />
 				</c:when>
 				<c:when test='${type == "outputDate"}'>
-					<p><h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
+					<h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
 					<h:outputText id="${id}" value="${entity[fieldName]}">
 						<f:convertDateTime locale="IT" type="date" dateStyle="medium" />
-					</h:outputText></p>
+					</h:outputText>
 				</c:when>
 				<c:when test='${type == "outputDateTime"}'>
-					<p><h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
+					<h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
 					<h:outputText id="${id}" value="${entity[fieldName]}">
 						<f:convertDateTime type="both" dateStyle="short" />
-					</h:outputText></p>
+					</h:outputText>
 				</c:when>
 				<c:when test='${type == "link"}'>
-					<p><h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
+					<h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
 					<h:outputLink id="${id}" value="${val}">
 						<h:outputText value="${label}" />
-					</h:outputLink></p>
+					</h:outputLink>
 				</c:when>
 				<c:when test='${type == "getCodice"}'>
-					<p><h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
-					<h:outputText id="${id}" value="#{fn:getCodice(entity[fieldName])}" /></p>
+					<h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
+					<h:outputText id="${id}" value="#{fn:getCodice(entity[fieldName])}" />
 				</c:when>
 				<c:when test='${type == "getArrayValue"}'>
-					<p><h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
-					<h:outputText id="${id}" value="#{fn:getArrayValue(campo,entity)}" /></p>
+					<h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
+					<h:outputText id="${id}" value="#{fn:getArrayValue(campo,entity)}" />
 				</c:when>
 				<c:when test='${type == "getEntityTypeVisual"}'>
-					<p><h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
+					<h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
 					<h:outputText id="${id}"
-						value="#{fn:getEntityTypeVisual(fieldName)}" /></p>
+						value="#{fn:getEntityTypeVisual(fieldName)}" />
 				</c:when>
 				<c:when test='${type == "getContactType"}'>
-					<p><h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
-					<h:outputText id="${id}" value="#{fn:getContactType(fieldName)}" /></p>
+					<h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
+					<h:outputText id="${id}" value="#{fn:getContactType(fieldName)}" />
 				</c:when>
 				<c:when test='${type == "htmlText"}'>
 					<div id="#{id}">
-					<p><h:outputLabel id="#{id}Label" value="${label}" for="${id}" /></p>
+					<h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
 					<h:outputText value="#{fn:nl2br(entity[fieldName])}" escape="false" />
 					</div>
 				</c:when>
 				<c:when test='${type == "boolean"}'>
-					<p><h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
+					<h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
 					<h:outputText id="${id}si" value="SI"
 						rendered="#{entity[fieldName] == true}" /> <h:outputText
 						id="${id}no" value="NO" rendered="#{entity[fieldName] == false}" />
-					</p>
+					
 				</c:when>
 			</c:choose>
 		</c:when>

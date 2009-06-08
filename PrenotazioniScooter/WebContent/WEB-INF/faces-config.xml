@@ -9,5 +9,9 @@
 	<application>
 		<navigation-handler>it.reservations.web.navigation.NavigationHandler</navigation-handler>
 	</application>
+	<converter>
+		<converter-for-class>java.util.Date</converter-for-class>
+		<converter-class>it.reservations.web.utils.CustomDateTimeConverter</converter-class>
+	</converter>
 
 </faces-config>

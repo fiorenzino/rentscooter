@@ -11,8 +11,14 @@
 			it.smartflower.web.utils.JSFStatics
 		</function-class>
 		<function-signature>
-			void init(java.lang.String,
-			java.lang.String,java.lang.String)
+			void init(java.lang.String,java.lang.String,java.lang.String)
+		</function-signature>
+	</function>
+	<function>
+		<function-name>getArrayValue</function-name>
+		<function-class>it.reservations.web.utils.Util</function-class>
+		<function-signature>
+			java.lang.String getArrayValue(java.lang.String,java.lang.Long)
 		</function-signature>
 	</function>
 

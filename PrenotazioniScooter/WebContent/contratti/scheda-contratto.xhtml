@@ -14,69 +14,61 @@
 		<p style="align: center;">Gestione Contratti</p>
 		<h:form id="form">
 			<rich:panel id="prenotazioneScooter">
+				<h:panelGrid columns="2" id="editContent">
+					<a:fieldView id="Cliente" label="Cliente:"
+						entity="#{contrattiHandler.contratto.cliente}"
+						fieldName="nomeCognome" />
 
-				<a:fieldView id="Cliente" label="Cliente:"
-					entityId="#{contrattiHandler.contratto.cliente}"
-					fieldName="nomeCognome" />
+					<a:fieldView id="scooter" label="Scooter:"
+						entity="#{contrattiHandler.contratto.scooter}"
+						fieldName="marcaModello" />
 
-				<a:fieldView id="scooter" label="Scooter:"
-					entityId="#{contrattiHandler.contratto.scooter}"
-					fieldName="marcaModello" />
+					<a:fieldView id="dataInit" label="Data Inizio:"
+						fieldName="dataInit" type="outputDate"
+						entity="#{contrattiHandler.contratto}" />
 
-				<a:fieldView id="dataInit" label="Data Inizio:" fieldName="dataInit"
-					type="outputDate" entity="#{contrattiHandler.contratto}" />
+					<a:fieldView id="dataEnd" label="Data Riconsegna Prevista:"
+						fieldName="dataEnd" type="outputDate"
+						entity="#{contrattiHandler.contratto}" />
 
-				<a:fieldView id="dataEnd" label="Data Riconsegna Prevista:"
-					fieldName="dataEnd" type="outputDate"
-					entity="#{contrattiHandler.contratto}" />
+					<a:fieldView id="dataEff" label="Data Riconsegna Effettuata:"
+						fieldName="dataRiconsegna" type="outputDate"
+						entity="#{contrattiHandler.contratto}" />
 
-				<a:fieldView id="dataEff" label="Data Riconsegna Effettuata:"
-					fieldName="dataRiconsegna" type="outputDate"
-					entity="#{contrattiHandler.contratto}" />
+					<a:fieldView id="note" label="Note:" fieldName="note"
+						entity="#{contrattiHandler.contratto}" />
 
-				<a:fieldView id="note" label="Note:" fieldName="note"
-					entity="#{contrattiHandler.contratto}" />
+					<a:fieldView id="importoIniziale" label="Importo Iniziale:"
+						fieldName="importoIniziale" entity="#{contrattiHandler.contratto}" />
 
-				<a:fieldView id="importoIniziale" label="Importo Iniziale:"
-					fieldName="importoIniziale" entity="#{contrattiHandler.contratto}" />
+					<a:fieldView id="sconto" label="Sconto:" fieldName="sconto"
+						entity="#{contrattiHandler.contratto}" />
 
-				<a:fieldView id="sconto" label="Sconto:" fieldName="sconto"
-					entity="#{contrattiHandler.contratto}" />
+					<a:fieldView id="extra" label="Extra:" fieldName="extra"
+						entity="#{contrattiHandler.contratto}" />
 
-				<a:fieldView id="extra" label="Extra:" fieldName="extra"
-					entity="#{contrattiHandler.contratto}" />
+					<a:fieldView id="benzinaExtra" label="Benzina Extra:"
+						fieldName="benzinaExtra" entity="#{contrattiHandler.contratto}" />
 
-				<a:fieldView id="benzinaExtra" label="Benzina Extra:"
-					fieldName="benzinaExtra" entity="#{contrattiHandler.contratto}" />
+					<a:fieldView id="cascoExtra" label="Secondo Casco:"
+						fieldName="cascoExtra" entity="#{contrattiHandler.contratto}" />
 
-				<a:fieldView id="cascoExtra" label="Secondo Casco:"
-					fieldName="cascoExtra" entity="#{contrattiHandler.contratto}" />
+					<a:fieldView id="totale" label="Totale:" fieldName="totale"
+						entity="#{contrattiHandler.contratto}" />
 
-				<a:fieldView id="totale" label="Totale:" fieldName="totale"
-					entity="#{contrattiHandler.contratto}" />
-
-				<a:fieldView id="aperto" label="Contratto Aperto?:"
-					fieldName="aperto" entity="#{contrattiHandler.contratto}"
-					type="boolean" />
-				<rich:panel id="prenotazioni">
-
-					<a4j:repeat value="#{contrattiHandler.contratto.prenotazioni}"
-						var="prenotazione">
-						<h:outputText value="#{prenotazione.id}" /> - 
-					<h:outputText value="#{prenotazione.singleDayName}" />
-						<br />
-					</a4j:repeat>
+					<a:fieldView id="aperto" label="Contratto Aperto?:"
+						fieldName="aperto" entity="#{contrattiHandler.contratto}"
+						type="boolean" />
 
 
-				</rich:panel>
+					<h:commandLink id="chiudiContratto"
+						action="/contratti/chiusura-contratto.xhtml"
+						value="Chiudi Contratto"
+						rendered="#{contrattiHandler.contratto.aperto}" />
 
-				<h:commandLink id="chiudiContratto"
-					action="/contratti/chiusura-contratto.xhtml"
-					value="Chiudi Contratto"
-					rendered="#{contrattiHandler.contratto.aperto}" />
-
-				<h:commandLink id="stampaContratto" target="_blank"
-					action="/print/contratto.xhtml" value="Stampa Contratto" />
+					<h:commandLink id="stampaContratto" target="_blank"
+						action="/print/contratto.xhtml" value="Stampa Contratto" />
+				</h:panelGrid>
 			</rich:panel>
 
 		</h:form>

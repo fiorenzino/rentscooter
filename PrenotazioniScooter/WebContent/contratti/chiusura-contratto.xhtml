@@ -14,44 +14,49 @@
 		<p style="align: center;">Gestione Contratti</p>
 		<h:form id="form">
 			<rich:panel id="prenotazioneScooter">
+				<h:panelGrid columns="2">
+					<a:fieldView id="Cliente" label="Cliente:"
+						entity="#{contrattiHandler.contratto.cliente}"
+						fieldName="nomeCognome" />
 
-				<a:fieldView id="Cliente" label="Cliente:"
-					entityId="#{contrattiHandler.contratto.cliente}"
-					fieldName="nomeCognome" />
+					<a:fieldView id="scooter" label="Scooter:"
+						entity="#{contrattiHandler.contratto.scooter}"
+						fieldName="marcaModello" />
 
-				<a:fieldView id="scooter" label="Scooter:"
-					entityId="#{contrattiHandler.contratto.scooter}"
-					fieldName="marcaModello" />
+					<a:fieldView id="dataInit" label="Data Inizio:"
+						fieldName="dataInit" type="outputDate"
+						entity="#{contrattiHandler.contratto}" />
 
-				<a:fieldView id="dataInit" label="Data Inizio:" fieldName="dataInit"
-					type="outputDate" entity="#{contrattiHandler.contratto}" />
-
-				<a:fieldView id="dataEnd" label="Data Riconsegna Prevista:"
-					fieldName="dataEnd" type="outputDate"
-					entity="#{contrattiHandler.contratto}" />
+					<a:fieldView id="dataEnd" label="Data Riconsegna Prevista:"
+						fieldName="dataEnd" type="outputDate"
+						entity="#{contrattiHandler.contratto}" />
+				</h:panelGrid>
 				<a4j:region id="r1toa2">
-					<a:field id="dataRiconsegna" label="Data Riconsegna Effettuata(*):"
-						fieldName="dataRiconsegna" type="calendar"
-						entity="#{contrattiHandler.contratto}" required="true" />
+					<h:panelGrid columns="2">
+						<a:field id="dataRiconsegna"
+							label="Data Riconsegna Effettuata(*):" fieldName="dataRiconsegna"
+							type="calendar" entity="#{contrattiHandler.contratto}"
+							required="true" />
 
-					<a:field id="kmExtra" label="KM Extra:" fieldName="kmExtra"
-						entity="#{contrattiHandler.contratto}" required="false" />
+						<a:field id="kmExtra" label="KM Extra:" fieldName="kmExtra"
+							entity="#{contrattiHandler.contratto}" required="false" />
 
-					<a:field id="importoRitiroMezzo" label="Importo Ritiro Mezzo:"
-						fieldName="importoRitiroMezzo"
-						entity="#{contrattiHandler.contratto}" required="false" />
+						<a:field id="importoRitiroMezzo" label="Importo Ritiro Mezzo:"
+							fieldName="importoRitiroMezzo"
+							entity="#{contrattiHandler.contratto}" required="false" />
 
-					<a:field id="benzinaExtra" label="Importo Benzina Extra:"
-						fieldName="benzinaExtra" entity="#{contrattiHandler.contratto}"
-						required="false" />
+						<a:field id="benzinaExtra" label="Importo Benzina Extra (euro):"
+							fieldName="benzinaExtra" entity="#{contrattiHandler.contratto}"
+							required="false" />
 
-					<a:field id="importoDanni" label="Importo Danni:"
-						fieldName="importoDanni" entity="#{contrattiHandler.contratto}"
-						required="false" />
+						<a:field id="importoDanni" label="Importo Danni:"
+							fieldName="importoDanni" entity="#{contrattiHandler.contratto}"
+							required="false" />
 
-					<a:field id="note" label="Note(*):" fieldName="note"
-						entity="#{contrattiHandler.contratto}" required="false"
-						type="inputTextArea" />
+						<a:field id="note" label="Note(*):" fieldName="note"
+							entity="#{contrattiHandler.contratto}" required="false"
+							type="inputTextArea" />
+					</h:panelGrid>
 				</a4j:region>
 				<a4j:commandButton id="calculateSum"
 					action="#{contrattiHandler.calcolaExtra}" value="calcola extra"
@@ -62,44 +67,45 @@
 				<f:facet name="header">
 					<h:outputText value="Somma delle voci" />
 				</f:facet>
+				<h:panelGrid columns="2">
 
-				<a:fieldView id="numDays" label="Numero di giorni:"
-					fieldName="numDays" entity="#{contrattiHandler}" />
+					<a:fieldView id="numDays" label="Numero di giorni:"
+						fieldName="numDays" entity="#{contrattiHandler}" />
 
-				<a:fieldView id="sconto" label="Sconto su Importo Iniziale:"
-					fieldName="sconto" entity="#{contrattiHandler.contratto}" />
+					<a:fieldView id="sconto" label="Sconto su Importo Iniziale:"
+						fieldName="sconto" entity="#{contrattiHandler.contratto}" />
 
-				<a:fieldView id="importoIniziale" label="Importo Iniziale:"
-					fieldName="importoIniziale" entity="#{contrattiHandler.contratto}" />
+					<a:fieldView id="importoIniziale" label="Importo Iniziale:"
+						fieldName="importoIniziale" entity="#{contrattiHandler.contratto}" />
 
-				<a:fieldView id="numDaysExtra" label="Numero di giorni extra:"
-					fieldName="numDaysExtra" entity="#{contrattiHandler}" />
+					<a:fieldView id="numDaysExtra" label="Numero di giorni extra:"
+						fieldName="numDaysExtra" entity="#{contrattiHandler}" />
 
-				<a:fieldView id="extra" label="Importo Extra:" fieldName="extra"
-					entity="#{contrattiHandler.contratto}" required="false" />
+					<a:fieldView id="extra" label="Importo Extra:" fieldName="extra"
+						entity="#{contrattiHandler.contratto}" required="false" />
 
-				<a:fieldView id="benzinaExtraV" label="Importo Benzina Extra:"
-					fieldName="benzinaExtra" entity="#{contrattiHandler.contratto}" />
+					<a:fieldView id="benzinaExtraV" label="Importo Benzina Extra:"
+						fieldName="benzinaExtra" entity="#{contrattiHandler.contratto}" />
 
-				<a:fieldView id="kmExtraV" label="KM Extra(*):" fieldName="kmExtra"
-					entity="#{contrattiHandler.contratto}" />
+					<a:fieldView id="kmExtraV" label="KM Extra(*):" fieldName="kmExtra"
+						entity="#{contrattiHandler.contratto}" />
 
-				<a:fieldView id="importokmExtraV" label="Importo KM Extra(*):"
-					fieldName="importokmExtra" entity="#{contrattiHandler.contratto}" />
+					<a:fieldView id="importokmExtraV" label="Importo KM Extra(*):"
+						fieldName="importokmExtra" entity="#{contrattiHandler.contratto}" />
 
-				<a:fieldView id="cascoExtra" label="Secondo Casco:"
-					fieldName="cascoExtra" entity="#{contrattiHandler.contratto}" />
+					<a:fieldView id="cascoExtra" label="Secondo Casco:"
+						fieldName="cascoExtra" entity="#{contrattiHandler.contratto}" />
 
-				<a:fieldView id="importoRitiroMezzoV" label="Importo Ritiro Mezzo:"
-					fieldName="importoRitiroMezzo"
-					entity="#{contrattiHandler.contratto}" />
+					<a:fieldView id="importoRitiroMezzoV" label="Importo Ritiro Mezzo:"
+						fieldName="importoRitiroMezzo"
+						entity="#{contrattiHandler.contratto}" />
 
-				<a:field id="importoDanniV" label="Importo Danni:"
-					fieldName="importoDanni" entity="#{contrattiHandler.contratto}" />
+					<a:fieldView id="importoDanniV" label="Importo Danni:"
+						fieldName="importoDanni" entity="#{contrattiHandler.contratto}" />
 
-				<a:fieldView id="totale" label="Totale:" fieldName="totale"
-					entity="#{contrattiHandler.contratto}" />
-
+					<a:fieldView id="totale" label="Totale:" fieldName="totale"
+						entity="#{contrattiHandler.contratto}" />
+				</h:panelGrid>
 			</rich:panel>
 
 			<rich:spacer height="30" />

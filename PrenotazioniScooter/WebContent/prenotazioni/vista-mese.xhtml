@@ -22,7 +22,8 @@
 						<h:selectOneMenu id="idScooter"
 							value="#{organizerHandler.scooterFilter}">
 							<f:selectItems value="#{scootersHandler.scootersItems}" />
-							<a4j:support  action="#{organizerHandler.reset}" event="onchange" reRender="organizer" />
+							<a4j:support action="#{organizerHandler.reset}" event="onchange"
+								reRender="organizer" />
 						</h:selectOneMenu>
 					</h:panelGroup>
 				</h:panelGrid>
@@ -65,12 +66,15 @@
 			</f:facet>
 			<h:form>
 				<h:panelGrid columns="2" id="editContent">
-					<p><h:outputText
-						value="Giorno: #{organizerHandler.currentDate}" /></p>
-					<p><b><h:outputText
-						value="#{organizerHandler.currentShortDescription}" /></b></p>
-					<p><h:outputText
-						value="Note: #{organizerHandler.currentDescription}" /></p>
+					<h:outputText value="Data: " />
+					<h:outputText value="#{organizerHandler.currentDate}">
+						<f:convertDateTime type="date" dateStyle="short" />
+					</h:outputText>
+					<h:outputText value="Occupati: " />
+					<h:outputText value="#{organizerHandler.currentShortDescription}" />
+					<h:outputText value="Descrizione: " />
+					<h:outputText value="#{organizerHandler.currentDescription}"
+						escape="false" />
 				</h:panelGrid>
 			</h:form>
 		</rich:modalPanel>

@@ -30,11 +30,12 @@
 				</h:panelGroup>
 				<h:panelGroup>
 					<h:outputLabel id="apertoLabel1" value="Aperto:" for="aperto1" />
-					<h:selectBooleanCheckbox id="aperto1" title="aperto o chiuso?"
+					<h:selectOneMenu id="aperto1"
 						value="#{contrattiHandler.ricerca.aperto}">
-						<a4j:support event="onclick" ajaxSingle="true"
-							reRender="list,scollerList" action="#{contrattiHandler.aggModel}" />
-					</h:selectBooleanCheckbox>
+						<f:selectItems value="#{propertiesHandler.statusItems}" />
+						<a4j:support event="onchange" reRender="list,scollerList"
+							action="#{contrattiHandler.aggModel}" />
+					</h:selectOneMenu>
 				</h:panelGroup>
 				<h:panelGroup>
 					<h:outputLabel value="Num. Righe:" for="numRighe" />
@@ -61,16 +62,16 @@
 					sort="${false}" label="scooter" />
 
 				<a:column entity="${contratto}" fieldName="dataInit" sort="${false}"
-					label="Data_Inizio" />
+					label="Data_Inizio" type="outputDate" />
 
 				<a:column entity="${contratto}" fieldName="dataEnd" sort="${false}"
-					label="Data_Prevista" />
+					label="Data_Prevista" type="outputDate" />
 
 				<a:column entity="${contratto}" fieldName="dataRiconsegna"
-					sort="${false}" label="Data_Riconsegna" />
+					sort="${false}" label="Data_Riconsegna" type="outputDate" />
 
 				<a:column entity="${contratto}" fieldName="aperto" sort="${false}"
-					label="Aperto" />
+					label="Aperto" type="boolean" />
 
 				<a:column entity="${contratto}" fieldName="totale" sort="${false}"
 					label="totale" />

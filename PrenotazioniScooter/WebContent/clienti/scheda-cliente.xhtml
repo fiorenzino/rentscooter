@@ -14,35 +14,59 @@
 		<p style="align: center;">Gestione Clienti</p>
 		<h:form id="form">
 			<rich:panel id="prenotazioneScooter">
-				<a:fieldView label="Nome:" fieldName="nome" id="nome"
-					entity="#{clientiHandler.cliente}" />
+				<h:panelGrid columns="2" id="editContent">
+					<a:fieldView label="Nome:" fieldName="nome" id="nome"
+						entity="#{clientiHandler.cliente}" />
 
-				<a:fieldView label="Cognome:" fieldName="cognome" id="cognome"
-					entity="#{clientiHandler.cliente}" />
+					<a:fieldView label="Cognome:" fieldName="cognome" id="cognome"
+						entity="#{clientiHandler.cliente}" />
 
-				<a:fieldView label="Data Nascita" fieldName="dataNascita"
-					id="datanascita" entity="#{clientiHandler.cliente}" />
+					<a:fieldView id="codicefiscale" label="Codice fiscale-P.IVA(*):"
+						fieldName="codicefiscale" entity="#{clientiHandler.cliente}" />
 
-				<a:fieldView id="ci" label="Carta d'Identita':"
-					fieldName="cartaidentita" entity="#{clientiHandler.cliente}" />
+					<a:fieldView id="ci" label="Carta d'Identita':"
+						fieldName="cartaidentita" entity="#{clientiHandler.cliente}" />
 
-				<a:fieldView id="indirizzo" label="Indirizzo:" fieldName="indirizzo"
-					entity="#{clientiHandler.cliente}" />
 
-				<a:fieldView id="provincia" label="provincia:" fieldName="provincia"
-					entity="#{clientiHandler.cliente}" />
+					<a:fieldView id="indirizzo" label="Indirizzo:"
+						fieldName="indirizzo" entity="#{clientiHandler.cliente}" />
 
-				<a:fieldView id="city" label="Citta'" fieldName="city"
-					entity="#{clientiHandler.cliente}" />
+					<a:fieldView id="cap" label="Cap:" fieldName="cap"
+						entity="#{clientiHandler.cliente}" />
 
-				<a:fieldView id="cap" label="Cap:" fieldName="cap"
-					entity="#{clientiHandler.cliente}" />
 
-				<a:fieldView id="nazione" label="Nazione:" fieldName="nazione"
-					entity="#{clientiHandler.cliente}" />
+					<a:fieldView id="city" label="Comune di residenza:"
+						campo="Comuni" entity="#{clientiHandler.cliente.city}"
+						type="getArrayValue" />
 
-				<h:commandLink id="stampaPrivacy" action="/print/privacy.xhtml"
-					value="Stampa Privacy" target="_blank" />
+					<a:fieldView id="province"
+						label="Provincia di residenza:" campo="Province"
+						entity="#{clientiHandler.cliente.provincia}" type="getArrayValue" />
+
+					<a:fieldView id="nation" label="Nazione di residenza:"
+						campo="Nazioni" entity="#{clientiHandler.cliente.nazione}"
+						type="getArrayValue" />
+
+					<a:fieldView label="Data Nascita" fieldName="dataNascita"
+						id="datanascita" entity="#{clientiHandler.cliente}" />
+
+					<a:fieldView id="birthCity" label="Comune di nascita:"
+						campo="Comuni" entity="#{clientiHandler.cliente.cityNascita}"
+						type="getArrayValue" />
+
+					<a:fieldView id="birthProvince" label="Provincia di nascita:"
+						campo="Province"
+						entity="#{clientiHandler.cliente.provinciaNascita}"
+						type="getArrayValue" />
+
+					<a:fieldView id="birthNation" label="Nazione di nascita:"
+						campo="Nazioni" entity="#{clientiHandler.cliente.nazioneNascita}"
+						type="getArrayValue" />
+
+
+					<h:commandLink id="stampaPrivacy" action="/print/privacy.xhtml"
+						value="Stampa Privacy" target="_blank" />
+				</h:panelGrid>
 			</rich:panel>
 		</h:form>
 	</ui:define>
