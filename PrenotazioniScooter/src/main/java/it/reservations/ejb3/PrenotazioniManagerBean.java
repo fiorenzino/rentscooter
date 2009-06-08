@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.TreeMap;
 
 import javax.ejb.Local;
@@ -70,18 +71,25 @@ public class PrenotazioniManagerBean extends EJBManagerBean implements
 		return prenotazioniTot;
 	}
 
-	public Map<Date, DaySummary> getReservationData(Long scooterFilter,
+	public Map<String, DaySummary> getReservationData(Long scooterFilter,
 			Date dal, Date al) {
-		Map<Date, DaySummary> resMap = new TreeMap<Date, DaySummary>();
+
+		Map<String, DaySummary> resMap = new TreeMap<String, DaySummary>();
 		try {
 
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(dal);
+			TimeZone tz = TimeZone.getTimeZone("Europe/Rome");
+			tz.setDefault(TimeZone.getTimeZone("GMT+2"));
+			cal.setTimeZone(tz);
 			while (cal.getTime().compareTo(al) <= 0) {
 				System.out.println("DATA: " + cal.getTime());
 				cal.set(Calendar.HOUR_OF_DAY, 0);
 				cal.set(Calendar.MINUTE, 0);
-				resMap.put(cal.getTime(), new DaySummary(new Long(0), ""));
+				resMap.put(cal.get(Calendar.YEAR) + ""
+						+ cal.get(Calendar.MONTH) + ""
+						+ cal.get(Calendar.DAY_OF_MONTH), new DaySummary(
+						new Long(0), "", cal.getTime()));
 				cal.add(Calendar.DAY_OF_MONTH, 1);
 			}
 			System.out.println("DAL: " + dal);
@@ -104,17 +112,29 @@ public class PrenotazioniManagerBean extends EJBManagerBean implements
 			}
 			System.out.println("NUM RES: " + prenotazioni.size());
 			for (Prenotazione reservation : prenotazioni) {
-				System.out.println("DAY: " + reservation.getSingleDay());
-				if (resMap.containsKey(reservation.getSingleDay())) {
-					DaySummary day = resMap.get(reservation.getSingleDay());
+				cal.setTime(reservation.getSingleDay());
+				cal.set(Calendar.HOUR_OF_DAY, 0);
+				cal.set(Calendar.MINUTE, 0);
+				System.out.println("DAY: " + cal.getTime());
+				if (resMap.containsKey(cal.get(Calendar.YEAR) + ""
+						+ cal.get(Calendar.MONTH) + ""
+						+ cal.get(Calendar.DAY_OF_MONTH))) {
+					DaySummary day = resMap.get(cal.get(Calendar.YEAR) + ""
+							+ cal.get(Calendar.MONTH) + ""
+							+ cal.get(Calendar.DAY_OF_MONTH));
 					day.inc();
 					day.addDescription(reservation.getContratto().getScooter()
 							.getMarcaModello());
-					resMap.put(reservation.getSingleDay(), day);
+					resMap.put(cal.get(Calendar.YEAR) + ""
+							+ cal.get(Calendar.MONTH) + ""
+							+ cal.get(Calendar.DAY_OF_MONTH), day);
 				} else {
 					DaySummary day = new DaySummary(new Long(1), reservation
-							.getContratto().getScooter().getMarcaModello());
-					resMap.put(reservation.getSingleDay(), day);
+							.getContratto().getScooter().getMarcaModello(), cal
+							.getTime());
+					resMap.put(cal.get(Calendar.YEAR) + ""
+							+ cal.get(Calendar.MONTH) + ""
+							+ cal.get(Calendar.DAY_OF_MONTH), day);
 				}
 			}
 		} catch (Exception e) {

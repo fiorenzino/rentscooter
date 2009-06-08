@@ -1,6 +1,8 @@
 package it.reservations.web.utils;
 
+import it.reservations.par.Cliente;
 import it.reservations.web.PropertiesHandler;
+import it.smartflower.web.utils.JSFUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,13 +26,13 @@ public class Util {
 		}
 		try {
 			if (name.compareTo("Nazioni") == 0) {
-				return (String) ((PropertiesHandler) getManagedBean("PropertiesHandler"))
+				return (String) ((PropertiesHandler) getManagedBean("propertiesHandler"))
 						.getNazioni().get(id).getNazione();
 			} else if (name.compareTo("Province") == 0) {
-				return (String) ((PropertiesHandler) getManagedBean("PropertiesHandler"))
+				return (String) ((PropertiesHandler) getManagedBean("propertiesHandler"))
 						.getProvince().get(id).getProvincia();
 			} else if (name.compareTo("Comuni") == 0) {
-				return (String) ((PropertiesHandler) getManagedBean("PropertiesHandler"))
+				return (String) ((PropertiesHandler) getManagedBean("propertiesHandler"))
 						.getComuni().get(id).getComune();
 			}
 		} catch (Exception e) {
@@ -43,9 +45,24 @@ public class Util {
 	}
 
 	public static String getArrayValue(String name, Long id, FacesContext fc) {
-		ArrayList<Object> array = (ArrayList<Object>) fc.getApplication()
-				.getELResolver().getValue(fc.getELContext(), null, name);
-		return (String) array.get(id.intValue());
+		if (name.compareTo("Nazioni") == 0) {
+			return (String) ((PropertiesHandler) JSFUtils
+					.getManagedBean("propertiesHandler")).getNazioni().get(id)
+					.getNazione();
+		} else if (name.compareTo("Province") == 0) {
+			return (String) ((PropertiesHandler) JSFUtils
+					.getManagedBean("propertiesHandler")).getProvince().get(id)
+					.getProvincia();
+		} else if (name.compareTo("Comuni") == 0) {
+			return (String) ((PropertiesHandler) JSFUtils
+					.getManagedBean("propertiesHandler")).getComuni().get(id)
+					.getComune();
+		} else {
+			ArrayList<Object> array = (ArrayList<Object>) fc.getApplication()
+					.getELResolver().getValue(fc.getELContext(), null, name);
+			return (String) array.get(id.intValue());
+		}
+
 	}
 
 	public static Map getMap(String mapName, FacesContext fc) {
@@ -107,6 +124,21 @@ public class Util {
 				null, name);
 		// return fc.getApplication().getVariableResolver().resolveVariable(fc,
 		// name);
+	}
+
+	public static void valorizzaCliente(Cliente cliente) {
+		cliente.setProvinciaName(Util.getArrayValue("Province", cliente
+				.getProvincia()));
+		cliente.setCityName(Util.getArrayValue("Comuni", cliente.getCity()));
+		cliente.setNazioneName(Util.getArrayValue("Nazioni", cliente
+				.getNazione()));
+
+		cliente.setProvinciaNascitaName(Util.getArrayValue("Province", cliente
+				.getProvinciaNascita()));
+		cliente.setCityNascitaName(Util.getArrayValue("Comuni", cliente
+				.getCityNascita()));
+		cliente.setNazioneNascitaName(Util.getArrayValue("Nazioni", cliente
+				.getNazioneNascita()));
 	}
 
 }

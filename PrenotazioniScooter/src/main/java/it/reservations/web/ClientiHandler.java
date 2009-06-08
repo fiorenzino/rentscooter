@@ -2,6 +2,7 @@ package it.reservations.web;
 
 import it.reservations.ejb3.utils.JNDIUtils;
 import it.reservations.par.Cliente;
+import it.reservations.web.utils.Util;
 import it.smartflower.ejb3.utils.ClassCreator;
 import it.smartflower.par.RicercaI;
 import it.smartflower.web.utils.JSFHandler;
@@ -45,6 +46,7 @@ public class ClientiHandler extends JSFHandler implements Serializable {
 	public String addCliente2() {
 		JNDIUtils.getClientiManager().persist(this.cliente);
 		aggModel();
+		Util.valorizzaCliente(cliente);
 		clientiItems = null;
 		return "/clienti/scheda-cliente.xhtml";
 	}
@@ -58,6 +60,7 @@ public class ClientiHandler extends JSFHandler implements Serializable {
 	public String modCliente2() {
 		JNDIUtils.getClientiManager().update(this.cliente);
 		aggModel();
+		Util.valorizzaCliente(cliente);
 		clientiItems = null;
 		return "/clienti/scheda-cliente.xhtml";
 	}
@@ -70,6 +73,7 @@ public class ClientiHandler extends JSFHandler implements Serializable {
 
 	public String detailCliente() {
 		this.cliente = (Cliente) getModel().getRowData();
+		Util.valorizzaCliente(cliente);
 		return "/clienti/scheda-cliente.xhtml";
 	}
 
