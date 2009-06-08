@@ -53,11 +53,12 @@
 
 				<a:column entity="${cliente}" fieldName="indirizzo" sort="${false}"
 					label="indirizzo" />
-				<a:column entity="${cliente}" fieldName="city" sort="${false}"
-					label="city" />
 
-				<a:column entity="${cliente}" fieldName="provincia" sort="${false}"
-					label="provincia" />
+				<a:column campo="Comuni" entity="${cliente.city}" sort="${false}"
+					label="city" type="getArrayValue" />
+
+				<a:column entity="${cliente.provincia}" campo="Province"
+					sort="${false}" label="provincia" type="getArrayValue" />
 
 				<a:columnCommand label="Vedi" action="detailCliente"
 					backingBean="${clientiHandler}" />

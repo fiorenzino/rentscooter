@@ -14,27 +14,27 @@
 		<p style="align: center;">Gestione Scooter</p>
 		<h:form id="form">
 			<rich:panel id="prenotazioneScooter">
+				<h:panelGrid columns="2" id="editContent">
+					<a:field id="Marca" label="Marca(*):" fieldName="marca"
+						entity="#{scootersHandler.scooter}" required="true" />
 
-				<a:field id="Marca" label="Marca(*):" fieldName="marca"
-					entity="#{scootersHandler.scooter}" required="true" />
+					<a:field id="modello" label="Modello(*):" fieldName="modello"
+						entity="#{scootersHandler.scooter}" required="true" />
 
-				<a:field id="modello" label="Modello(*):" fieldName="modello"
-					entity="#{scootersHandler.scooter}" required="true" />
+					<a:field id="cilindrata" label="Cilindrata(*):"
+						fieldName="cilindrata" entity="#{scootersHandler.scooter}"
+						required="true" />
 
-				<a:field id="cilindrata" label="Cilindrata(*):"
-					fieldName="cilindrata" entity="#{scootersHandler.scooter}"
-					required="true" />
+					<a:field id="targa" label="Targa(*):" fieldName="targa"
+						entity="#{scootersHandler.scooter}" required="true" />
 
-				<a:field id="targa" label="Targa(*):" fieldName="targa"
-					entity="#{scootersHandler.scooter}" required="true" />
-					
-				<a:field id="caparra" label="Caparra(*):" fieldName="caparra"
-					entity="#{scootersHandler.scooter}" required="false" />
+					<a:field id="caparra" label="Caparra(*):" fieldName="caparra"
+						entity="#{scootersHandler.scooter}" required="false" />
 
-				<a:field label="Tariffa(*):" fieldName="id" id="idTar"
-					entityId="#{scootersHandler.scooter.tariffa}" type="selOneM_items"
-					fieldNameList="#{tariffeHandler.tariffeList}" />
-
+					<a:field label="Tariffa(*):" fieldName="id" id="idTar"
+						entityId="#{scootersHandler.scooter.tariffa}" type="selOneM_items"
+						fieldNameList="#{tariffeHandler.tariffeList}" />
+				</h:panelGrid>
 			</rich:panel>
 			<rich:spacer height="30" />
 			<div><h:commandButton id="submitAdd"

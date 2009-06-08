@@ -15,71 +15,73 @@
 		<h:form id="form">
 			<rich:panel id="prenotazioneScooter">
 				<a4j:region id="r1toa2">
-					<a:field id="cliente" label="Cliente(*):" type="selOneM"
-						entityId="#{contrattiHandler.contratto.cliente}" fieldName="id"
-						entityList="#{clientiHandler}" fieldNameList="clientiItems"
-						required="true" />
-
-					<a:field id="scooter" label="Scooter(*):" type="selOneM"
-						entityId="#{contrattiHandler.contratto.scooter}" fieldName="id"
-						entityList="#{scootersHandler}" fieldNameList="scootersItems"
-						required="true" />
+					<h:panelGrid columns="2">
+						<a:field id="cliente" label="Cliente(*):" type="selOneM"
+							entityId="#{contrattiHandler.contratto.cliente}" fieldName="id"
+							entityList="#{clientiHandler}" fieldNameList="clientiItems"
+							required="true" />
 
 
-					<a:field id="dataInit" label="Data Inizio(*):" fieldName="dataInit"
-						type="calendar" entity="#{contrattiHandler.contratto}"
-						required="true" />
+						<a:field id="scooter" label="Scooter(*):" type="selOneM"
+							entityId="#{contrattiHandler.contratto.scooter}" fieldName="id"
+							entityList="#{scootersHandler}" fieldNameList="scootersItems"
+							required="true" />
 
-					<a:field id="dataEnd" label="Data Riconsegna(*):"
-						fieldName="dataEnd" type="calendar"
-						entity="#{contrattiHandler.contratto}" required="true" />
 
+						<a:field id="dataInit" label="Data Inizio(*):"
+							fieldName="dataInit" type="calendar"
+							entity="#{contrattiHandler.contratto}" required="true" />
+
+						<a:field id="dataEnd" label="Data Riconsegna(*):"
+							fieldName="dataEnd" type="calendar"
+							entity="#{contrattiHandler.contratto}" required="true" />
+					</h:panelGrid>
 				</a4j:region>
-				<a:field id="note" label="Note(*):" fieldName="note"
-					entity="#{contrattiHandler.contratto}" required="false"
-					type="inputTextArea" />
+				<h:panelGrid columns="2">
+					<a:field id="note" label="Note(*):" fieldName="note"
+						entity="#{contrattiHandler.contratto}" required="false"
+						type="inputTextArea" />
 
-				<a4j:commandButton id="calculateSum"
-					action="#{contrattiHandler.calcolaSomma}" value="calcola prezzo"
-					reRender="sommaPanel" immediate="false" />
-
+					<a4j:commandButton id="calculateSum"
+						action="#{contrattiHandler.calcolaSomma}" value="calcola prezzo"
+						reRender="sommaPanel" immediate="false" />
+				</h:panelGrid>
 			</rich:panel>
 
 			<rich:panel id="sommaPanel">
 				<f:facet name="header">
 					<h:outputText value="Somma delle voci" />
 				</f:facet>
+				<h:panelGrid columns="2">
+					<a:fieldView id="numDays" label="Numero di giorni:"
+						fieldName="numDays" entity="#{contrattiHandler}" />
 
+					<a:field id="importoIniziale" label="Importo Iniziale(*):"
+						fieldName="importoIniziale" entity="#{contrattiHandler.contratto}"
+						required="false" />
 
+					<a:field id="sconto" label="Sconto(*):" fieldName="sconto"
+						entity="#{contrattiHandler.contratto}" required="false" />
 
-				<a:fieldView id="numDays" label="Numero di giorni:"
-					fieldName="numDays" entity="#{contrattiHandler}" />
+					<a:field id="cascoExtra" label="Secondo Casco:"
+						fieldName="cascoExtra" entity="#{contrattiHandler.contratto}"
+						required="false" />
 
-				<a:field id="importoIniziale" label="Importo Iniziale(*):"
-					fieldName="importoIniziale" entity="#{contrattiHandler.contratto}"
-					required="false" />
+					<a:field id="importoSottoCasco" label="Sotto Casco:"
+						fieldName="importoSottoCasco"
+						entity="#{contrattiHandler.contratto}" required="false" />
 
-				<a:field id="sconto" label="Sconto(*):" fieldName="sconto"
-					entity="#{contrattiHandler.contratto}" required="false" />
+					<a:field id="importoCaparra" label="Importo Caparra:"
+						fieldName="importoCaparra" entity="#{contrattiHandler.contratto}"
+						required="false" />
 
-				<a:field id="cascoExtra" label="Secondo Casco:"
-					fieldName="cascoExtra" entity="#{contrattiHandler.contratto}"
-					required="false" />
+					<a:fieldView id="totale" label="Totale(*):" fieldName="totale"
+						entity="#{contrattiHandler.contratto}" />
 
-				<a:field id="importoSottoCasco" label="Sotto Casco:"
-					fieldName="importoSottoCasco"
-					entity="#{contrattiHandler.contratto}" required="false" />
-					
-				<a:field id="importoCaparra" label="Importo Caparra:"
-					fieldName="importoCaparra"
-					entity="#{contrattiHandler.contratto}" required="false" />
-
-				<a:fieldView id="totale" label="Totale(*):" fieldName="totale"
-					entity="#{contrattiHandler.contratto}" />
-
-				<a4j:commandButton id="aggiorna"
-					action="#{contrattiHandler.calcolaSomma}" value="aggiorna"
-					reRender="sommaPanel" immediate="false" />
+					<a4j:commandButton id="aggiorna"
+						action="#{contrattiHandler.calcolaSomma}" value="aggiorna"
+						reRender="sommaPanel" immediate="false" />
+				</h:panelGrid>
 			</rich:panel>
 
 			<rich:spacer height="30" />

@@ -14,7 +14,7 @@ THIS TEXT WILL BE REMOVED
 	<c:if test="${empty type}">
 		<c:set var="type" value="inputText" />
 	</c:if>
-	<c:if test='${type != "hidden"}'>
+	<c:if test='${type == "flower"}'>
 		<h:outputText value="&#60;div style='clear:both;' &#62;"
 			escape="false" />
 	</c:if>
@@ -115,7 +115,6 @@ THIS TEXT WILL BE REMOVED
 				</c:when>
 				<c:when test='${type == "calendar"}'>
 					<h:outputLabel id="${id}Label" value="${label}" for="#{id}" />
-
 					<rich:calendar value="#{entity[fieldName]}" id="#{id}" popup="true"
 						datePattern="d/M/yyyy" enableManualInput="true"
 						showApplyButton="false" style="width:200px"
@@ -149,12 +148,16 @@ THIS TEXT WILL BE REMOVED
 					</h:selectOneMenu>
 				</c:when>
 				<c:when test='${type == "selOneM_Aitems"}'>
-					<h:outputLabel value="${label}" for="${id}" />
-					<h:selectOneMenu id="${id}" value="#{entityId[fieldName]}"
-						readonly="#{readonly}">
-						<f:selectItems value="#{fieldNameList}" />
-						<a4j:support event="onchange" reRender="#{reRender}" />
-					</h:selectOneMenu>
+					<h:panelGroup>
+						<h:outputLabel value="${label}" for="${id}" />
+					</h:panelGroup>
+					<h:panelGroup>
+						<h:selectOneMenu id="${id}" value="#{entityId[fieldName]}"
+							readonly="#{readonly}">
+							<f:selectItems value="#{fieldNameList}" />
+							<a4j:support event="onchange" reRender="#{reRender}" />
+						</h:selectOneMenu>
+					</h:panelGroup>
 				</c:when>
 				<c:when test='${type == "selOneAjax"}'>
 					<h:outputLabel value="${label}" for="${id}" />
@@ -174,7 +177,7 @@ THIS TEXT WILL BE REMOVED
 			<h:message id="${id}Message" style="color: #0094D6;" for="#{id}" />
 		</c:when>
 	</c:choose>
-	<c:if test='${type != "hidden"}'>
+	<c:if test='${type == "flower"}'>
 		<h:outputText value="&#60;/div&#62;" escape="false" />
 	</c:if>
 </ui:composition>
