@@ -1,15 +1,17 @@
 package it.reservations.par;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class DaySummary implements Serializable {
 	private Long num;
 	private StringBuffer description;
+	private Date data;
 
-	public DaySummary(Long num, String description) {
+	public DaySummary(Long num, String description, Date data) {
 		this.num = num;
 		this.description = new StringBuffer();
-		this.description.append(description + ".");
+		this.data = data;
 	}
 
 	public Long getNum() {
@@ -31,7 +33,15 @@ public class DaySummary implements Serializable {
 	}
 
 	public void addDescription(String description) {
-		this.description.append(description + ".");
+		this.description.append(description + "<br/>");
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
 	}
 
 }

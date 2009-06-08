@@ -24,14 +24,27 @@ public class Cliente implements Serializable {
 	private String rilasciataDove;
 	private String indirizzo;
 	private Long city;
+	private String cityName;
 	private Long provincia;
+	private String provinciaName;
 	private Long cap;
 	private Long nazione;
+	private String nazioneName;
 	private Date dataNascita;
 	private Long cityNascita;
 	private Long provinciaNascita;
+	private Long nazioneNascita;
+	private String cityNascitaName;
+	private String provinciaNascitaName;
+	private String nazioneNascitaName;
 	private String telefono;
 	private String cellulare;
+
+	public Cliente() {
+		this.provincia = new Long(5);
+		this.city = new Long(381);
+		this.nazione = new Long(104);
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -187,6 +200,68 @@ public class Cliente implements Serializable {
 
 	public void setCellulare(String cellulare) {
 		this.cellulare = cellulare;
+	}
+
+	@Transient
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+	@Transient
+	public String getProvinciaName() {
+		return provinciaName;
+	}
+
+	public void setProvinciaName(String provinciaName) {
+		this.provinciaName = provinciaName;
+	}
+
+	@Transient
+	public String getNazioneName() {
+		return nazioneName;
+	}
+
+	public void setNazioneName(String nazioneName) {
+		this.nazioneName = nazioneName;
+	}
+
+	public Long getNazioneNascita() {
+		return nazioneNascita;
+	}
+
+	public void setNazioneNascita(Long nazioneNascita) {
+		this.nazioneNascita = nazioneNascita;
+	}
+
+	@Transient
+	public String getCityNascitaName() {
+		return cityNascitaName;
+	}
+
+	public void setCityNascitaName(String cityNascitaName) {
+		this.cityNascitaName = cityNascitaName;
+	}
+
+	@Transient
+	public String getProvinciaNascitaName() {
+		return provinciaNascitaName;
+	}
+
+	public void setProvinciaNascitaName(String provinciaNascitaName) {
+		this.provinciaNascitaName = provinciaNascitaName;
+	}
+
+	@Transient
+	public String getNazioneNascitaName() {
+		return nazioneNascitaName;
+	}
+
+	public void setNazioneNascitaName(String nazioneNascitaName) {
+		this.nazioneNascitaName = nazioneNascitaName;
 	}
 
 }

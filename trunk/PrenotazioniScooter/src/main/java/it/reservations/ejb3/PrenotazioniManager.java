@@ -12,7 +12,7 @@ public interface PrenotazioniManager extends EJBManager {
 	public Map<String, Map<String, Boolean>> getReservationList(Date dal,
 			Date al, String cilindrata);
 
-	public Map<Date, DaySummary> getReservationData(Long scooterFilter,
+	public Map<String, DaySummary> getReservationData(Long scooterFilter,
 			Date init, Date end);
 
 	public void addReservation(Contratto contract);

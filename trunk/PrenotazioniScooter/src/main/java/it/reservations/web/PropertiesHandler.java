@@ -44,6 +44,8 @@ public class PropertiesHandler implements Serializable {
 
 	private SelectItem[] rowItems = new SelectItem[] {};
 
+	private SelectItem[] statusItems = new SelectItem[] {};
+
 	@EJB
 	Configurator configurator;
 
@@ -61,6 +63,17 @@ public class PropertiesHandler implements Serializable {
 		return rowItems;
 	}
 
+	public SelectItem[] getStatusItems() {
+		// 10 - 20 -50 -100
+		if (statusItems.length == 0) {
+			statusItems = new SelectItem[3];
+			statusItems[0] = new SelectItem(null, "--");
+			statusItems[1] = new SelectItem(new Boolean(true), "SI");
+			statusItems[2] = new SelectItem(new Boolean(false), "NO");
+		}
+		return statusItems;
+	}
+
 	public SelectItem[] getCapItems() {
 		Long provincia = new Long(0);
 		Long comune = new Long(0);
@@ -68,16 +81,15 @@ public class PropertiesHandler implements Serializable {
 		comune = clientiHandler.getCliente().getCity();
 		provincia = clientiHandler.getCliente().getProvincia();
 		capItems = new SelectItem[] { new SelectItem(" -- ") };
-		if ((comune == 0) && (provincia != 0)) {
+		if ((comune == null || comune == 0) && (provincia != null)) {
 			comune = getMappaProvinciaComuni().get(provincia).get(0);
-			// log.info("comune derivato dalla provincia: - " + type
-			// + " -" + comune);
+			// log.info("comune derivato dalla provincia: - " + provincia + " -"
+			// + comune);
 		}
 		if (comune == null || comune == 0) {
 			return capItems;
 		} else {
 			int i = 0;
-
 			ArrayList<String> capSet = (ArrayList<String>) getComuni().get(
 					comune).getCap();
 			if (capSet == null || capSet.size() == 0) {
@@ -92,8 +104,34 @@ public class PropertiesHandler implements Serializable {
 		return capItems;
 	}
 
-	private SelectItem[] getComuniItems() {
+	public SelectItem[] getComuniItems2() {
+		Long provincia = new Long(0);
+		// log.info("getComuniItems2 - " + provincia);
+		provincia = clientiHandler.getCliente().getProvinciaNascita();
 
+		comuniItems = new SelectItem[] { new SelectItem(new Long(0), " -- ") };
+		if (provincia == null || provincia == 0) {
+			return comuniItems;
+		} else {
+			int i = 0;
+			ArrayList<Long> comuniSet = getMappaProvinciaComuni()
+					.get(provincia);
+			if (comuniSet == null || comuniSet.size() == 0) {
+				return comuniItems;
+			}
+			SelectItem[] comuniSel = new SelectItem[comuniSet.size()];
+			for (Long comuneSc : comuniSet) {
+				comuniSel[i++] = new SelectItem(comuneSc, getComuni().get(
+						comuneSc).getComune());
+			}
+			comuniItems = comuniSel;
+		}
+		Arrays.sort(comuniItems, new SimpleComparator());
+		return comuniItems;
+
+	}
+
+	public SelectItem[] getComuniItems() {
 		Long provincia = new Long(0);
 		// log.info("getComuniItems2 - " + provincia);
 		provincia = clientiHandler.getCliente().getProvincia();
@@ -140,6 +178,7 @@ public class PropertiesHandler implements Serializable {
 		if (mappaProvinciaComuni.size() == 0) {
 			creaMappe();
 		}
+		// log.info("MAPPA SIZE: ");
 		return mappaProvinciaComuni;
 	}
 
@@ -190,7 +229,7 @@ public class PropertiesHandler implements Serializable {
 	}
 
 	public String getAbsolutePath() {
-		//System.out.println("ABS: " + Util.getAbsolutePath());
+		// System.out.println("ABS: " + Util.getAbsolutePath());
 		return Util.getAbsolutePath();
 	}
 

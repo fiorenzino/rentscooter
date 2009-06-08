@@ -43,7 +43,7 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 		this.contratto.setDataInit(cal.getTime());
-		cal.add(Calendar.DAY_OF_MONTH, 6);
+		cal.add(Calendar.DAY_OF_MONTH, 5);
 		this.contratto.setDataEnd(cal.getTime());
 		this.contratto.setDataRiconsegna(cal.getTime());
 		this.contratto.setAperto(true);
@@ -132,6 +132,7 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 		this.contratto.setPrenotazioni(prenotazioni);
 		JNDIUtils.getContrattiManager().update(this.contratto);
 		aggModel();
+		Util.valorizzaCliente(this.contratto.getCliente());
 		organizerHandler.reset();
 		return "/contratti/scheda-contratto.xhtml";
 	}
@@ -163,6 +164,7 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 		this.contratto.setPrenotazioni(prenotazioni);
 		JNDIUtils.getContrattiManager().persist(this.contratto);
 		aggModel();
+		Util.valorizzaCliente(this.contratto.getCliente());
 		organizerHandler.reset();
 		return "/contratti/scheda-contratto.xhtml";
 	}
@@ -176,6 +178,7 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 	public String modContratto2() {
 		JNDIUtils.getContrattiManager().update(this.contratto);
 		aggModel();
+		Util.valorizzaCliente(this.contratto.getCliente());
 		return "/contratti/scheda-contratto.xhtml";
 	}
 
@@ -188,6 +191,7 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 	public String detailContratto() {
 		System.out.println("ABS: " + Util.getAbsolutePath());
 		this.contratto = (Contratto) getModel().getRowData();
+		Util.valorizzaCliente(this.contratto.getCliente());
 		return "/contratti/scheda-contratto.xhtml";
 	}
 

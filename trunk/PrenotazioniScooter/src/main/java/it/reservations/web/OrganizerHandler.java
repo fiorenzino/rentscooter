@@ -35,6 +35,7 @@ public class OrganizerHandler implements CalendarDataModel, Serializable {
 	private Date dataInit;
 	private Date dataEnd;
 	private Long scooterFilter;
+	private Long idContratto;
 
 	public OrganizerHandler() {
 		reset();
@@ -111,13 +112,13 @@ public class OrganizerHandler implements CalendarDataModel, Serializable {
 		// CREO LISTA CHE VERRA' VISUALIZZATA
 		List<CalendarDataModelItem> lista = new LinkedList<CalendarDataModelItem>();
 
-		Map<Date, DaySummary> mapp = prenotazioniManager.getReservationData(
+		Map<String, DaySummary> mapp = prenotazioniManager.getReservationData(
 				scooterFilter, init, end);
-		for (Date data : mapp.keySet()) {
+		for (String data : mapp.keySet()) {
 			// System.out.println("DATA: " + data);
 			DaySummary dayS = mapp.get(data);
-			lista.add(createDataModelItem(data, "occupate:" + dayS.getNum(),
-					dayS.getDescription(), dayS.getNum()));
+			lista.add(createDataModelItem(dayS.getData(), "scooter:"
+					+ dayS.getNum(), dayS.getDescription(), dayS.getNum()));
 		}
 
 		items = new CalendarDataModelItem[lista.size()];
@@ -190,6 +191,7 @@ public class OrganizerHandler implements CalendarDataModel, Serializable {
 		setCurrentShortDescription((String) ((HashMap) items[calendar
 				.get(Calendar.DAY_OF_MONTH) - 1].getData())
 				.get("shortDescription"));
+		
 
 	}
 
@@ -274,6 +276,19 @@ public class OrganizerHandler implements CalendarDataModel, Serializable {
 
 	public void setScooterFilter(Long scooterFilter) {
 		this.scooterFilter = scooterFilter;
+	}
+
+	public String vediContratto() {
+
+		return "/contratti/scheda-contratto.xhtml";
+	}
+
+	public Long getIdContratto() {
+		return idContratto;
+	}
+
+	public void setIdContratto(Long idContratto) {
+		this.idContratto = idContratto;
 	}
 
 }
