@@ -2,6 +2,7 @@ package it.reservations.web.printer;
 
 import it.reservations.web.utils.Util;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.StringReader;
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
 import org.w3c.dom.Document;
 import org.xhtmlrenderer.pdf.ITextRenderer;
@@ -37,7 +40,10 @@ public class RendererFilter implements Filter {
 			this.config = config;
 			DocumentBuilderFactory factory = DocumentBuilderFactory
 					.newInstance();
+			factory.setValidating(false);
 			documentBuilder = factory.newDocumentBuilder();
+			documentBuilder.setEntityResolver(new LocalHostEntityResolver());
+
 		} catch (ParserConfigurationException e) {
 			throw new ServletException(e);
 		}
