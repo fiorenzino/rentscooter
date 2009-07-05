@@ -20,16 +20,22 @@
 		<p></p>
 		<p>Tra la ditta <b>Simonelli Moto SAS</b> ed il signor <b>#{contrattiHandler.contratto.cliente.nomeCognome}</b>,
 		nato il <b><h:outputText
-			value=" #{clientiHandler.cliente.dataNascita}">
-			<f:convertDateTime locale="IT" type="date" dateStyle="short" />
+			value="#{clientiHandler.cliente.dataNascita}">
+			<f:convertDateTime locale="IT" type="date" pattern="dd-MM-yyyy" />
 		</h:outputText></b> a <b>#{contrattiHandler.contratto.cliente.cityNascitaName}
-		(#{contrattiHandler.contratto.cliente.provinciaNascitaName})</b>, residente in
-		via <b>#{contrattiHandler.contratto.cliente.indirizzo}</b>,
+		(#{contrattiHandler.contratto.cliente.provinciaNascitaName})</b>,
+		residente in via <b>#{contrattiHandler.contratto.cliente.indirizzo}</b>,
 		#{contrattiHandler.contratto.cliente.cap}
 		#{contrattiHandler.contratto.cliente.cityName}
 		(#{contrattiHandler.contratto.cliente.provinciaName}) , cod. fiscale <b>#{contrattiHandler.contratto.cliente.codicefiscale}</b>
-		ed identificato con PATENTE N. <b>LU5064881D</b> emessa dal MCTC di
-		Lucca in data 25/01/2003, avente numero di telefono:
+		ed identificato con PATENTE N. <b>#{contrattiHandler.contratto.cliente.patente}</b>
+		emessa da #{contrattiHandler.contratto.cliente.rilasciataDa} di
+		#{contrattiHandler.contratto.cliente.luogoRilascio} in data 
+		<h:outputText
+			value="#{contrattiHandler.contratto.cliente.dataRilasco}">
+			<f:convertDateTime locale="IT" type="date" pattern="dd-MM-yyyy" />
+		</h:outputText>
+		, avente numero di telefono:
 		#{contrattiHandler.contratto.cliente.telefono} e cellulare:
 		#{contrattiHandler.contratto.cliente.cellulare},</p>
 		<p></p>
@@ -91,10 +97,10 @@
 			</li>
 			<li>il locatario dichiara di essere perfettamente abilitato alla
 			conduzione dello scoooter che gli verrà consegnato, come da patente
-			n. 32423423 che esibisce al momento della stipula del presente
-			contratto e che dichiara essere in perfetto corso di validità, non
-			essendo egli sottoposto a restrizione di legge o provvedimenti
-			dell'autorità amministrativa o giudiziaria.
+			n. #{contrattiHandler.contratto.cliente.patente} che esibisce al momento
+			della stipula del presente contratto e che dichiara essere in
+			perfetto corso di validità, non essendo egli sottoposto a restrizione
+			di legge o provvedimenti dell'autorità amministrativa o giudiziaria.
 			<p></p>
 			</li>
 			<li>eventuali multi , sanzioni pecuniarie amministrative
@@ -118,27 +124,35 @@
 <div style="page-break-after: always"></div> 
 -->
 		<p></p>
-		<p><b>San Benedetto del Tronto, li 03/10/2008</b></p>
+		<p><b>San Benedetto del Tronto, li <h:outputText
+			value="#{contrattiHandler.contratto.dataStipula}">
+			<f:convertDateTime locale="IT" type="date" pattern="dd-MM-yyyy" />
+		</h:outputText></b></p>
 
 		<p>il locatore <b>Simonelli Moto SAS</b>
 		___________________________</p>
 
 		<p></p>
 		<p></p>
-		<p>il locatario <b>Mario Rossi </b>___________________________</p>
+		<p>il locatario <b>#{contrattiHandler.contratto.cliente.nomeCognome}
+		</b>___________________________</p>
 
 		<p><b> per espressa approvazione delle clausole
 		1,2,3,4,5,6,7,8,9,10,11,12,13 </b></p>
 
 		<p></p>
-		<p><b>San Benedetto del Tronto, li 03/10/2008</b></p>
+		<p><b>San Benedetto del Tronto, li <h:outputText
+			value="#{contrattiHandler.contratto.dataStipula}">
+			<f:convertDateTime locale="IT" type="date" pattern="dd-MM-yyyy" />
+		</h:outputText></b></p>
 
 		<p>il locatore <b>Simonelli Moto SAS</b>
 		___________________________</p>
 
 		<p></p>
 		<p></p>
-		<p>il locatario <b>Mario Rossi </b>___________________________</p>
+		<p>il locatario <b>#{contrattiHandler.contratto.cliente.nomeCognome}
+		</b>___________________________</p>
 
 		<p></p>
 		</div>

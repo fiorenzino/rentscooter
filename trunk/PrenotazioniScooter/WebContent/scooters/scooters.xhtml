@@ -53,6 +53,9 @@
 				<f:facet name="header">
 					<h:outputText value="Lista Scooter" />
 				</f:facet>
+				
+				<a:column entity="${scooter}" fieldName="nome" sort="${false}"
+					label="nome" />
 
 				<a:column entity="${scooter}" fieldName="marca" sort="${false}"
 					label="marca" />
@@ -65,6 +68,9 @@
 
 				<a:column entity="${scooter}" fieldName="targa" sort="${false}"
 					label="targa" />
+				
+				<a:column entity="${scooter}" fieldName="scadenzaAssicurazione" sort="${false}"
+					label="Assicurazione" />
 
 
 				<a:columnCommand label="Vedi" action="detailScooter"
