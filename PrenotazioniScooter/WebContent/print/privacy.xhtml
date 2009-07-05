@@ -21,7 +21,7 @@
 			value="#{clientiHandler.cliente.provinciaNascitaName}" />) <h:outputText
 			value=" #{clientiHandler.cliente.nazioneNascitaName}" /> il <h:outputText
 			value=" #{clientiHandler.cliente.dataNascita}">
-			<f:convertDateTime locale="IT" type="date" dateStyle="short" />
+			<f:convertDateTime locale="IT" type="date" pattern="dd-MM-yyyy" />
 		</h:outputText>, residente a #{clientiHandler.cliente.cityName}
 		(#{clientiHandler.cliente.provinciaName}) <h:outputText
 			value=" #{clientiHandler.cliente.nazioneName}" />, in

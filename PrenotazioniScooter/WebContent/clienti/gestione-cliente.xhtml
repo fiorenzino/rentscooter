@@ -25,8 +25,19 @@
 						fieldName="codicefiscale" entity="#{clientiHandler.cliente}"
 						required="true" />
 
-					<a:field id="ci" label="Carta d Identita(*):"
-						fieldName="cartaidentita" entity="#{clientiHandler.cliente}"
+					<a:field id="patN" label="Patente n.(*):" fieldName="patente"
+						entity="#{clientiHandler.cliente}" required="false" />
+
+					<a:field id="rilData" label="Rilasciata in data(*):"
+						fieldName="dataRilasco" entity="#{clientiHandler.cliente}"
+						required="false" type="calendar" />
+
+					<a:field id="luogoRil" label="Luogo Rilascio(*):"
+						fieldName="luogoRilascio" entity="#{clientiHandler.cliente}"
+						required="false" type="inputTextArea" />
+
+					<a:field id="rilDa" label="Rilasciata da(*):"
+						fieldName="rilasciataDa" entity="#{clientiHandler.cliente}"
 						required="false" />
 
 					<a:field id="indirizzo" label="Indirizzo(*):" fieldName="indirizzo"
@@ -52,11 +63,22 @@
 						<a:field id="cityuserHandler" label="Citta di residenza(*):"
 							type="selOneM_Aitems" entityId="#{clientiHandler.cliente}"
 							fieldName="city" fieldNameList="#{propertiesHandler.comuniItems}"
-							reRender="capuserHandler" required="true" />
+							reRender="capuserHandler" required="true"
+							rendered="#{clientiHandler.cliente.provincia != '109'}" />
+
+						<a:field id="city2EE" label="Citta di residenza(*):"
+							fieldName="city" entity="#{clientiHandler.cliente}"
+							required="false"
+							rendered="#{clientiHandler.cliente.provincia == '109'}" />
 
 						<a:field id="capuserHandler" label="Cap(*):" type="selOneM_items"
 							entityId="#{clientiHandler.cliente}" fieldName="cap"
-							fieldNameList="#{propertiesHandler.capItems}" required="true" />
+							fieldNameList="#{propertiesHandler.capItems}" required="true"
+							rendered="#{clientiHandler.cliente.provincia != '109'}" />
+
+						<a:field id="cap2EE" label="Cap(*):" fieldName="cap"
+							entity="#{clientiHandler.cliente}" required="false"
+							rendered="#{clientiHandler.cliente.provincia == '109'}" />
 					</h:panelGrid>
 				</a4j:region>
 				<h:panelGrid columns="2">
@@ -87,6 +109,16 @@
 							fieldNameList="#{propertiesHandler.comuniItems2}" required="true" />
 					</h:panelGrid>
 				</a4j:region>
+				<h:panelGrid columns="2">
+					<a:field id="telefono" label="Telefono(*):" fieldName="telefono"
+						entity="#{clientiHandler.cliente}" required="false" />
+
+					<a:field id="cellulare" label="Cellulare(*):" fieldName="cellulare"
+						entity="#{clientiHandler.cliente}" required="false" />
+
+					<a:field id="email" label="Email(*):" fieldName="email"
+						entity="#{clientiHandler.cliente}" required="false" />
+				</h:panelGrid>
 			</rich:panel>
 			<rich:spacer height="30" />
 			<div><h:commandButton id="submitAdd"

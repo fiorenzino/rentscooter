@@ -15,6 +15,10 @@
 		<h:form id="form">
 			<rich:panel id="prenotazioneScooter">
 				<h:panelGrid columns="2" id="editContent">
+
+					<a:fieldView id="nome" label="Nome:" fieldName="nome"
+						entity="#{scootersHandler.scooter}" />
+						
 					<a:fieldView id="Marca" label="Marca:" fieldName="marca"
 						entity="#{scootersHandler.scooter}" />
 
@@ -28,6 +32,10 @@
 						entity="#{scootersHandler.scooter}" />
 
 					<a:fieldView id="targa" label="Targa:" fieldName="targa"
+						entity="#{scootersHandler.scooter}" />
+
+					<a:fieldView id="scadenzaAss" label="Scadenza Assicurazione:"
+						fieldName="scadenzaAssicurazione"
 						entity="#{scootersHandler.scooter}" />
 				</h:panelGrid>
 			</rich:panel>
