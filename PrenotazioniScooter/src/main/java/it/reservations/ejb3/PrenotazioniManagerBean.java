@@ -169,14 +169,19 @@ public class PrenotazioniManagerBean extends EJBManagerBean implements
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void removeReservation(Contratto contract) {
-		List<Prenotazione> prenotazioni = (List<Prenotazione>) em
-				.createNamedQuery("GET_RESERVATIONS_BY_DATA").setParameter(
-						"DAL", contract.getDataInit()).setParameter("AL",
-						contract.getDataEnd()).getResultList();
-		for (Prenotazione reservation : prenotazioni) {
-			em.remove(reservation);
+		try {
+			List<Prenotazione> prenotazioni = (List<Prenotazione>) em
+					.createNamedQuery("GET_RESERVATIONS_BY_DATA").setParameter(
+							"DAL", contract.getDataInit()).setParameter("AL",
+							contract.getDataEnd()).getResultList();
+			for (Prenotazione reservation : prenotazioni) {
+				em.remove(reservation);
+			}
+			em.remove(contract);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		em.remove(contract);
+
 	}
 
 	@Override

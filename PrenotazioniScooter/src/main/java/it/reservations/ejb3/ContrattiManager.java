@@ -10,5 +10,7 @@ public interface ContrattiManager extends EJBManager {
 	public void update(Contratto contract);
 
 	public void delete(Contratto contract);
+	
+	public Long getNumContrattiCliente(Long id);
 
 }

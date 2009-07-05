@@ -144,6 +144,7 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 				this.contratto.getCliente().getId());
 		this.contratto.setScooter(sco);
 		this.contratto.setCliente(cli);
+		this.contratto.setDataStipula(new Date());
 		this.contratto.setDataRiconsegna(this.contratto.getDataEnd());
 		// DEVO CREARE I GG SINGOLI DI PRENOTAZIONE
 		// VEDI PrenotazioniManagerBean.getReservationList

@@ -17,11 +17,10 @@ public class Cliente implements Serializable {
 	private String nome;
 	private String cognome;
 	private String nomeCognome;
-	private String cartaidentita;
+	private Date dataInsert;
+	
 	private String codicefiscale;
-	private String rilasciataDa;
-	private Date rilasciataData;
-	private String rilasciataDove;
+	
 	private String indirizzo;
 	private Long city;
 	private String cityName;
@@ -39,11 +38,21 @@ public class Cliente implements Serializable {
 	private String nazioneNascitaName;
 	private String telefono;
 	private String cellulare;
+	private String email;
+
+	private String patente;
+	private String rilasciataDa;
+	private String luogoRilascio;
+	private Date dataRilasco;
 
 	public Cliente() {
 		this.provincia = new Long(5);
 		this.city = new Long(381);
 		this.nazione = new Long(104);
+		
+		this.provinciaNascita = new Long(5);
+		this.cityNascita = new Long(381);
+		this.nazioneNascita = new Long(104);
 	}
 
 	@Id
@@ -70,14 +79,6 @@ public class Cliente implements Serializable {
 
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
-	}
-
-	public String getCartaidentita() {
-		return cartaidentita;
-	}
-
-	public void setCartaidentita(String cartaidentita) {
-		this.cartaidentita = cartaidentita;
 	}
 
 	@Lob
@@ -146,22 +147,6 @@ public class Cliente implements Serializable {
 		this.rilasciataDa = rilasciataDa;
 	}
 
-	public Date getRilasciataData() {
-		return rilasciataData;
-	}
-
-	public void setRilasciataData(Date rilasciataData) {
-		this.rilasciataData = rilasciataData;
-	}
-
-	public String getRilasciataDove() {
-		return rilasciataDove;
-	}
-
-	public void setRilasciataDove(String rilasciataDove) {
-		this.rilasciataDove = rilasciataDove;
-	}
-
 	public Long getCityNascita() {
 		return cityNascita;
 	}
@@ -202,7 +187,6 @@ public class Cliente implements Serializable {
 		this.cellulare = cellulare;
 	}
 
-	@Transient
 	public String getCityName() {
 		return cityName;
 	}
@@ -262,6 +246,46 @@ public class Cliente implements Serializable {
 
 	public void setNazioneNascitaName(String nazioneNascitaName) {
 		this.nazioneNascitaName = nazioneNascitaName;
+	}
+
+	public String getPatente() {
+		return patente;
+	}
+
+	public void setPatente(String patente) {
+		this.patente = patente;
+	}
+	@Lob
+	public String getLuogoRilascio() {
+		return luogoRilascio;
+	}
+
+	public void setLuogoRilascio(String luogoRilascio) {
+		this.luogoRilascio = luogoRilascio;
+	}
+
+	public Date getDataRilasco() {
+		return dataRilasco;
+	}
+
+	public void setDataRilasco(Date dataRilasco) {
+		this.dataRilasco = dataRilasco;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Date getDataInsert() {
+		return dataInsert;
+	}
+
+	public void setDataInsert(Date dataInsert) {
+		this.dataInsert = dataInsert;
 	}
 
 }

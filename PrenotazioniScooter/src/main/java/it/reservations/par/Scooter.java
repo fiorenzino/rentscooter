@@ -1,6 +1,7 @@
 package it.reservations.par;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +15,7 @@ import javax.persistence.Transient;
 public class Scooter implements Serializable {
 
 	private Long id;
+	private String nome;
 	private String marca;
 	private String modello;
 	private String cilindrata;
@@ -21,6 +23,7 @@ public class Scooter implements Serializable {
 	private String marcaModello;
 	private Float caparra;
 	private String targa;
+	private Date scadenzaAssicurazione;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -90,5 +93,21 @@ public class Scooter implements Serializable {
 
 	public void setCaparra(Float caparra) {
 		this.caparra = caparra;
+	}
+
+	public Date getScadenzaAssicurazione() {
+		return scadenzaAssicurazione;
+	}
+
+	public void setScadenzaAssicurazione(Date scadenzaAssicurazione) {
+		this.scadenzaAssicurazione = scadenzaAssicurazione;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 }

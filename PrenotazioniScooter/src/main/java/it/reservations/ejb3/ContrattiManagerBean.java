@@ -1,5 +1,7 @@
 package it.reservations.ejb3;
 
+import java.util.List;
+
 import it.reservations.par.Contratto;
 import it.reservations.par.Prenotazione;
 import it.smartflower.ejb3.EJBManagerBean;
@@ -23,7 +25,6 @@ public class ContrattiManagerBean extends EJBManagerBean implements
 		return em;
 	}
 
-	@Override
 	public void delete(Contratto contratto) {
 		try {
 			Contratto cl = em.find(Contratto.class, contratto.getId());
@@ -34,7 +35,6 @@ public class ContrattiManagerBean extends EJBManagerBean implements
 
 	}
 
-	@Override
 	public void persist(Contratto contratto) {
 		try {
 			em.persist(contratto);
@@ -44,7 +44,6 @@ public class ContrattiManagerBean extends EJBManagerBean implements
 
 	}
 
-	@Override
 	public void update(Contratto contratto) {
 		try {
 			em.merge(contratto);
@@ -52,6 +51,18 @@ public class ContrattiManagerBean extends EJBManagerBean implements
 			e.printStackTrace();
 		}
 
+	}
+
+	public Long getNumContrattiCliente(Long id) {
+		Long numContratti = new Long(0);
+		try {
+			numContratti = (Long) em.createNamedQuery(
+					"GET_NUM_CONTRATTI_BY_CLIENTE").setParameter("CLIENTE_ID",
+					id).getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return numContratti;
 	}
 
 }

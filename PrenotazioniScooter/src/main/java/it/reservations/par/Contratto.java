@@ -20,6 +20,7 @@ import javax.persistence.Transient;
 public class Contratto implements Serializable {
 
 	private Long id;
+	private Date dataStipula;
 	private Date dataInit;
 	private Date dataEnd;
 	private Date dataRiconsegna;
@@ -268,6 +269,14 @@ public class Contratto implements Serializable {
 
 	public void setImportoDanni(Float importoDanni) {
 		this.importoDanni = importoDanni;
+	}
+
+	public Date getDataStipula() {
+		return dataStipula;
+	}
+
+	public void setDataStipula(Date dataStipula) {
+		this.dataStipula = dataStipula;
 	}
 
 }
