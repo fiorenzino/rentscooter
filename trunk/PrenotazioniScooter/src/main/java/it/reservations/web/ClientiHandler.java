@@ -8,6 +8,7 @@ import it.smartflower.par.RicercaI;
 import it.smartflower.web.utils.JSFHandler;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Named;
@@ -44,6 +45,7 @@ public class ClientiHandler extends JSFHandler implements Serializable {
 	}
 
 	public String addCliente2() {
+		this.cliente.setDataInsert(new Date());
 		JNDIUtils.getClientiManager().persist(this.cliente);
 		aggModel();
 		Util.valorizzaCliente(cliente);
@@ -66,7 +68,12 @@ public class ClientiHandler extends JSFHandler implements Serializable {
 	}
 
 	public String delCliente() {
-		JNDIUtils.getClientiManager().update(this.cliente);
+		Long numContratti = JNDIUtils.getContrattiManager()
+				.getNumContrattiCliente(this.cliente.getId());
+		if (numContratti < 1) {
+			JNDIUtils.getClientiManager().delete(this.cliente);
+		}
+
 		aggModel();
 		return "/clienti/scheda-cliente.xhtml";
 	}
