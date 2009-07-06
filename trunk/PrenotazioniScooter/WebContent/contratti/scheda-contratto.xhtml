@@ -168,6 +168,17 @@
 						value="Elimina Contratto"
 						rendered="#{contrattiHandler.contratto.aperto}" />
 
+					<h:commandLink id="vediContrattoChiuso" target="_blank"
+						action="/print/contratto-chiuso.xhtml"
+						value="Stampa Contratto Chiuso" />
+
+					<h:commandLink id="stampaSchedaChiusuraContratto" target="_blank"
+						action="/print/dati-chiusura-contratto.xhtml"
+						value="Raccolta Dati Chiusura Contratto"
+						rendered="#{contrattiHandler.contratto.aperto}" />
+
+					<h:outputText value=" " />
+
 				</h:panelGrid>
 
 

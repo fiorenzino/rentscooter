@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://topnet.it/facelets"
+	xmlns:fn="http://topnet.it/functions"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax">
+
+<ui:composition template="/WEB-INF/layout/print_layout.xhtml">
+	<ui:define name="title">Dati Contratto Chiuso</ui:define>
+	<ui:define name="content">
+
+		<div
+			style="width: 650px; text-align: justify; border: #000 solid 0px;">
+
+
+		<p></p>
+		<p></p>
+		<h:panelGrid columns="2" id="editContent" columnClasses="80,100">
+
+			<a:fieldView id="Cliente" label="Cliente:"
+				entity="#{contrattiHandler.contratto.cliente}"
+				fieldName="nomeCognome" />
+
+			<a:fieldView id="scooter" label="Scooter:"
+				entity="#{contrattiHandler.contratto.scooter}"
+				fieldName="marcaModello" />
+
+			<a:fieldView id="dataInit" label="Data Inizio:" fieldName="dataInit"
+				type="outputDate" entity="#{contrattiHandler.contratto}" />
+
+			<a:fieldView id="dataEnd" label="Data Riconsegna Prevista:"
+				fieldName="dataEnd" type="outputDate"
+				entity="#{contrattiHandler.contratto}" />
+
+			<a:fieldView id="kmIniziali" label="KM Iniziali:"
+				fieldName="kmIniziali" entity="#{contrattiHandler.contratto}" />
+
+			<a:field id="dataRiconsegna" label="Data Riconsegna Effettuata(*):"
+				fieldName="dataRiconsegna" type="calendar"
+				entity="#{contrattiHandler.contratto}" required="true" />
+
+			<a:field id="kmExtra" label="KM Finali:" fieldName="kmFinali"
+				entity="#{contrattiHandler.contratto}" required="false" />
+
+			<a:field id="importoRitiroMezzo" label="Importo Ritiro Mezzo:"
+				fieldName="importoRitiroMezzo"
+				entity="#{contrattiHandler.contratto}" required="false" />
+
+			<a:field id="benzinaExtra" label="Importo Benzina Extra (euro):"
+				fieldName="benzinaExtra" entity="#{contrattiHandler.contratto}"
+				required="false" />
+
+			<a:field id="importoDanni" label="Importo Danni:"
+				fieldName="importoDanni" entity="#{contrattiHandler.contratto}"
+				required="false" />
+
+			<a:field id="note" label="Note(*):" fieldName="note"
+				entity="#{contrattiHandler.contratto}" required="false"
+				type="inputTextArea" />
+
+
+
+		</h:panelGrid></div>
+	</ui:define>
+</ui:composition>
+</html>
