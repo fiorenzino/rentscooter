@@ -1,4 +1,4 @@
-package it.reservations.web.utils;
+package it.reservations.ejb3.utils;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -16,7 +16,7 @@ public class TimeUtil {
 					- cal1.getTimeInMillis()) / (new Long(24 * 60 * 60 * 1000))
 
 			);
-			return numDay + 2;
+			return numDay + 1;
 		} else {
 			return new Long(0);
 		}

@@ -2,6 +2,7 @@ package it.reservations.ejb3;
 
 import java.util.List;
 
+import it.reservations.par.Cliente;
 import it.reservations.par.Contratto;
 import it.reservations.par.Prenotazione;
 import it.smartflower.ejb3.EJBManagerBean;
@@ -64,5 +65,7 @@ public class ContrattiManagerBean extends EJBManagerBean implements
 		}
 		return numContratti;
 	}
+	
+	
 
 }
