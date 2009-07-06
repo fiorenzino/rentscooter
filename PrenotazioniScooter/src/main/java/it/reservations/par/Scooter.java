@@ -1,6 +1,9 @@
 package it.reservations.par;
 
+import it.reservations.ejb3.utils.TimeUtil;
+
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -24,6 +27,7 @@ public class Scooter implements Serializable {
 	private Float caparra;
 	private String targa;
 	private Date scadenzaAssicurazione;
+	private String scadenza;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,7 +76,7 @@ public class Scooter implements Serializable {
 
 	@Transient
 	public String getMarcaModello() {
-		return marca + " " + modello;
+		return nome + "-" + marca + " " + modello;
 	}
 
 	public void setMarcaModello(String marcaModello) {
@@ -110,4 +114,16 @@ public class Scooter implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	@Transient
+	public String getScadenza() {
+		if (TimeUtil.getDiffDays(getScadenzaAssicurazione(), new Date()) < 7)
+			return "occupato";
+		return "libero";
+	}
+
+	public void setScadenza(String scadenza) {
+		this.scadenza = scadenza;
+	}
+
 }

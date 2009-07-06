@@ -39,6 +39,8 @@ public class Contratto implements Serializable {
 	private Float benzinaExtra;
 	private Float cascoExtra;
 	private Float kmExtra;
+	private Float kmIniziali;
+	private Float kmFinali;
 	private Float sconto;
 	private Boolean aperto;
 	private List<Prenotazione> prenotazioni;
@@ -211,14 +213,12 @@ public class Contratto implements Serializable {
 		this.cascoExtra = cascoExtra;
 	}
 
+	@Transient
 	public Float getKmExtra() {
-		if (kmExtra == null)
-			kmExtra = new Float(0);
-		return kmExtra;
-	}
-
-	public void setKmExtra(Float kmExtra) {
-		this.kmExtra = kmExtra;
+		if ((kmIniziali != null) && (kmFinali != null)
+				&& (kmFinali > kmIniziali))
+			return kmFinali - kmIniziali;
+		return new Float(0);
 	}
 
 	public Float getImportokmExtra() {
@@ -277,6 +277,22 @@ public class Contratto implements Serializable {
 
 	public void setDataStipula(Date dataStipula) {
 		this.dataStipula = dataStipula;
+	}
+
+	public Float getKmIniziali() {
+		return kmIniziali;
+	}
+
+	public void setKmIniziali(Float kmIniziali) {
+		this.kmIniziali = kmIniziali;
+	}
+
+	public Float getKmFinali() {
+		return kmFinali;
+	}
+
+	public void setKmFinali(Float kmFinali) {
+		this.kmFinali = kmFinali;
 	}
 
 }

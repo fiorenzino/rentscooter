@@ -32,7 +32,7 @@ public class ClientiHandler extends JSFHandler implements Serializable {
 			int i = 1;
 			for (Cliente cliente : clienti) {
 				items[i++] = new SelectItem(cliente.getId(), cliente
-						.getCognome());
+						.getNomeCognome());
 			}
 			clientiItems = items;
 		}
@@ -75,7 +75,7 @@ public class ClientiHandler extends JSFHandler implements Serializable {
 		}
 
 		aggModel();
-		return "/clienti/scheda-cliente.xhtml";
+		return "/clienti/clienti.xhtml";
 	}
 
 	public String detailCliente() {

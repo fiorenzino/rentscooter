@@ -22,6 +22,23 @@ public class ScootersHandler extends JSFHandler implements Serializable {
 
 	private SelectItem[] scootersItems;
 
+	private SelectItem[] cilindrateItems;
+
+	public SelectItem[] getCilindrateItems() {
+		if (cilindrateItems == null) {
+			List<String> cilindrate = JNDIUtils.getScooterManager()
+					.getCilindrate();
+			SelectItem[] items = new SelectItem[cilindrate.size() + 1];
+			items[0] = new SelectItem(0, "scegli");
+			int i = 1;
+			for (String cil : cilindrate) {
+				items[i++] = new SelectItem(cil);
+			}
+			cilindrateItems = items;
+		}
+		return cilindrateItems;
+	}
+
 	public SelectItem[] getScootersItems() {
 		if (scootersItems == null) {
 			List<Scooter> scooters = JNDIUtils.getScooterManager()
@@ -30,8 +47,8 @@ public class ScootersHandler extends JSFHandler implements Serializable {
 			items[0] = new SelectItem(0, "scegli");
 			int i = 1;
 			for (Scooter scooter : scooters) {
-				items[i++] = new SelectItem(scooter.getId(), scooter
-						.getMarcaModello());
+				items[i++] = new SelectItem(scooter.getId(), scooter.getNome()
+						+ " - " + scooter.getMarcaModello());
 			}
 			scootersItems = items;
 		}

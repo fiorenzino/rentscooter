@@ -1,13 +1,13 @@
 package it.reservations.web;
 
 import it.reservations.ejb3.utils.JNDIUtils;
+import it.reservations.ejb3.utils.TimeUtil;
 import it.reservations.par.Cliente;
 import it.reservations.par.Contratto;
 import it.reservations.par.Prenotazione;
 import it.reservations.par.Scooter;
 import it.reservations.par.Tariffa;
 import it.reservations.web.utils.TariffeUtil;
-import it.reservations.web.utils.TimeUtil;
 import it.reservations.web.utils.Util;
 import it.smartflower.ejb3.utils.ClassCreator;
 import it.smartflower.par.RicercaI;
@@ -184,9 +184,9 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 	}
 
 	public String delContratto() {
-		JNDIUtils.getContrattiManager().update(this.contratto);
+		JNDIUtils.getContrattiManager().delete(this.contratto);
 		aggModel();
-		return "/contratti/scheda-contratto.xhtml";
+		return "/contratti/contratti.xhtml";
 	}
 
 	public String detailContratto() {

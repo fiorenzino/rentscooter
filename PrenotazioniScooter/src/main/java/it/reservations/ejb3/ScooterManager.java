@@ -11,9 +11,11 @@ public interface ScooterManager extends EJBManager {
 	public void update(Scooter scooter);
 
 	public void remove(Scooter scooter);
-	
+
 	public Scooter find(Long id);
-	
+
 	public List<Scooter> getAllScooter();
+
+	public List<String> getCilindrate();
 
 }

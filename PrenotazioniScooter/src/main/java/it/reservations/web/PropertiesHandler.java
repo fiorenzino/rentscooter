@@ -254,7 +254,7 @@ public class PropertiesHandler implements Serializable {
 					res.append(" - ");
 				}
 				if (dovs[i].endsWith(".jsf")) {
-					res.append(dovs[i].replace(".jsf", ""));
+					res.append("<b>" + dovs[i].replace(".jsf", "") + "</b>");
 				} else {
 					res.append("<a href=\"/" + path + "/" + dovs[i] + "\">"
 							+ dovs[i] + "</a>");

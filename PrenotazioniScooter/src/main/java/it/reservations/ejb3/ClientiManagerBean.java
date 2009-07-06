@@ -45,7 +45,7 @@ public class ClientiManagerBean extends EJBManagerBean implements
 
 	}
 
-	@Override
+	
 	public void delete(Cliente cliente) {
 		try {
 			Cliente cl = em.find(Cliente.class, cliente.getId());
