@@ -27,15 +27,14 @@
 		residente in via <b>#{contrattiHandler.contratto.cliente.indirizzo}</b>,
 		#{contrattiHandler.contratto.cliente.cap}
 		#{contrattiHandler.contratto.cliente.cityName}
-		(#{contrattiHandler.contratto.cliente.provinciaName}) , cod. fiscale <b>#{contrattiHandler.contratto.cliente.codicefiscale}</b>
+		(#{contrattiHandler.contratto.cliente.provinciaName}), cod. fiscale <b>#{contrattiHandler.contratto.cliente.codicefiscale}</b>
 		ed identificato con PATENTE N. <b>#{contrattiHandler.contratto.cliente.patente}</b>
 		emessa da #{contrattiHandler.contratto.cliente.rilasciataDa} di
-		#{contrattiHandler.contratto.cliente.luogoRilascio} in data 
-		<h:outputText
+		#{contrattiHandler.contratto.cliente.luogoRilascio} in data <h:outputText
+			value=" " /><h:outputText
 			value="#{contrattiHandler.contratto.cliente.dataRilasco}">
 			<f:convertDateTime locale="IT" type="date" pattern="dd-MM-yyyy" />
-		</h:outputText>
-		, avente numero di telefono:
+		</h:outputText>, avente numero di telefono:
 		#{contrattiHandler.contratto.cliente.telefono} e cellulare:
 		#{contrattiHandler.contratto.cliente.cellulare},</p>
 		<p></p>
@@ -49,25 +48,28 @@
 			</li>
 			<li>il signor #{contrattiHandler.contratto.cliente.nomeCognome}
 			prende in locazione lo scooter <b>#{contrattiHandler.contratto.scooter.marcaModello}</b>
-			accettando tutte le clausole del presente contratto, nessuna esclusa
-			od eccettuatae dichiarando espressamente di ritirare lo scooter in
-			ottime condizioni di uso e manutanezione, sia di carrozzeria che di
-			meccanica, con tutte le parti in perfetto ordine ed in tale stato si
-			impegna ad osservare la diligenza del buon padre di famiglia,
-			nell'uso della cosae nei limiti stabiliti dal presente contratto ed a
-			restituire lo scooter alla scadenza del contratto.
+			avente targa <b>#{contrattiHandler.contratto.scooter.targa}</b>, dal
+			giorno/ore: #{contrattiHandler.contratto.dataInit}, al giorno/ore:
+			#{contrattiHandler.contratto.dataEnd}, accettando tutte le clausole
+			del presente contratto, nessuna esclusa od eccettuata e dichiarando
+			espressamente di ritirare lo scooter in ottime condizioni di uso e
+			manutanezione, sia di carrozzeria che di meccanica, con tutte le
+			parti in perfetto ordine ed in tale stato si impegna ad osservare la
+			diligenza del buon padre di famiglia, nell'uso della cosa e nei limiti
+			stabiliti dal presente contratto ed a restituire lo scooter alla
+			scadenza del contratto.
 			<p></p>
 			</li>
 			<li>lo scooter deve essere restituito alla predetta scadenza
 			nello stesso stato in cui viene consegnato al locatario.
 			<p></p>
 			</li>
-			<li>lo scooter verrà restituito entro <b>le ore 16 del
-			giorno #{contrattiHandler.contratto.dataEnd}</b>, presso Simonelli Moto e
-			dovrà essere riconsegnato con il pieno del carburante o con il
-			livello con cui lo stesso viene consegnato al locatario; diversamente
-			verrà addebitato al locatario un supplemento di euro 10 per il
-			servizio di rifornimento oltre al carburante mancante
+			<li>lo scooter verrà restituito entro il giorno/ore <b>
+			#{contrattiHandler.contratto.dataEnd}</b>, presso Simonelli Moto e dovrà
+			essere riconsegnato con il pieno del carburante o con il livello con
+			cui lo stesso viene consegnato al locatario; diversamente verrà
+			addebitato al locatario un supplemento di euro 10 per il servizio di
+			rifornimento oltre al carburante mancante
 			<p></p>
 			</li>
 			<li>è prevista una tolleranza massima di 59 minuti nella
@@ -83,9 +85,60 @@
 			dovuto
 			<p></p>
 			</li>
-			<li>il prezzo della locazione è di euro 10 per ogni ora, di euro
-			23 per ogni giorno, di euro 33 per 3 gg, di euro 66 per 5 giorni, di
-			euro 140 per ogni settimana.
+			<li>le tariffe e condizioni della locazione del mezzo:
+			<table>
+				<tr>
+					<td style="width: 50px;">         </td>
+					<td>I giorno:</td>
+					<td>euro #{contrattiHandler.contratto.scooter.tariffa.d1}</td>
+				</tr>
+				<tr>
+					<td>         </td>
+					<td>II giorno:</td>
+					<td>euro #{contrattiHandler.contratto.scooter.tariffa.d2}</td>
+				</tr>
+				<tr>
+					<td>         </td>
+					<td>III giorno:</td>
+					<td>euro #{contrattiHandler.contratto.scooter.tariffa.d3}</td>
+				</tr>
+				<tr>
+					<td>         </td>
+					<td>IV giorno:</td>
+					<td>euro #{contrattiHandler.contratto.scooter.tariffa.d4}</td>
+				</tr>
+				<tr>
+					<td>         </td>
+					<td>V giorno:</td>
+					<td>euro #{contrattiHandler.contratto.scooter.tariffa.d5}</td>
+				</tr>
+				<tr>
+					<td>         </td>
+					<td>7 giorni:</td>
+					<td>euro #{contrattiHandler.contratto.scooter.tariffa.d7}</td>
+				</tr>
+				<tr>
+					<td>         </td>
+					<td>30 giorni:</td>
+					<td>euro #{contrattiHandler.contratto.scooter.tariffa.d4}</td>
+				</tr>
+				<tr>
+					<td>         </td>
+					<td>1 giorno extra:</td>
+					<td>euro #{contrattiHandler.contratto.scooter.tariffa.d4}</td>
+				</tr>
+				<tr>
+					<td>         </td>
+					<td>numero max Km:</td>
+					<td>#{contrattiHandler.contratto.scooter.tariffa.maxKm}</td>
+				</tr>
+				<tr>
+					<td>         </td>
+					<td>costo per km extra:</td>
+					<td>euro #{contrattiHandler.contratto.scooter.tariffa.costoKm}</td>
+				</tr>
+			</table>
+
 			<p></p>
 			</li>
 			<li>è stabilito il divieto assoluto di sublocazione
@@ -97,8 +150,8 @@
 			</li>
 			<li>il locatario dichiara di essere perfettamente abilitato alla
 			conduzione dello scoooter che gli verrà consegnato, come da patente
-			n. #{contrattiHandler.contratto.cliente.patente} che esibisce al momento
-			della stipula del presente contratto e che dichiara essere in
+			n. #{contrattiHandler.contratto.cliente.patente} che esibisce al
+			momento della stipula del presente contratto e che dichiara essere in
 			perfetto corso di validità, non essendo egli sottoposto a restrizione
 			di legge o provvedimenti dell'autorità amministrativa o giudiziaria.
 			<p></p>
@@ -124,38 +177,52 @@
 <div style="page-break-after: always"></div> 
 -->
 		<p></p>
-		<p><b>San Benedetto del Tronto, li <h:outputText
+		<p style="text-align: right;"><b><h:outputText
+			value="San Benedetto del Tronto, li  " /><h:outputText
 			value="#{contrattiHandler.contratto.dataStipula}">
 			<f:convertDateTime locale="IT" type="date" pattern="dd-MM-yyyy" />
 		</h:outputText></b></p>
-
-		<p>il locatore <b>Simonelli Moto SAS</b>
-		___________________________</p>
-
 		<p></p>
 		<p></p>
-		<p>il locatario <b>#{contrattiHandler.contratto.cliente.nomeCognome}
-		</b>___________________________</p>
-
-		<p><b> per espressa approvazione delle clausole
-		1,2,3,4,5,6,7,8,9,10,11,12,13 </b></p>
-
 		<p></p>
-		<p><b>San Benedetto del Tronto, li <h:outputText
+		<h:panelGrid columns="2" style="width: 650px;">
+			<h:panelGroup style="width: 325px; text-align: left;">
+			il locatore <b>Simonelli Moto SAS</b>
+				<br />
+			___________________________
+			</h:panelGroup>
+			<h:panelGroup style="width: 325px; text-align: right;">
+			il locatario <b>#{contrattiHandler.contratto.cliente.nomeCognome}</b>
+				<br />
+			___________________________
+			</h:panelGroup>
+		</h:panelGrid>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p><b>Per espressa approvazione delle clausole 1, 2, 3, 4, 5,
+		6, 7, 8, 9, 10, 11, 12, 13 </b></p>
+		<p></p>
+		<p style="text-align: right;"><b><h:outputText
+			value="San Benedetto del Tronto, li  " /><h:outputText
 			value="#{contrattiHandler.contratto.dataStipula}">
 			<f:convertDateTime locale="IT" type="date" pattern="dd-MM-yyyy" />
 		</h:outputText></b></p>
-
-		<p>il locatore <b>Simonelli Moto SAS</b>
-		___________________________</p>
-
 		<p></p>
 		<p></p>
-		<p>il locatario <b>#{contrattiHandler.contratto.cliente.nomeCognome}
-		</b>___________________________</p>
-
 		<p></p>
-		</div>
+		<h:panelGrid columns="2" style="width: 650px;">
+			<h:panelGroup style="width: 325px; text-align: left;">
+			il locatore <b>Simonelli Moto SAS</b>
+				<br />
+			___________________________
+			</h:panelGroup>
+			<h:panelGroup style="width: 325px; text-align: right;">
+			il locatario <b>#{contrattiHandler.contratto.cliente.nomeCognome}</b>
+				<br />
+			___________________________
+			</h:panelGroup>
+		</h:panelGrid></div>
 	</ui:define>
 </ui:composition>
 </html>

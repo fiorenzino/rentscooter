@@ -9,19 +9,16 @@
 	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax">
 
 <ui:composition template="/WEB-INF/layout/t_single.xhtml">
-	<ui:define name="title">Gestione Clienti</ui:define>
+	<ui:define name="title">Lista Clienti</ui:define>
 	<ui:define name="content">
-		<p style="align: center;">Gestione Clienti</p>
+		<h2>Lista Clienti</h2>
 		<h:outputText
 			value="#{fn:init('clientiHandler','it.reservations.par.Cliente', 'cercaClienti')}" />
 		<h:form id="centerForm">
-			<rich:spacer height="30" />
+			
 			<h:panelGrid columns="4" width="70%">
-				<f:facet name="header">
-					<h:outputText value="Cerca Clienti" />
-				</f:facet>
 				<h:panelGroup>
-					<h:outputLabel id="nomeLabel1" value="Nome:" for="nome1" />
+					<h:outputLabel id="nomeLabel1" value="Cerca per nome:" for="nome1" />
 					<h:inputText id="nome1" value="#{clientiHandler.ricerca.cognome}"
 						size="15">
 						<a4j:support event="onkeyup" ajaxSingle="true"

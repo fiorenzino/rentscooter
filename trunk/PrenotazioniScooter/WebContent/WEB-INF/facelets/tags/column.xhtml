@@ -56,7 +56,7 @@ THIS TEXT WILL BE REMOVED
 		<!--  Display the field name -->
 		<c:choose>
 			<c:when test='${type == "outputText"}'>
-				<h:outputText value="${entity[fieldName]}" />
+				<h:outputText value="${entity[fieldName]}" styleClass="${styleClass}" />
 			</c:when>
 			<c:when test='${type == "outputDate"}'>
 				<h:outputText value="${entity[fieldName]}">

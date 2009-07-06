@@ -9,13 +9,13 @@
 	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax">
 
 <ui:composition template="/WEB-INF/layout/t_single.xhtml">
-	<ui:define name="title">Gestione Tariffe</ui:define>
+	<ui:define name="title">Lista Tariffe</ui:define>
 	<ui:define name="content">
-		<p style="align: center;">Gestione Tariffe</p>
+		<h2>Lista Tariffe</h2>
 		<h:outputText
 			value="#{fn:init('tariffeHandler','it.reservations.par.Tariffa', 'cercaTariffe')}" />
 		<h:form id="centerForm">
-			<rich:spacer height="30" />
+			
 			<h:panelGrid columns="4" width="70%">
 				<f:facet name="header">
 					<h:outputText value="Cerca Tariffa" />
@@ -51,12 +51,30 @@
 
 				<a:column entity="${Tariffa}" fieldName="d1" sort="${false}"
 					label="d1" />
+					
+				<a:column entity="${Tariffa}" fieldName="d2" sort="${false}"
+					label="d2" />
+					
+				<a:column entity="${Tariffa}" fieldName="d3" sort="${false}"
+					label="d3" />
+					
+				<a:column entity="${Tariffa}" fieldName="d4" sort="${false}"
+					label="d4" />
+				
+				<a:column entity="${Tariffa}" fieldName="d5" sort="${false}"
+					label="d5" />
 
 				<a:column entity="${Tariffa}" fieldName="d7" sort="${false}"
 					label="d7" />
 					
 				<a:column entity="${Tariffa}" fieldName="d30" sort="${false}"
 					label="d30" />
+					
+				<a:column entity="${Tariffa}" fieldName="d1ex" sort="${false}"
+					label="d1ex" />
+					
+				<a:column entity="${Tariffa}" fieldName="maxKm" sort="${false}"
+					label="maxKm" />
 
 				<a:columnCommand label="Modifica" action="modTariffa1"
 					backingBean="${tariffeHandler}" />

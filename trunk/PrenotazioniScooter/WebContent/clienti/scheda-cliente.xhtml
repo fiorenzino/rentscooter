@@ -9,9 +9,9 @@
 	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax">
 
 <ui:composition template="/WEB-INF/layout/t_single.xhtml">
-	<ui:define name="title">Gestione Clienti</ui:define>
+	<ui:define name="title">Scheda Cliente</ui:define>
 	<ui:define name="content">
-		<p style="align: center;">Gestione Clienti</p>
+		<h2>Scheda Cliente</h2>
 		<h:form id="form">
 			<rich:panel id="prenotazioneScooter">
 				<h:panelGrid columns="2" id="editContent">
@@ -70,14 +70,14 @@
 						campo="Nazioni" entity="#{clientiHandler.cliente.nazioneNascita}"
 						type="getArrayValue" />
 
-					<a:fieldView id="telefono" label="Telefono(*):" fieldName="telefono"
-						entity="#{clientiHandler.cliente}" />
+					<a:fieldView id="telefono" label="Telefono(*):"
+						fieldName="telefono" entity="#{clientiHandler.cliente}" />
 
 					<a:fieldView id="cellulare" label="Cellulare(*):"
 						fieldName="cellulare" entity="#{clientiHandler.cliente}" />
 
 					<a:fieldView id="email" label="Email(*):" fieldName="email"
-						entity="#{clientiHandler.cliente}"  />
+						entity="#{clientiHandler.cliente}" />
 
 
 					<h:commandLink id="stampaPrivacy" action="/print/privacy.xhtml"

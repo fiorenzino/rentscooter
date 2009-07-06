@@ -19,8 +19,9 @@
 		<p>Il sottoscritto #{clientiHandler.cliente.nomeCognome}, nato a <h:outputText
 			value=" #{clientiHandler.cliente.cityNascitaName}" /> (<h:outputText
 			value="#{clientiHandler.cliente.provinciaNascitaName}" />) <h:outputText
-			value=" #{clientiHandler.cliente.nazioneNascitaName}" /> il <h:outputText
-			value=" #{clientiHandler.cliente.dataNascita}">
+			value=" #{clientiHandler.cliente.nazioneNascitaName}" /><h:outputText
+			value=" il " /><h:outputText
+			value="#{clientiHandler.cliente.dataNascita}">
 			<f:convertDateTime locale="IT" type="date" pattern="dd-MM-yyyy" />
 		</h:outputText>, residente a #{clientiHandler.cliente.cityName}
 		(#{clientiHandler.cliente.provinciaName}) <h:outputText
@@ -54,10 +55,16 @@
 <div style="page-break-after: always"></div> 
 -->
 		<p></p>
-
+		<p style="text-align: right;"><b><h:outputText
+			value="San Benedetto del Tronto, li  " /><h:outputText
+			value="#{clientiHandler.cliente.dataInsert}">
+			<f:convertDateTime locale="IT" type="date" pattern="dd-MM-yyyy" />
+		</h:outputText></b></p>
 		<p></p>
 		<p></p>
-		<p><b>#{clientiHandler.cliente.nomeCognome} </b>___________________________</p>
+		<p></p>
+		<p style="text-align: left;"><b>#{clientiHandler.cliente.nomeCognome}</b> <br />
+		___________________________</p>
 
 		<p></p>
 		</div>
