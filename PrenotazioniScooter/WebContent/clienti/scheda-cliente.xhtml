@@ -42,9 +42,13 @@
 					<a:fieldView id="cap" label="Cap:" fieldName="cap"
 						entity="#{clientiHandler.cliente}" />
 
-
 					<a:fieldView id="city" label="Comune di residenza:" campo="Comuni"
-						entity="#{clientiHandler.cliente.city}" type="getArrayValue" />
+						entity="#{clientiHandler.cliente.city}" type="getArrayValue"
+						rendered="#{clientiHandler.cliente.provincia != 109}" />
+
+					<a:fieldView id="city2" label="Comune di residenza:"
+						entity="#{clientiHandler.cliente}" fieldName="cityName"
+						rendered="#{clientiHandler.cliente.provincia == 109}" />
 
 					<a:fieldView id="province" label="Provincia di residenza:"
 						campo="Province" entity="#{clientiHandler.cliente.provincia}"
@@ -59,7 +63,12 @@
 
 					<a:fieldView id="birthCity" label="Comune di nascita:"
 						campo="Comuni" entity="#{clientiHandler.cliente.cityNascita}"
-						type="getArrayValue" />
+						type="getArrayValue"
+						rendered="#{clientiHandler.cliente.provinciaNascita != 109}" />
+
+					<a:fieldView id="birthCity2" label="Comune di nascita:"
+						fieldName="cityNascitaName" entity="#{clientiHandler.cliente}"
+						rendered="#{clientiHandler.cliente.provinciaNascita == 109}" />
 
 					<a:fieldView id="birthProvince" label="Provincia di nascita:"
 						campo="Province"
