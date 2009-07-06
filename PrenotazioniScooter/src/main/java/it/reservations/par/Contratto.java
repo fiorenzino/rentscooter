@@ -1,5 +1,7 @@
 package it.reservations.par;
 
+import it.reservations.ejb3.utils.TimeUtil;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,6 +38,8 @@ public class Contratto implements Serializable {
 	private Float importoDanni;
 	private Float extra;
 	private Float totale;
+	private Float totaleParziale;
+	private Float totaleChiusura;
 	private Float benzinaExtra;
 	private Float cascoExtra;
 	private Float kmExtra;
@@ -114,7 +118,8 @@ public class Contratto implements Serializable {
 	public Float getExtra() {
 		if (extra == null)
 			extra = new Float(0);
-		return extra;
+		Long extraG = TimeUtil.getDiffDays(getDataEnd(), getDataRiconsegna());
+		return extraG * getScooter().getTariffa().getD1ex();
 	}
 
 	public void setExtra(Float extra) {
@@ -143,6 +148,32 @@ public class Contratto implements Serializable {
 
 	public void setTotale(Float totale) {
 		this.totale = totale;
+	}
+
+	@Transient
+	public Float getTotaleParziale() {
+		if (getSconto() != 0) {
+			return (getImportoIniziale() - (getSconto() * getImportoIniziale() / new Float(
+					100)))
+					+ getCascoExtra()
+					+ getImportoCaparra()
+					+ getImportoSottoCasco();
+		}
+		return getImportoIniziale() + getCascoExtra() + getImportoCaparra()
+				+ getImportoSottoCasco();
+	}
+
+	public void setTotaleParziale(Float totaleParziale) {
+		this.totaleParziale = totaleParziale;
+	}
+
+	@Transient
+	public Float getTotaleChiusura() {
+		return getTotale() - getTotaleParziale();
+	}
+
+	public void setTotaleChiusura(Float totaleChiusura) {
+		this.totaleChiusura = totaleChiusura;
 	}
 
 	@OneToMany(mappedBy = "contratto", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
@@ -216,14 +247,19 @@ public class Contratto implements Serializable {
 	@Transient
 	public Float getKmExtra() {
 		if ((kmIniziali != null) && (kmFinali != null)
-				&& (kmFinali > kmIniziali))
-			return kmFinali - kmIniziali;
+				&& (kmFinali > kmIniziali)) {
+			Long kmMax = getScooter().getTariffa().getMaxKm();
+			Float kmInPiu = kmFinali - kmIniziali;
+			if ((kmInPiu != null) && (kmInPiu > 0) && (kmInPiu > kmMax))
+				return kmInPiu - kmMax;
+		}
 		return new Float(0);
 	}
 
 	public Float getImportokmExtra() {
 		if (importokmExtra == null)
 			importokmExtra = new Float(0);
+		importokmExtra = getScooter().getTariffa().getCostoKm() * getKmExtra();
 		return importokmExtra;
 	}
 

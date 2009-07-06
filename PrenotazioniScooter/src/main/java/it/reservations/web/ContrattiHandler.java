@@ -4,6 +4,7 @@ import it.reservations.ejb3.utils.JNDIUtils;
 import it.reservations.ejb3.utils.TimeUtil;
 import it.reservations.par.Cliente;
 import it.reservations.par.Contratto;
+import it.reservations.par.MiniPre;
 import it.reservations.par.Prenotazione;
 import it.reservations.par.Scooter;
 import it.reservations.par.Tariffa;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Named;
 import javax.context.SessionScoped;
@@ -35,8 +37,65 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 
 	private boolean withCaparra = false;
 
+	private List<MiniPre[]> searchModel;
+	private List<String> colonne;
+	private String cil;
+	private int begin;
+	private int end;
+
 	@Current
 	OrganizerHandler organizerHandler;
+
+	public List<MiniPre[]> getSearchModel() {
+		Map<String, Map<String, MiniPre>> mappa = JNDIUtils
+				.getPrenotazioniManager().getReservationList(
+						getContratto().getDataInit(),
+						getContratto().getDataEnd(), getCil());
+		searchModel = new ArrayList<MiniPre[]>();
+		for (String nome : mappa.keySet()) {
+			MiniPre[] sco = new MiniPre[getColonne().size() + 1];
+
+			Map<String, MiniPre> occ = mappa.get(nome);
+			int l = 1;
+			for (String key : occ.keySet()) {
+				if (l == 1) {
+					sco[0] = occ.get(key);
+				}
+				sco[l++] = occ.get(key);
+			}
+			searchModel.add(sco);
+		}
+		return searchModel;
+	}
+
+	public void setSearchModel(List<MiniPre[]> searchModel) {
+		this.searchModel = searchModel;
+	}
+
+	public List<String> getColonne() {
+		if (colonne == null)
+			aggColonne();
+		return colonne;
+	}
+
+	public void setColonne(List<String> colonne) {
+		this.colonne = colonne;
+	}
+
+	public void aggColonne() {
+		colonne = new ArrayList<String>();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(getContratto().getDataInit());
+		colonne.add("scooter");
+		while (cal.getTime().compareTo(getContratto().getDataEnd()) <= 0) {
+			// System.out.println("COLDATA: " + cal.get(Calendar.DAY_OF_MONTH)
+			// + "-" + cal.get(Calendar.MONTH) + "-"
+			// + cal.get(Calendar.YEAR));
+			colonne.add(cal.get(Calendar.DAY_OF_MONTH) + "-"
+					+ cal.get(Calendar.MONTH) + "-" + cal.get(Calendar.YEAR));
+			cal.add(Calendar.DAY_OF_MONTH, 1);
+		}
+	}
 
 	public String addContratto1() {
 		this.contratto = new Contratto();
@@ -238,6 +297,30 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 
 	public void setWithCaparra(boolean withCaparra) {
 		this.withCaparra = withCaparra;
+	}
+
+	public String getCil() {
+		return cil;
+	}
+
+	public void setCil(String cil) {
+		this.cil = cil;
+	}
+
+	public int getBegin() {
+		return 0;
+	}
+
+	public void setBegin(int begin) {
+		this.begin = begin;
+	}
+
+	public int getEnd() {
+		return getColonne().size() + 1;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
 	}
 
 }
