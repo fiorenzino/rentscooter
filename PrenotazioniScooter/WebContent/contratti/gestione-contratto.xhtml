@@ -13,37 +13,42 @@
 	<ui:define name="content">
 		<h2>Gestione Contratto</h2>
 		<h:form id="formCerca">
-			<rich:panel id="prenotazioneScooter">
+			<rich:panel id="cercaScooter">
 				<a:field id="scooter" label="Cilindrata:" type="selOneM"
-					entityId="#{testHandler}" fieldName="cil"
+					entityId="#{contrattiHandler}" fieldName="cil"
 					entityList="#{scootersHandler}" fieldNameList="cilindrateItems" />
 
-				<a:field id="dataInit" label="Data Inizio(*):" fieldName="dal"
-					type="calendar" entity="#{testHandler}" required="true" />
+				<a:field id="dataInit" label="Data Inizio(*):" fieldName="dataInit"
+					type="dateTime" entity="#{contrattiHandler.contratto}"
+					required="true" />
 
-				<a:field id="dataEnd" label="Data Riconsegna(*):" fieldName="al"
-					type="calendar" entity="#{testHandler}" required="true" />
+				<a:field id="dataEnd" label="Data Riconsegna(*):"
+					fieldName="dataEnd" type="dateTime"
+					entity="#{contrattiHandler.contratto}" required="true" />
 
 				<a4j:commandButton id="cercaButton"
-					action="#{testHandler.aggColonne}" value="cerca" reRender="cerca"
-					immediate="false" />
+					action="#{contrattiHandler.aggColonne}" value="cerca"
+					reRender="cercaScooterResult, cercaScooter" immediate="false" />
 
 			</rich:panel>
 		</h:form>
 		<h:form id="form2Cerca">
-			<rich:panel id="cerca">
-				<rich:dataTable id="colTable" value="#{testHandler.model}" var="res">
+			<rich:panel id="cercaScooterResult">
+				<rich:dataTable id="colTable"
+					value="#{contrattiHandler.searchModel}" var="res">
 					<f:facet name="header">
 						<h:outputText value="Test Prenotazioni"></h:outputText>
 					</f:facet>
-					<rich:columns value="#{testHandler.colonne}" var="col" index="ind"
-						begin="#{testHandler.begin}" end="#{testHandler.end}">
+					<rich:columns value="#{contrattiHandler.colonne}" var="col"
+						index="ind" begin="#{contrattiHandler.begin}"
+						end="#{contrattiHandler.end}">
 						<f:facet name="header">
 							<h:outputText value="#{col}" />
 						</f:facet>
 						<a4j:region>
 							<a4j:commandLink value="#{res[ind].nome}"
-								rendered="#{ind == '0'}" reRender="prenotazioneScooter,cerca"
+								rendered="#{ind == '0'}"
+								reRender="cercaScooterResult,cercaScooter,prenotazioneScooter"
 								immediate="true">
 								<a4j:actionparam name="id" value="#{res[ind].id}"
 									assignTo="#{contrattiHandler.contratto.scooter.id}" />
@@ -66,21 +71,10 @@
 							entityList="#{clientiHandler}" fieldNameList="clientiItems"
 							required="true" />
 
-
 						<a:field id="scooter" label="Scooter(*):" type="selOneM"
 							entityId="#{contrattiHandler.contratto.scooter}" fieldName="id"
 							entityList="#{scootersHandler}" fieldNameList="scootersItems"
 							required="true" />
-
-
-						<a:field id="dataInit" label="Data Inizio(*):"
-							fieldName="dataInit" type="dateTime"
-							entity="#{contrattiHandler.contratto}" required="true"
-							datePattern="d/M/yy HH:mm" />
-
-						<a:field id="dataEnd" label="Data Riconsegna(*):"
-							fieldName="dataEnd" type="dateTime"
-							entity="#{contrattiHandler.contratto}" required="true" />
 
 						<a:field id="kmIniziali" label="KM Iniziali(*):"
 							fieldName="kmIniziali" entity="#{contrattiHandler.contratto}"

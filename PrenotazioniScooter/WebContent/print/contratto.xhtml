@@ -18,8 +18,8 @@
 
 		<p></p>
 		<p></p>
-		<p>Tra la ditta <b>Simonelli Moto SAS</b> ed il signor <b>#{contrattiHandler.contratto.cliente.nomeCognome}</b>,
-		nato il <b><h:outputText
+		<p>Tra la ditta <b>Simonelli Moto s.a.s.</b> ed il/la sig./sig.ra
+		<b>#{contrattiHandler.contratto.cliente.nomeCognome}</b>, nato il <b><h:outputText
 			value="#{clientiHandler.cliente.dataNascita}">
 			<f:convertDateTime locale="IT" type="date" pattern="dd-MM-yyyy" />
 		</h:outputText></b> a <b>#{contrattiHandler.contratto.cliente.cityNascitaName}
@@ -28,7 +28,7 @@
 		#{contrattiHandler.contratto.cliente.cap}
 		#{contrattiHandler.contratto.cliente.cityName}
 		(#{contrattiHandler.contratto.cliente.provinciaName}), cod. fiscale <b>#{contrattiHandler.contratto.cliente.codicefiscale}</b>
-		ed identificato con PATENTE N. <b>#{contrattiHandler.contratto.cliente.patente}</b>
+		ed identificato con patente n. <b>#{contrattiHandler.contratto.cliente.patente}</b>
 		emessa da #{contrattiHandler.contratto.cliente.rilasciataDa} di
 		#{contrattiHandler.contratto.cliente.luogoRilascio} in data <h:outputText
 			value=" " /><h:outputText
@@ -40,36 +40,47 @@
 		<p></p>
 		<p><b>si accetta e si stipula quanto segue:</b></p>
 		<ul>
-			<li>la ditta simonelli moto cede in locazione a <b>#{contrattiHandler.contratto.cliente.nomeCognome}</b>
+			<li>la ditta <b>Simonelli Moto s.a.s.</b> cede in locazione a <b>#{contrattiHandler.contratto.cliente.nomeCognome}</b>
 			lo scooter <b>#{contrattiHandler.contratto.scooter.marcaModello}</b>
 			avente targa <b>#{contrattiHandler.contratto.scooter.targa}</b>
-			intestato a Simonelli Moto SAS
+			intestato a Simonelli Moto s.a.s.
 			<p></p>
 			</li>
-			<li>il signor #{contrattiHandler.contratto.cliente.nomeCognome}
-			prende in locazione lo scooter <b>#{contrattiHandler.contratto.scooter.marcaModello}</b>
-			avente targa <b>#{contrattiHandler.contratto.scooter.targa}</b>, dal
-			giorno/ore: #{contrattiHandler.contratto.dataInit}, al giorno/ore:
-			#{contrattiHandler.contratto.dataEnd}, accettando tutte le clausole
-			del presente contratto, nessuna esclusa od eccettuata e dichiarando
-			espressamente di ritirare lo scooter in ottime condizioni di uso e
-			manutanezione, sia di carrozzeria che di meccanica, con tutte le
-			parti in perfetto ordine ed in tale stato si impegna ad osservare la
-			diligenza del buon padre di famiglia, nell'uso della cosa e nei limiti
-			stabiliti dal presente contratto ed a restituire lo scooter alla
-			scadenza del contratto.
+			<li>il/la sig./sig.ra
+			#{contrattiHandler.contratto.cliente.nomeCognome} prende in locazione
+			lo scooter <b>#{contrattiHandler.contratto.scooter.marca}
+			#{contrattiHandler.contratto.scooter.modello}</b> avente targa <b>#{contrattiHandler.contratto.scooter.targa}</b>,
+			dal giorno/ore: <b><h:outputText value=" " /><h:outputText
+				value="#{contrattiHandler.contratto.dataInit}">
+				<f:convertDateTime locale="IT" type="date"
+					pattern="dd-MM-yyyy hh:mm" />
+			</h:outputText></b>, al giorno/ore: <b><h:outputText value=" " /><h:outputText
+				value="#{contrattiHandler.contratto.dataEnd}">
+				<f:convertDateTime locale="IT" type="date"
+					pattern="dd-MM-yyyy hh:mm" />
+			</h:outputText></b>, accettando tutte le clausole del presente contratto, nessuna
+			esclusa od eccettuata e dichiarando espressamente di ritirare lo
+			scooter in ottime condizioni di uso e manutenzione, sia di
+			carrozzeria che di meccanica, con tutte le parti in perfetto ordine,
+			ed in tale stato si impegna ad osservare la diligenza del buon padre
+			di famiglia, nell'uso della cosa e nei limiti stabiliti dal presente
+			contratto ed a restituire lo scooter alla scadenza del contratto.
 			<p></p>
 			</li>
 			<li>lo scooter deve essere restituito alla predetta scadenza
 			nello stesso stato in cui viene consegnato al locatario.
 			<p></p>
 			</li>
-			<li>lo scooter verrà restituito entro il giorno/ore <b>
-			#{contrattiHandler.contratto.dataEnd}</b>, presso Simonelli Moto e dovrà
-			essere riconsegnato con il pieno del carburante o con il livello con
-			cui lo stesso viene consegnato al locatario; diversamente verrà
-			addebitato al locatario un supplemento di euro 10 per il servizio di
-			rifornimento oltre al carburante mancante
+			<li>lo scooter verrà restituito entro il giorno/ore<b><h:outputText
+				value=" " /> <h:outputText
+				value="#{contrattiHandler.contratto.dataEnd}">
+				<f:convertDateTime locale="IT" type="date"
+					pattern="dd-MM-yyyy hh:mm" />
+			</h:outputText></b>, presso Simonelli Moto s.a.s. e dovrà essere riconsegnato con il
+			pieno del carburante o con il livello con cui lo stesso viene
+			consegnato al locatario; diversamente verrà addebitato al locatario
+			un supplemento di euro 10 per il servizio di rifornimento oltre al
+			carburante mancante
 			<p></p>
 			</li>
 			<li>è prevista una tolleranza massima di 59 minuti nella
@@ -80,60 +91,93 @@
 			ogni giorno di ritardo
 			<p></p>
 			</li>
-			<li>il signor Mario Rossi lascia la somma di euro
-			#{contrattiHandler.contratto.totale}, a titolo di saldo per l'importo
-			dovuto
+			<li>il/la sig./sign.ra
+			#{contrattiHandler.contratto.cliente.nomeCognome} lascia la somma di
+			euro #{contrattiHandler.contratto.totale}, a titolo di saldo per
+			l'importo dovuto, così ripartita:
+			<table>
+				<tr>
+					<td style="width: 50px;"></td>
+					<td>Importo Iniziale: </td>
+					<td>euro #{contrattiHandler.contratto.importoIniziale}</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Eventuale sconto:</td>
+					<td>#{contrattiHandler.contratto.sconto} %</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Secondo Casco:</td>
+					<td>euro #{contrattiHandler.contratto.cascoExtra}</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Sotto Casco:</td>
+					<td>euro #{contrattiHandler.contratto.importoSottoCasco}</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Importo Caparra:</td>
+					<td>euro #{contrattiHandler.contratto.importoCaparra}</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>Totale:</td>
+					<td>euro #{contrattiHandler.contratto.totale}</td>
+				</tr>
+			</table>
 			<p></p>
 			</li>
 			<li>le tariffe e condizioni della locazione del mezzo:
 			<table>
 				<tr>
-					<td style="width: 50px;">         </td>
+					<td style="width: 50px;"></td>
 					<td>I giorno:</td>
 					<td>euro #{contrattiHandler.contratto.scooter.tariffa.d1}</td>
 				</tr>
 				<tr>
-					<td>         </td>
+					<td></td>
 					<td>II giorno:</td>
 					<td>euro #{contrattiHandler.contratto.scooter.tariffa.d2}</td>
 				</tr>
 				<tr>
-					<td>         </td>
+					<td></td>
 					<td>III giorno:</td>
 					<td>euro #{contrattiHandler.contratto.scooter.tariffa.d3}</td>
 				</tr>
 				<tr>
-					<td>         </td>
+					<td></td>
 					<td>IV giorno:</td>
 					<td>euro #{contrattiHandler.contratto.scooter.tariffa.d4}</td>
 				</tr>
 				<tr>
-					<td>         </td>
+					<td></td>
 					<td>V giorno:</td>
 					<td>euro #{contrattiHandler.contratto.scooter.tariffa.d5}</td>
 				</tr>
 				<tr>
-					<td>         </td>
+					<td></td>
 					<td>7 giorni:</td>
 					<td>euro #{contrattiHandler.contratto.scooter.tariffa.d7}</td>
 				</tr>
 				<tr>
-					<td>         </td>
+					<td></td>
 					<td>30 giorni:</td>
 					<td>euro #{contrattiHandler.contratto.scooter.tariffa.d4}</td>
 				</tr>
 				<tr>
-					<td>         </td>
+					<td></td>
 					<td>1 giorno extra:</td>
 					<td>euro #{contrattiHandler.contratto.scooter.tariffa.d4}</td>
 				</tr>
 				<tr>
-					<td>         </td>
+					<td></td>
 					<td>numero max Km:</td>
 					<td>#{contrattiHandler.contratto.scooter.tariffa.maxKm}</td>
 				</tr>
 				<tr>
-					<td>         </td>
+					<td></td>
 					<td>costo per km extra:</td>
 					<td>euro #{contrattiHandler.contratto.scooter.tariffa.costoKm}</td>
 				</tr>
