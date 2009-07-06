@@ -32,6 +32,10 @@
 
 					<a:fieldView id="kmIniziali" label="KM Iniziali:"
 						fieldName="kmIniziali" entity="#{contrattiHandler.contratto}" />
+
+					<a:fieldView id="kmMax" label="KM Max" fieldName="maxKm"
+						entity="#{contrattiHandler.contratto.scooter.tariffa}" />
+
 				</h:panelGrid>
 				<a4j:region id="r1toa2">
 					<h:panelGrid columns="2">
@@ -74,29 +78,62 @@
 					<a:fieldView id="numDays" label="Numero di giorni:"
 						fieldName="numDays" entity="#{contrattiHandler}" />
 
-					<a:fieldView id="sconto" label="Sconto su Importo Iniziale:"
-						fieldName="sconto" entity="#{contrattiHandler.contratto}" />
-
 					<a:fieldView id="importoIniziale" label="Importo Iniziale:"
 						fieldName="importoIniziale" entity="#{contrattiHandler.contratto}" />
 
-					<a:fieldView id="numDaysExtra" label="Numero di giorni extra:"
-						fieldName="numDaysExtra" entity="#{contrattiHandler}" />
-
-					<a:fieldView id="extra" label="Importo Extra:" fieldName="extra"
-						entity="#{contrattiHandler.contratto}" required="false" />
-
-					<a:fieldView id="benzinaExtraV" label="Importo Benzina Extra:"
-						fieldName="benzinaExtra" entity="#{contrattiHandler.contratto}" />
-
-					<a:fieldView id="kmExtraV" label="KM Extra(*):" fieldName="kmExtra"
-						entity="#{contrattiHandler.contratto}" />
-
-					<a:fieldView id="importokmExtraV" label="Importo KM Extra(*):"
-						fieldName="importokmExtra" entity="#{contrattiHandler.contratto}" />
+					<a:fieldView id="sconto" label="Sconto su Importo Iniziale:"
+						fieldName="sconto" entity="#{contrattiHandler.contratto}" />
 
 					<a:fieldView id="cascoExtra" label="Secondo Casco:"
 						fieldName="cascoExtra" entity="#{contrattiHandler.contratto}" />
+
+					<a:fieldView id="importoSottoCasco" label="Sotto Casco:"
+						fieldName="importoSottoCasco"
+						entity="#{contrattiHandler.contratto}" />
+
+					<a:fieldView id="importoCaparra" label="Importo Caparra:"
+						fieldName="importoCaparra" entity="#{contrattiHandler.contratto}" />
+
+					<a:fieldView id="totale" label="Somma Versata Inizialmente:"
+						fieldName="totaleParziale" entity="#{contrattiHandler.contratto}" />
+
+					<h:outputText value="-------------" />
+					<h:outputText value="-------------" />
+
+					<a:fieldView id="numDaysExtra" label="Numero giorni extra:"
+						fieldName="numDaysExtra" entity="#{contrattiHandler}" />
+						
+					<a:fieldView id="costoDayEx2" label="Costo Giorno Extra" fieldName="d1ex"
+						entity="#{contrattiHandler.contratto.scooter.tariffa}" />
+
+					<a:fieldView id="extra" label="Importo Per Giorni Extra:"
+						fieldName="extra" entity="#{contrattiHandler.contratto}"
+						required="false" />
+
+					<h:outputText value="-------------" />
+					<h:outputText value="-------------" />
+
+					<a:fieldView id="kmMax2" label="KM Max" fieldName="maxKm"
+						entity="#{contrattiHandler.contratto.scooter.tariffa}" />
+						
+					<a:fieldView id="costoKm2" label="Costo Km Extra" fieldName="costoKm"
+						entity="#{contrattiHandler.contratto.scooter.tariffa}" />
+
+					<a:fieldView id="kmIniziali2" label="KM Iniziali:"
+						fieldName="kmIniziali" entity="#{contrattiHandler.contratto}" />
+
+					<a:fieldView id="kmFinali2" label="KM Finali:" fieldName="kmFinali"
+						entity="#{contrattiHandler.contratto}" />
+
+					<a:fieldView id="kmExtraV2" label="Numero KM Extra:"
+						fieldName="kmExtra" entity="#{contrattiHandler.contratto}" />
+
+					<a:fieldView id="importokmExtraV2" label="Importo KM Extra(*):"
+						fieldName="importokmExtra" entity="#{contrattiHandler.contratto}" />
+
+					<h:outputText value="-------------" />
+					<h:outputText value="-------------" />
+
 
 					<a:fieldView id="importoRitiroMezzoV" label="Importo Ritiro Mezzo:"
 						fieldName="importoRitiroMezzo"
@@ -105,8 +142,23 @@
 					<a:fieldView id="importoDanniV" label="Importo Danni:"
 						fieldName="importoDanni" entity="#{contrattiHandler.contratto}" />
 
-					<a:fieldView id="totale" label="Totale:" fieldName="totale"
+					<a:fieldView id="benzinaExtraV" label="Importo Benzina Extra:"
+						fieldName="benzinaExtra" entity="#{contrattiHandler.contratto}" />
+
+					<h:outputText value="-------------" />
+					<h:outputText value="-------------" />
+
+					<a:fieldView id="totaleSomma" label="Somma Totale:" fieldName="totale"
 						entity="#{contrattiHandler.contratto}" />
+
+					<h:outputText value="-------------" />
+					<h:outputText value="-------------" />
+
+					<a:fieldView id="totaleChiusura"
+						label="Totale dovuto per Chiusura Contratto:"
+						fieldName="totaleChiusura" entity="#{contrattiHandler.contratto}" />
+
+
 				</h:panelGrid>
 			</rich:panel>
 
