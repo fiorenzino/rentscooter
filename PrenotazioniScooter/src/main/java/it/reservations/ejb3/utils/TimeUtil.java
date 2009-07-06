@@ -16,7 +16,7 @@ public class TimeUtil {
 					- cal1.getTimeInMillis()) / (new Long(24 * 60 * 60 * 1000))
 
 			);
-			return numDay + 1;
+			return numDay;
 		} else {
 			return new Long(0);
 		}
