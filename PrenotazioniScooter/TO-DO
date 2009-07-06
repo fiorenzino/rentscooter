@@ -1,0 +1,15 @@
+1) gestione comune e provincia EE (provincia e comune-campo textarea)
+
+
+2) patente num telefonici: se vuoti scrivere n.d
+
+3) gestione km extra: sono giornalieri e non totali!!! modifica il meccanismo di calcolo
+
+4) escludi caparra nel totale finale
+
+5) km iniziali recuperali dall'ultimo contratto sottoscritto per scooter
+
+6) genera pagina con caselle vuote per raccolta informazioni su chiusura contratto:
+raccolta km/danni/pieno etc
+
+7)stampa pdf contratto finale (dati economici)
