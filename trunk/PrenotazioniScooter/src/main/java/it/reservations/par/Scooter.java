@@ -76,7 +76,7 @@ public class Scooter implements Serializable {
 
 	@Transient
 	public String getMarcaModello() {
-		return nome + "-" + marca + " " + modello;
+		return nome + " - " + marca + " " + modello;
 	}
 
 	public void setMarcaModello(String marcaModello) {

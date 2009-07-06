@@ -60,6 +60,8 @@ public class Contratto implements Serializable {
 	}
 
 	public Date getDataInit() {
+		if (dataInit == null)
+			dataInit = new Date();
 		return dataInit;
 	}
 
@@ -68,6 +70,8 @@ public class Contratto implements Serializable {
 	}
 
 	public Date getDataEnd() {
+		if (dataEnd == null)
+			dataEnd = getDataInit();
 		return dataEnd;
 	}
 
@@ -118,8 +122,15 @@ public class Contratto implements Serializable {
 	public Float getExtra() {
 		if (extra == null)
 			extra = new Float(0);
-		Long extraG = TimeUtil.getDiffDays(getDataEnd(), getDataRiconsegna());
-		return extraG * getScooter().getTariffa().getD1ex();
+		try {
+			Long extraG = TimeUtil.getDiffDays(getDataEnd(),
+					getDataRiconsegna());
+			return extraG * getScooter().getTariffa().getD1ex();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new Float(0);
 	}
 
 	public void setExtra(Float extra) {
@@ -128,22 +139,28 @@ public class Contratto implements Serializable {
 
 	@Transient
 	public Float getTotale() {
-		if (getSconto() != 0) {
-			return (getImportoIniziale() - (getSconto() * getImportoIniziale() / new Float(
-					100)))
-					+ getImportoFinale()
-					+ getExtra()
-					+ getBenzinaExtra()
-					+ getCascoExtra()
-					+ getImportokmExtra()
-					+ getImportoCaparra()
-					+ getImportoDanni()
+		try {
+			if (getSconto() != 0) {
+				return (getImportoIniziale() - (getSconto()
+						* getImportoIniziale() / new Float(100)))
+						+ getImportoFinale()
+						+ getExtra()
+						+ getBenzinaExtra()
+						+ getCascoExtra()
+						+ getImportokmExtra()
+						+ getImportoCaparra()
+						+ getImportoDanni()
+						+ getImportoRitiroMezzo() + getImportoSottoCasco();
+			}
+			return getImportoIniziale() + getImportoFinale() + getExtra()
+					+ getBenzinaExtra() + getCascoExtra() + getImportokmExtra()
+					+ getImportoCaparra() + getImportoDanni()
 					+ getImportoRitiroMezzo() + getImportoSottoCasco();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return getImportoIniziale() + getImportoFinale() + getExtra()
-				+ getBenzinaExtra() + getCascoExtra() + getImportokmExtra()
-				+ getImportoCaparra() + getImportoDanni()
-				+ getImportoRitiroMezzo() + getImportoSottoCasco();
+		return new Float(0);
+
 	}
 
 	public void setTotale(Float totale) {
@@ -169,7 +186,7 @@ public class Contratto implements Serializable {
 
 	@Transient
 	public Float getTotaleChiusura() {
-		return getTotale() - getTotaleParziale();
+		return getTotale() - getTotaleParziale() ;
 	}
 
 	public void setTotaleChiusura(Float totaleChiusura) {
@@ -217,6 +234,8 @@ public class Contratto implements Serializable {
 	}
 
 	public Date getDataRiconsegna() {
+		if (dataRiconsegna == null)
+			dataRiconsegna = getDataEnd();
 		return dataRiconsegna;
 	}
 
