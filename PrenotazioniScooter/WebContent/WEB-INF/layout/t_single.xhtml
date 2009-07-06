@@ -22,8 +22,11 @@
 	<ui:include src="menu.xhtml" />
 </ui:insert></div>
 <div id="contentarea"><h:outputText
-	value="#{propertiesHandler.currentPage}" escape="false" /><ui:insert
-	name="content">
+	value="#{propertiesHandler.currentPage}" escape="false" /> <a4j:status>
+	<f:facet name="start">
+		<h:graphicImage value="/images/ajax_process.gif" />
+	</f:facet>
+</a4j:status><ui:insert name="content">
 	<ui:include src="content.xhtml" />
 </ui:insert>
 <div id="footer">

@@ -7,18 +7,15 @@
 	xmlns:rich="http://richfaces.org/rich">
 
 <ui:composition template="/WEB-INF/layout/t_single.xhtml">
-	<ui:define name="title">Calendario</ui:define>
+	<ui:define name="title">Vista Mensile</ui:define>
 	<ui:define name="content">
 		<h2>Vista Mensile</h2>
 		<h:form id="form">
 
 			<rich:panel id="calendario">
 				<h:panelGrid columns="4" width="70%">
-					<f:facet name="header">
-						<h:outputText value="Cerca per Scooter" />
-					</f:facet>
 					<h:panelGroup>
-						<h:outputLabel value="Scooter:" for="idScooter" />
+						<h:outputLabel value="Cerca per scooter:" for="idScooter" />
 						<h:selectOneMenu id="idScooter"
 							value="#{organizerHandler.scooterFilter}">
 							<f:selectItems value="#{scootersHandler.scootersItems}" />

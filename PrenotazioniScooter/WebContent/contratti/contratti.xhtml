@@ -9,19 +9,15 @@
 	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax">
 
 <ui:composition template="/WEB-INF/layout/t_single.xhtml">
-	<ui:define name="title">Gestione Contratti</ui:define>
+	<ui:define name="title">Lista Contratti</ui:define>
 	<ui:define name="content">
-		<p style="align: center;">Gestione Contratti</p>
 		<h:outputText
 			value="#{fn:init('contrattiHandler','it.reservations.par.Contratto', 'cercaContratti')}" />
 		<h:form id="centerForm">
-			<rich:spacer height="30" />
+			
 			<h:panelGrid columns="4" width="70%">
-				<f:facet name="header">
-					<h:outputText value="Cerca Contratti" />
-				</f:facet>
 				<h:panelGroup>
-					<h:outputLabel id="nomeLabel1" value="Cognome:" for="nome1" />
+					<h:outputLabel id="nomeLabel1" value="Cerca per cognome:" for="nome1" />
 					<h:inputText id="nome1" value="#{clientiHandler.ricerca.cognome}"
 						size="15">
 						<a4j:support event="onkeyup" ajaxSingle="true"
@@ -29,7 +25,7 @@
 					</h:inputText>
 				</h:panelGroup>
 				<h:panelGroup>
-					<h:outputLabel id="apertoLabel1" value="Aperto:" for="aperto1" />
+					<h:outputLabel id="apertoLabel1" value="Aperto/Chiuso:" for="aperto1" />
 					<h:selectOneMenu id="aperto1"
 						value="#{contrattiHandler.ricerca.aperto}">
 						<f:selectItems value="#{propertiesHandler.statusItems}" />

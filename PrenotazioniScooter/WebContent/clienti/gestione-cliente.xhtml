@@ -11,7 +11,7 @@
 <ui:composition template="/WEB-INF/layout/t_single.xhtml">
 	<ui:define name="title">Gestione Clienti</ui:define>
 	<ui:define name="content">
-		<p style="align: center;">Gestione Clienti</p>
+		<h2>Gestione Clienti</h2>
 		<h:form id="form">
 			<rich:panel id="prenotazioneScooter">
 				<h:panelGrid columns="2">
@@ -44,6 +44,17 @@
 						entity="#{clientiHandler.cliente}" required="true"
 						type="inputTextArea" />
 
+
+					<a:field id="telefono" label="Telefono(*):" fieldName="telefono"
+						entity="#{clientiHandler.cliente}" required="false" />
+
+					<a:field id="cellulare" label="Cellulare(*):" fieldName="cellulare"
+						entity="#{clientiHandler.cliente}" required="false" />
+
+					<a:field id="email" label="Email(*):" fieldName="email"
+						entity="#{clientiHandler.cliente}" required="false" />
+
+
 					<a:field id="nazioneuserHandler" label="Nazione di residenza(*):"
 						type="selOneM" entityId="#{clientiHandler.cliente}"
 						fieldName="nazione" entityList="#{propertiesHandler}"
@@ -55,19 +66,20 @@
 							label="Provincia di residenza(*):" type="selOneAjax"
 							entityId="#{clientiHandler.cliente}" fieldName="provincia"
 							fieldNameList="#{propertiesHandler.provinceList}"
-							reRender="cityuserHandler, capuserHandler" required="true" />
+							reRender="cityuserPanel"
+							required="true" />
 					</h:panelGrid>
 				</a4j:region>
 				<a4j:region>
-					<h:panelGrid columns="2">
+					<h:panelGrid columns="2" id="cityuserPanel">
 						<a:field id="cityuserHandler" label="Citta di residenza(*):"
 							type="selOneM_Aitems" entityId="#{clientiHandler.cliente}"
 							fieldName="city" fieldNameList="#{propertiesHandler.comuniItems}"
-							reRender="capuserHandler" required="true"
+							reRender="cityuserPanel" required="true"
 							rendered="#{clientiHandler.cliente.provincia != '109'}" />
 
 						<a:field id="city2EE" label="Citta di residenza(*):"
-							fieldName="city" entity="#{clientiHandler.cliente}"
+							fieldName="cityName" entity="#{clientiHandler.cliente}"
 							required="false"
 							rendered="#{clientiHandler.cliente.provincia == '109'}" />
 
@@ -98,27 +110,22 @@
 							label="Provincia di Nascita(*):" type="selOneAjax"
 							entityId="#{clientiHandler.cliente}" fieldName="provinciaNascita"
 							fieldNameList="#{propertiesHandler.provinceList}"
-							reRender="cityNascitauserHandler" required="true" />
+							reRender="cityNascitaPanel" required="true" />
 					</h:panelGrid>
 				</a4j:region>
 				<a4j:region>
-					<h:panelGrid columns="2">
+					<h:panelGrid columns="2" id="cityNascitaPanel">
 						<a:field id="cityNascitauserHandler" label="Citta di Nascita(*):"
 							type="selOneM_Aitems" entityId="#{clientiHandler.cliente}"
 							fieldName="cityNascita"
+							rendered="#{clientiHandler.cliente.provinciaNascita != '109'}"
 							fieldNameList="#{propertiesHandler.comuniItems2}" required="true" />
+
+						<a:field id="cityNascita2EE" label="Citta di Nascita(*):"
+							fieldName="cityNascitaName" entity="#{clientiHandler.cliente}"
+							rendered="#{clientiHandler.cliente.provinciaNascita == '109'}" />
 					</h:panelGrid>
 				</a4j:region>
-				<h:panelGrid columns="2">
-					<a:field id="telefono" label="Telefono(*):" fieldName="telefono"
-						entity="#{clientiHandler.cliente}" required="false" />
-
-					<a:field id="cellulare" label="Cellulare(*):" fieldName="cellulare"
-						entity="#{clientiHandler.cliente}" required="false" />
-
-					<a:field id="email" label="Email(*):" fieldName="email"
-						entity="#{clientiHandler.cliente}" required="false" />
-				</h:panelGrid>
 			</rich:panel>
 			<rich:spacer height="30" />
 			<div><h:commandButton id="submitAdd"

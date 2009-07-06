@@ -9,12 +9,11 @@
 	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax">
 
 <ui:composition template="/WEB-INF/layout/t_single.xhtml">
-	<ui:define name="title">Gestione Contratti</ui:define>
+	<ui:define name="title">Scheda Contratto</ui:define>
 	<ui:define name="content">
-		<p style="align: center;">Gestione Contratti</p>
 		<h:form id="form">
 			<rich:panel id="prenotazioneScooter">
-				<h:panelGrid columns="2" id="editContent">
+				<h:panelGrid columns="2" id="editContent" columnClasses="80,100">
 					<a:fieldView id="Cliente" label="Cliente:"
 						entity="#{contrattiHandler.contratto.cliente}"
 						fieldName="nomeCognome" />
@@ -59,7 +58,9 @@
 					<a:fieldView id="aperto" label="Contratto Aperto?:"
 						fieldName="aperto" entity="#{contrattiHandler.contratto}"
 						type="boolean" />
+				</h:panelGrid>
 
+				<h:panelGrid columns="3" id="editCommand">
 
 					<h:commandLink id="chiudiContratto"
 						action="/contratti/chiusura-contratto.xhtml"
@@ -68,7 +69,15 @@
 
 					<h:commandLink id="stampaContratto" target="_blank"
 						action="/print/contratto.xhtml" value="Stampa Contratto" />
+
+					<h:commandLink id="delUpdate"
+						action="#{contrattiHandler.delContratto}"
+						value="Elimina Contratto"
+						rendered="#{contrattiHandler.contratto.aperto}" />
+
 				</h:panelGrid>
+
+
 			</rich:panel>
 
 		</h:form>

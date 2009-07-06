@@ -9,12 +9,57 @@
 	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax">
 
 <ui:composition template="/WEB-INF/layout/t_single.xhtml">
-	<ui:define name="title">Gestione Contratti</ui:define>
+	<ui:define name="title">Gestione Contratto</ui:define>
 	<ui:define name="content">
-		<p style="align: center;">Gestione Contratti</p>
+		<h2>Gestione Contratto</h2>
+		<h:form id="formCerca">
+			<rich:panel id="prenotazioneScooter">
+				<a:field id="scooter" label="Cilindrata:" type="selOneM"
+					entityId="#{testHandler}" fieldName="cil"
+					entityList="#{scootersHandler}" fieldNameList="cilindrateItems" />
+
+				<a:field id="dataInit" label="Data Inizio(*):" fieldName="dal"
+					type="calendar" entity="#{testHandler}" required="true" />
+
+				<a:field id="dataEnd" label="Data Riconsegna(*):" fieldName="al"
+					type="calendar" entity="#{testHandler}" required="true" />
+
+				<a4j:commandButton id="cercaButton"
+					action="#{testHandler.aggColonne}" value="cerca" reRender="cerca"
+					immediate="false" />
+
+			</rich:panel>
+		</h:form>
+		<h:form id="form2Cerca">
+			<rich:panel id="cerca">
+				<rich:dataTable id="colTable" value="#{testHandler.model}" var="res">
+					<f:facet name="header">
+						<h:outputText value="Test Prenotazioni"></h:outputText>
+					</f:facet>
+					<rich:columns value="#{testHandler.colonne}" var="col" index="ind"
+						begin="#{testHandler.begin}" end="#{testHandler.end}">
+						<f:facet name="header">
+							<h:outputText value="#{col}" />
+						</f:facet>
+						<a4j:region>
+							<a4j:commandLink value="#{res[ind].nome}"
+								rendered="#{ind == '0'}" reRender="prenotazioneScooter,cerca"
+								immediate="true">
+								<a4j:actionparam name="id" value="#{res[ind].id}"
+									assignTo="#{contrattiHandler.contratto.scooter.id}" />
+							</a4j:commandLink>
+						</a4j:region>
+						<h:outputText styleClass="#{res[ind].styleClass}"
+							value="#{res[ind].symbol}" rendered="#{ind != '0'}" />
+					</rich:columns>
+				</rich:dataTable>
+
+			</rich:panel>
+		</h:form>
 		<h:form id="form">
 			<rich:panel id="prenotazioneScooter">
 				<a4j:region id="r1toa2">
+					<rich:messages />
 					<h:panelGrid columns="2">
 						<a:field id="cliente" label="Cliente(*):" type="selOneM"
 							entityId="#{contrattiHandler.contratto.cliente}" fieldName="id"
@@ -29,16 +74,21 @@
 
 
 						<a:field id="dataInit" label="Data Inizio(*):"
-							fieldName="dataInit" type="calendar"
-							entity="#{contrattiHandler.contratto}" required="true" />
+							fieldName="dataInit" type="dateTime"
+							entity="#{contrattiHandler.contratto}" required="true"
+							datePattern="d/M/yy HH:mm" />
 
 						<a:field id="dataEnd" label="Data Riconsegna(*):"
-							fieldName="dataEnd" type="calendar"
+							fieldName="dataEnd" type="dateTime"
 							entity="#{contrattiHandler.contratto}" required="true" />
+
+						<a:field id="kmIniziali" label="KM Iniziali(*):"
+							fieldName="kmIniziali" entity="#{contrattiHandler.contratto}"
+							required="true" />
 					</h:panelGrid>
 				</a4j:region>
 				<h:panelGrid columns="2">
-					<a:field id="note" label="Note(*):" fieldName="note"
+					<a:field id="note" label="Note:" fieldName="note"
 						entity="#{contrattiHandler.contratto}" required="false"
 						type="inputTextArea" />
 

@@ -105,7 +105,6 @@ THIS TEXT WILL BE REMOVED
 						required="${required}" size="#{size}" />
 				</c:when>
 				<c:when test='${type == "linkPopup"}'>
-
 					<h:outputLabel id="${id}Label" value="${label1}" for="#{id}" />
 					<h:inputText id="#{id}" value="#{entity[fieldName]}"
 						required="${required}" size="#{size}" />
@@ -119,6 +118,14 @@ THIS TEXT WILL BE REMOVED
 						datePattern="d/M/yyyy" enableManualInput="true"
 						showApplyButton="false" style="width:200px"
 						converterMessage="Data non valida!"
+						requiredMessage="Campo obbligatorio!" />
+				</c:when>
+				<c:when test='${type == "dateTime"}'>
+					<h:outputLabel id="${id}Label" value="${label}" for="#{id}" />
+					<rich:calendar value="#{entity[fieldName]}" id="#{id}"
+						style="width:200px" popup="true" showInput="true"
+						enableManualInput="true" datePattern="d/M/yy HH:mm"
+						showApplyButton="false" converterMessage="Data non valida!"
 						requiredMessage="Campo obbligatorio!" />
 				</c:when>
 				<c:when test='${type == "checkbox"}'>
