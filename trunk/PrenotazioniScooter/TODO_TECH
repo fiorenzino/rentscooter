@@ -1,0 +1,10 @@
+
+
+add @EJB for use in web beans ejb3 components
+
+
+add Event to update Datamodel
+
+use generics event for update province/comuni
+
+use log - no syso
