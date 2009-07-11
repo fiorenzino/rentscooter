@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/WB"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/rich330ga"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/WB10"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/RICH"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JBOSS51CR1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JBO5GA"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JSF12"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/richfaces-api-3.3.0.GA.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/richfaces-impl-3.3.0.GA.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/richfaces-ui-3.3.0.GA.jar"/>
+	<classpathentry kind="lib" path="lib/deploy/smartflower.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/iText-2.0.8.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/core-renderer.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-6-sun-1.6.0.14"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
