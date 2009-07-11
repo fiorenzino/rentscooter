@@ -1,4 +1,4 @@
-<project basedir="." name="prenotazioniScooter" default="ear_dir">
+<project basedir="." name="gestione-noleggi" default="ear_dir">
 
 	<property name="example.name" value="prenotazioniScooter" />
 	<property environment="env" />
@@ -76,6 +76,7 @@
 				<exclude name="**/ejb3/**/*.class" />
 				<exclude name="**/par/**/*.class" />
 			</classes>
+
 			<fileset dir="${web.dir}" />
 		</war>
 	</target>
