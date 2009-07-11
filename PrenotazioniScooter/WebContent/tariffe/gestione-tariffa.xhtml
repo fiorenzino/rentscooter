@@ -13,8 +13,8 @@
 	<ui:define name="content">
 		<h2>Gestione Tariffa</h2>
 		<h:form id="form">
-
 			<rich:panel id="prenotazioneScooter">
+				<rich:messages />
 				<h:panelGrid columns="2" id="editContent">
 					<a:field id="Nome" label="Nome(*):" fieldName="nome"
 						entity="#{tariffeHandler.tariffa}" required="true" />

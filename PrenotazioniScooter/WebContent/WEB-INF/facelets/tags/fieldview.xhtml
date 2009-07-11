@@ -41,7 +41,7 @@ THIS TEXT WILL BE REMOVED
 				<c:when test='${type == "outputDateTime"}'>
 					<h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
 					<h:outputText id="${id}" value="${entity[fieldName]}">
-						<f:convertDateTime type="both" dateStyle="short" />
+						<f:convertDateTime type="both" pattern="dd/M/yy HH:mm" />
 					</h:outputText>
 				</c:when>
 				<c:when test='${type == "link"}'>
@@ -68,17 +68,17 @@ THIS TEXT WILL BE REMOVED
 					<h:outputText id="${id}" value="#{fn:getContactType(fieldName)}" />
 				</c:when>
 				<c:when test='${type == "htmlText"}'>
-					<div id="#{id}">
-					<h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
-					<h:outputText value="#{fn:nl2br(entity[fieldName])}" escape="false" />
-					</div>
+					<div id="#{id}"><h:outputLabel id="#{id}Label"
+						value="${label}" for="${id}" /> <h:outputText
+						value="#{fn:nl2br(entity[fieldName])}" escape="false" /></div>
 				</c:when>
 				<c:when test='${type == "boolean"}'>
 					<h:outputLabel id="#{id}Label" value="${label}" for="${id}" />
 					<h:outputText id="${id}si" value="SI"
-						rendered="#{entity[fieldName] == true}" /> <h:outputText
-						id="${id}no" value="NO" rendered="#{entity[fieldName] == false}" />
-					
+						rendered="#{entity[fieldName] == true}" />
+					<h:outputText id="${id}no" value="NO"
+						rendered="#{entity[fieldName] == false}" />
+
 				</c:when>
 			</c:choose>
 		</c:when>

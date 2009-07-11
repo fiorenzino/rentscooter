@@ -14,10 +14,11 @@
 		<h2>Gestione Scooter</h2>
 		<h:form id="form">
 			<rich:panel id="prenotazioneScooter">
+				<rich:messages />
 				<h:panelGrid columns="2" id="editContent">
 					<a:field id="nome" label="Nome:" fieldName="nome"
 						entity="#{scootersHandler.scooter}" required="false" />
-						
+
 					<a:field id="Marca" label="Marca(*):" fieldName="marca"
 						entity="#{scootersHandler.scooter}" required="true" />
 
@@ -43,6 +44,9 @@
 						fieldName="scadenzaAssicurazione"
 						entity="#{scootersHandler.scooter}" required="false"
 						type="calendar" />
+
+					<a:field id="kmFatti" label="km Fatti:" fieldName="kmFatti"
+						entity="#{scootersHandler.scooter}" required="false" />
 				</h:panelGrid>
 			</rich:panel>
 			<rich:spacer height="30" />

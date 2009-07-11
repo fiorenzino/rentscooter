@@ -11,7 +11,7 @@
 <ui:composition template="/WEB-INF/layout/t_single.xhtml">
 	<ui:define name="title">Gestione Clienti</ui:define>
 	<ui:define name="content">
-		<h2>Gestione Clienti</h2>
+		<h2>Gestione Cliente</h2>
 		<h:form id="form">
 			<rich:panel id="prenotazioneScooter">
 				<h:panelGrid columns="2">
@@ -40,11 +40,6 @@
 						fieldName="rilasciataDa" entity="#{clientiHandler.cliente}"
 						required="false" />
 
-					<a:field id="indirizzo" label="Indirizzo(*):" fieldName="indirizzo"
-						entity="#{clientiHandler.cliente}" required="true"
-						type="inputTextArea" />
-
-
 					<a:field id="telefono" label="Telefono(*):" fieldName="telefono"
 						entity="#{clientiHandler.cliente}" required="false" />
 
@@ -54,6 +49,9 @@
 					<a:field id="email" label="Email(*):" fieldName="email"
 						entity="#{clientiHandler.cliente}" required="false" />
 
+					<a:field id="indirizzo" label="Indirizzo Residenza(*):"
+						fieldName="indirizzo" entity="#{clientiHandler.cliente}"
+						required="true" type="inputTextArea" />
 
 					<a:field id="nazioneuserHandler" label="Nazione di residenza(*):"
 						type="selOneM" entityId="#{clientiHandler.cliente}"
@@ -66,8 +64,7 @@
 							label="Provincia di residenza(*):" type="selOneAjax"
 							entityId="#{clientiHandler.cliente}" fieldName="provincia"
 							fieldNameList="#{propertiesHandler.provinceList}"
-							reRender="cityuserPanel"
-							required="true" />
+							reRender="cityuserPanel" required="true" />
 					</h:panelGrid>
 				</a4j:region>
 				<a4j:region>

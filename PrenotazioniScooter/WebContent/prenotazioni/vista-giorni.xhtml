@@ -11,51 +11,50 @@
 <ui:composition template="/WEB-INF/layout/t_single.xhtml">
 	<ui:define name="title">Gestione Prenotazioni</ui:define>
 	<ui:define name="content">
-		<h2>CERCA PER COLONNE</h2>
-		<h:outputText
-			value="#{fn:init('prenotazioniHandler','it.reservations.par.Prenotazione', 'cercaPrenotazioni')}" />
-		<h:form id="leftForm">
-			<rich:panel id="vediamo">
+		<h:form id="formCerca">
+			<h2>Vista Per Giorni</h2>
+			<h:commandLink id="vistaMese" action="/prenotazioni/vista-mese.xhtml"
+				value="Vista Mensile" />
 
-				<div>data dal: <rich:calendar id="dataDal"
-					value="#{prenotazioniHandler.ricerca.dal}" popup="true" showInput="true"
-					enableManualInput="true" datePattern="dd/MM/yyyy"
-					showApplyButton="false">
-					<a4j:support event="onchanged" ajaxSingle="true" />
-				</rich:calendar></div>
-				<div>data al: <rich:calendar id="dataAl"
-					value="#{prenotazioniHandler.ricerca.al}" popup="true" showInput="true"
-					enableManualInput="true" datePattern="dd/MM/yyyy"
-					showApplyButton="false">
-					<a4j:support event="onchanged" ajaxSingle="true" />
-				</rich:calendar></div>
-				<h:commandButton id="submit"
-					action="#{prenotazioniHandler.aggModel}" value="Cerca"
-					immediate="false" />
+			<rich:panel id="cercaScooter">
+				<a:field id="scooter" label="Cilindrata:" type="selOneM"
+					entityId="#{contrattiHandler}" fieldName="cil"
+					entityList="#{scootersHandler}" fieldNameList="cilindrateItems" />
+
+				<a:field id="dataInit" label="Data Inizio(*):" fieldName="dataInit"
+					type="dateTime" entity="#{contrattiHandler.contratto}"
+					required="true" />
+
+				<a:field id="dataEnd" label="Data Riconsegna(*):"
+					fieldName="dataEnd" type="dateTime"
+					entity="#{contrattiHandler.contratto}" required="true" />
+
+				<a4j:commandButton id="cercaButton"
+					action="#{contrattiHandler.aggColonne}" value="cerca"
+					reRender="cercaScooterResult, cercaScooter" immediate="false" />
 
 			</rich:panel>
-
-			<rich:panel header="Prenotazioni">
-
-				<rich:dataTable id="colTable" value="#{prenotazioniHandler.model}"
-					var="res">
+		</h:form>
+		<h:form id="form2Cerca">
+			<rich:panel id="cercaScooterResult">
+				<rich:dataTable id="colTable"
+					value="#{contrattiHandler.searchModel}" var="res">
 					<f:facet name="header">
-						<h:outputText value="Prentazioni"></h:outputText>
+						<h:outputText value="Test Prenotazioni"></h:outputText>
 					</f:facet>
-
-					<rich:columns value="#{prenotazioniHandler.columns}" var="columns"
-						index="ind" begin="#{prenotazioniHandler.begin}"
-						end="#{prenotazioniHandler.end}">
-
+					<rich:columns value="#{contrattiHandler.colonne}" var="col"
+						index="ind" begin="#{contrattiHandler.begin}"
+						end="#{contrattiHandler.end}">
 						<f:facet name="header">
-							<h:outputText value="#{columns.header}" />
+							<h:outputText value="#{col}" />
 						</f:facet>
-						<h:outputText value="#{res[ind].scooterName} " />
+						<h:outputText value="#{res[ind].nome}" rendered="#{ind == '0'}" />
+						<h:outputText styleClass="#{res[ind].styleClass}"
+							value="#{res[ind].symbol}" rendered="#{ind != '0'}" />
 					</rich:columns>
 				</rich:dataTable>
 
 			</rich:panel>
-			
 		</h:form>
 	</ui:define>
 </ui:composition>

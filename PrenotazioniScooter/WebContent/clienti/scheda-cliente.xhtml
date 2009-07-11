@@ -36,11 +36,8 @@
 					<a:fieldView id="dataRilasco" label="Data Rilasco:"
 						fieldName="dataRilasco" entity="#{clientiHandler.cliente}" />
 
-					<a:fieldView id="indirizzo" label="Indirizzo:"
+					<a:fieldView id="indirizzo" label="Indirizzo Residenza:"
 						fieldName="indirizzo" entity="#{clientiHandler.cliente}" />
-
-					<a:fieldView id="cap" label="Cap:" fieldName="cap"
-						entity="#{clientiHandler.cliente}" />
 
 					<a:fieldView id="city" label="Comune di residenza:" campo="Comuni"
 						entity="#{clientiHandler.cliente.city}" type="getArrayValue"
@@ -53,6 +50,9 @@
 					<a:fieldView id="province" label="Provincia di residenza:"
 						campo="Province" entity="#{clientiHandler.cliente.provincia}"
 						type="getArrayValue" />
+
+					<a:fieldView id="cap" label="Cap:" fieldName="cap"
+						entity="#{clientiHandler.cliente}" />
 
 					<a:fieldView id="nation" label="Nazione di residenza:"
 						campo="Nazioni" entity="#{clientiHandler.cliente.nazione}"
