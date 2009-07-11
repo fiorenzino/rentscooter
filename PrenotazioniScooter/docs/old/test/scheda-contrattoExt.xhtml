@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://topnet.it/facelets"
+	xmlns:fn="http://topnet.it/functions"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax">
+
+<ui:composition template="/WEB-INF/layout/t_single.xhtml">
+	<ui:define name="title">Gestione Contratti</ui:define>
+	<ui:define name="content">
+		<p style="align: center;">Gestione Contratti</p>
+		<h:form id="form">
+			<rich:panel id="prenotazioneScooter">
+
+				<a:fieldView id="Cliente" label="Cliente:"
+					entityId="#{extTest.contratto.cliente}" fieldName="nomeCognome" />
+
+				<a:fieldView id="scooter" label="Scooter:"
+					entityId="#{extTest.contratto.scooter}"
+					fieldName="marcaModello" />
+
+				<a:fieldView id="dataInit" label="Data Inizio:" fieldName="dataInit"
+					type="outputDate" entity="#{extTest.contratto}" />
+
+				<a:fieldView id="dataEnd" label="Data Riconsegna Prevista:"
+					fieldName="dataEnd" type="outputDate"
+					entity="#{extTest.contratto}" />
+
+				<a:fieldView id="dataEff" label="Data Riconsegna Effettuata:"
+					fieldName="dataRiconsegna" type="outputDate"
+					entity="#{extTest.contratto}" />
+
+				<a:fieldView id="note" label="Note:" fieldName="note"
+					entity="#{extTest.contratto}" />
+
+				<a:fieldView id="importoIniziale" label="Importo Iniziale:"
+					fieldName="importoIniziale" entity="#{extTest.contratto}" />
+
+				<a:fieldView id="sconto" label="Sconto:" fieldName="sconto"
+					entity="#{extTest.contratto}" />
+
+				<a:fieldView id="extra" label="Extra:" fieldName="extra"
+					entity="#{extTest.contratto}" />
+
+				<a:fieldView id="benzinaExtra" label="Benzina Extra:"
+					fieldName="benzinaExtra" entity="#{extTest.contratto}" />
+
+				<a:fieldView id="cascoExtra" label="Secondo Casco:"
+					fieldName="cascoExtra" entity="#{extTest.contratto}" />
+
+				<a:fieldView id="totale" label="Totale:" fieldName="totale"
+					entity="#{extTest.contratto}" />
+
+				<a:fieldView id="aperto" label="Contratto Aperto?:"
+					fieldName="aperto" entity="#{extTest.contratto}" type="boolean" />
+			</rich:panel>
+			<rich:panel id="prenotazioni">
+
+				<a4j:repeat value="#{extTest.contratto.prenotazioni}"
+					var="prenotazione">
+					<h:outputText value="#{prenotazione.id}" /> - 
+					<h:outputText value="#{prenotazione.singleDayName}" /><br/>
+				</a4j:repeat>
+
+
+			</rich:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

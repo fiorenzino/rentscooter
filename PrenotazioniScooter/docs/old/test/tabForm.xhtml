@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://topnet.it/facelets"
+	xmlns:fn="http://topnet.it/functions"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax">
+
+<ui:composition template="/WEB-INF/layout/t_single.xhtml">
+	<ui:define name="title">MultiForm</ui:define>
+	<ui:define name="content">
+		<p style="align: center;">FORM MULTI TAB</p>
+		<h:form id="tabForm">
+			<rich:tabPanel id="tabFormList" switchType="ajax"
+				
+				valueChangeListener="#{tabHandler.valueChanged}">
+				<rich:tab label="Uno">
+					<a:field id="uno" label="Uno:" fieldName="uno"
+						entity="#{tabHandler}" required="false" />
+				</rich:tab>
+				<rich:tab label="Due">
+					<a:field id="due" label="due:" fieldName="due"
+						entity="#{tabHandler}" required="false" />
+				</rich:tab>
+				<rich:tab label="Tre">
+					<a:field id="tre" label="Tre(*):" fieldName="tre"
+						entity="#{tabHandler}" required="false" />
+				</rich:tab>
+			</rich:tabPanel>
+
+			<a4j:jsFunction name="updateForm" reRender="tabFormList"
+				action="#{tabHandler.validateForm}">
+			</a4j:jsFunction>
+
+			<h:commandButton id="submit" action="#{tabHandler.closeForm}"
+				value="Cerca" immediate="false" />
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+</html>
