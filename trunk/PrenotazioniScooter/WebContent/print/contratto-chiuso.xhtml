@@ -90,8 +90,12 @@
 			<h:outputText value="-------------"
 				rendered="#{not contrattiHandler.contratto.aperto}" />
 
-			<a:fieldView id="kmMax2" label="KM Max" fieldName="maxKm"
+			<a:fieldView id="kmMax2" label="KM Max al GG" fieldName="maxKm"
 				entity="#{contrattiHandler.contratto.scooter.tariffa}"
+				rendered="#{not contrattiHandler.contratto.aperto}" />
+
+			<a:fieldView id="kmMaxTot" label="KM Max TOT" fieldName="kmMaxTot"
+				entity="#{contrattiHandler.contratto}"
 				rendered="#{not contrattiHandler.contratto.aperto}" />
 
 			<a:fieldView id="costoKm2" label="Costo Km Extra" fieldName="costoKm"

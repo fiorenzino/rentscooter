@@ -3,8 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-	<display-name>Web Beans Conversations example</display-name>
-	<description>Web Beans Conversations example</description>
+	<display-name>gestione-noleggi</display-name>
+	<description>gestione-noleggi</description>
 	<!-- JSF -->
 
 
@@ -92,7 +92,9 @@
 
 	<filter>
 		<filter-name>RendererFilter</filter-name>
-		<filter-class>it.reservations.web.printer.RendererFilter</filter-class>
+		<filter-class>
+			it.reservations.web.printer.RendererFilter
+		</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>RendererFilter</filter-name>
@@ -124,7 +126,32 @@
 	</context-param>
 
 	<session-config>
-		<session-timeout>10</session-timeout>
+		<session-timeout>30</session-timeout>
 	</session-config>
+
+	<error-page>
+		<exception-type>java.lang.NullPointerException</exception-type>
+		<location>/index.jsf</location>
+	</error-page>
+
+	<error-page>
+		<error-code>500</error-code>
+		<location>/index.jsf</location>
+	</error-page>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/login.jsf</location>
+	</error-page>
+
+	<error-page>
+		<error-code>403</error-code>
+		<location>/login.jsf</location>
+	</error-page>
+
+	<error-page>
+		<error-code>400</error-code>
+		<location>/index.jsf</location>
+	</error-page>
 
 </web-app>

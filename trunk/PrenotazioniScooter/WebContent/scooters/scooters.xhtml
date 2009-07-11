@@ -68,6 +68,9 @@
 
 				<a:column entity="${scooter}" fieldName="scadenzaAssicurazione"
 					sort="${false}" label="Assicurazione" styleClass="${scooter.scadenza}"/>
+					
+				<a:column entity="${scooter}" fieldName="kmFatti"
+					sort="${false}" label="KM_Fatti" styleClass="${scooter.scadenza}"/>
 
 				<a:columnCommand label="Vedi" action="detailScooter"
 					backingBean="${scootersHandler}" />

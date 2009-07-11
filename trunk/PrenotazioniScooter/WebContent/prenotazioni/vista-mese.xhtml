@@ -9,9 +9,10 @@
 <ui:composition template="/WEB-INF/layout/t_single.xhtml">
 	<ui:define name="title">Vista Mensile</ui:define>
 	<ui:define name="content">
-		<h2>Vista Mensile</h2>
 		<h:form id="form">
-
+			<h2>Vista Mensile</h2>
+			<h:commandLink id="vistaGiorni"
+				action="/prenotazioni/vista-giorni.xhtml" value="Vista Per Giorni" />
 			<rich:panel id="calendario">
 				<h:panelGrid columns="4" width="70%">
 					<h:panelGroup>

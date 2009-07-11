@@ -11,13 +11,15 @@
 <ui:composition template="/WEB-INF/layout/t_single.xhtml">
 	<ui:define name="title">Lista Contratti</ui:define>
 	<ui:define name="content">
+		<h2>Lista Contratti</h2>
 		<h:outputText
 			value="#{fn:init('contrattiHandler','it.reservations.par.Contratto', 'cercaContratti')}" />
 		<h:form id="centerForm">
-			
+
 			<h:panelGrid columns="4" width="70%">
 				<h:panelGroup>
-					<h:outputLabel id="nomeLabel1" value="Cerca per cognome:" for="nome1" />
+					<h:outputLabel id="nomeLabel1" value="Cerca per cognome:"
+						for="nome1" />
 					<h:inputText id="nome1" value="#{clientiHandler.ricerca.cognome}"
 						size="15">
 						<a4j:support event="onkeyup" ajaxSingle="true"
@@ -25,7 +27,8 @@
 					</h:inputText>
 				</h:panelGroup>
 				<h:panelGroup>
-					<h:outputLabel id="apertoLabel1" value="Aperto/Chiuso:" for="aperto1" />
+					<h:outputLabel id="apertoLabel1" value="Aperto/Chiuso:"
+						for="aperto1" />
 					<h:selectOneMenu id="aperto1"
 						value="#{contrattiHandler.ricerca.aperto}">
 						<f:selectItems value="#{propertiesHandler.statusItems}" />
@@ -68,9 +71,6 @@
 
 				<a:column entity="${contratto}" fieldName="aperto" sort="${false}"
 					label="Aperto" type="boolean" />
-
-				<a:column entity="${contratto}" fieldName="totale" sort="${false}"
-					label="totale" />
 
 				<a:columnCommand label="Vedi" action="detailContratto"
 					backingBean="${contrattiHandler}" />

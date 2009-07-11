@@ -11,6 +11,7 @@
 <ui:composition template="/WEB-INF/layout/t_single.xhtml">
 	<ui:define name="title">Scheda Contratto</ui:define>
 	<ui:define name="content">
+		<h2>Scheda Contratto</h2>
 		<h:form id="form">
 			<rich:panel id="prenotazioneScooter">
 				<h:panelGrid columns="2" id="editContent" columnClasses="80,100">
@@ -28,19 +29,17 @@
 						fieldName="marcaModello" />
 
 					<a:fieldView id="dataInit" label="Data Inizio:"
-						fieldName="dataInit" type="outputDate"
+						fieldName="dataInit" type="outputDateTime"
 						entity="#{contrattiHandler.contratto}" />
 
 					<a:fieldView id="dataEnd" label="Data Riconsegna Prevista:"
-						fieldName="dataEnd" type="outputDate"
+						fieldName="dataEnd" type="outputDateTime"
 						entity="#{contrattiHandler.contratto}" />
 
 					<a:fieldView id="dataEff" label="Data Riconsegna Effettuata:"
-						fieldName="dataRiconsegna" type="outputDate"
-						entity="#{contrattiHandler.contratto}" />
-
-					<a:fieldView id="note" label="Note:" fieldName="note"
-						entity="#{contrattiHandler.contratto}" />
+						fieldName="dataRiconsegna" type="outputDateTime"
+						entity="#{contrattiHandler.contratto}"
+						rendered="#{not contrattiHandler.contratto.aperto}" />
 
 					<a:fieldView id="numDays" label="Numero di giorni:"
 						fieldName="numDays" entity="#{contrattiHandler}" />
@@ -58,16 +57,27 @@
 						fieldName="importoSottoCasco"
 						entity="#{contrattiHandler.contratto}" />
 
-					<a:fieldView id="importoCaparra" label="Importo Caparra:"
+					<a:fieldView id="importoCaparra" label="Importo Caparra Versato:"
 						fieldName="importoCaparra" entity="#{contrattiHandler.contratto}" />
 
 					<a:fieldView id="totale" label="Somma Versata Inizialmente:"
 						fieldName="totaleParziale" entity="#{contrattiHandler.contratto}" />
 
+
+					<h:outputText value="-------------" />
+					<h:outputText value="-------------" />
+
+					<a:fieldView id="note" label="Note:" fieldName="note"
+						entity="#{contrattiHandler.contratto}" />
+
+
+
 					<h:outputText value="-------------"
 						rendered="#{not contrattiHandler.contratto.aperto}" />
 					<h:outputText value="-------------"
 						rendered="#{not contrattiHandler.contratto.aperto}" />
+
+
 
 					<a:fieldView id="numDaysExtra" label="Numero giorni extra:"
 						fieldName="numDaysExtra" entity="#{contrattiHandler}"
@@ -87,13 +97,17 @@
 					<h:outputText value="-------------"
 						rendered="#{not contrattiHandler.contratto.aperto}" />
 
-					<a:fieldView id="kmMax2" label="KM Max" fieldName="maxKm"
+					<a:fieldView id="kmMax2" label="KM Max al gg" fieldName="maxKm"
 						entity="#{contrattiHandler.contratto.scooter.tariffa}"
 						rendered="#{not contrattiHandler.contratto.aperto}" />
 
 					<a:fieldView id="costoKm2" label="Costo Km Extra"
 						fieldName="costoKm"
 						entity="#{contrattiHandler.contratto.scooter.tariffa}"
+						rendered="#{not contrattiHandler.contratto.aperto}" />
+
+					<a:fieldView id="kmMaxTot" label="KM Max TOT" fieldName="kmMaxTot"
+						entity="#{contrattiHandler.contratto}"
 						rendered="#{not contrattiHandler.contratto.aperto}" />
 
 					<a:fieldView id="kmIniziali2" label="KM Iniziali:"
@@ -108,7 +122,7 @@
 						fieldName="kmExtra" entity="#{contrattiHandler.contratto}"
 						rendered="#{not contrattiHandler.contratto.aperto}" />
 
-					<a:fieldView id="importokmExtraV2" label="Importo KM Extra(*):"
+					<a:fieldView id="importokmExtraV2" label="Importo KM Extra:"
 						fieldName="importokmExtra" entity="#{contrattiHandler.contratto}"
 						rendered="#{not contrattiHandler.contratto.aperto}" />
 
@@ -150,6 +164,10 @@
 						fieldName="totaleChiusura" entity="#{contrattiHandler.contratto}"
 						rendered="#{not contrattiHandler.contratto.aperto}" />
 
+					<a:fieldView id="importoCaparra2"
+						label="Importo Caparra da Restituire:" fieldName="importoCaparra"
+						entity="#{contrattiHandler.contratto}" />
+
 
 				</h:panelGrid>
 
@@ -170,7 +188,8 @@
 
 					<h:commandLink id="vediContrattoChiuso" target="_blank"
 						action="/print/contratto-chiuso.xhtml"
-						value="Stampa Contratto Chiuso" />
+						value="Stampa Contratto Chiuso"
+						rendered="#{not contrattiHandler.contratto.aperto}" />
 
 					<h:commandLink id="stampaSchedaChiusuraContratto" target="_blank"
 						action="/print/dati-chiusura-contratto.xhtml"
