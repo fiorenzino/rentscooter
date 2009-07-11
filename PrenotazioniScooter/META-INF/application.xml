@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application>
-	<display-name>prenotazioniScooter</display-name>
-	<description>prenotazioniScooter</description>
+	<display-name>gestione-noleggi</display-name>
+	<description>gestione-noleggi</description>
 	<module>
-		<ejb>prenotazioniScooter.jar</ejb>
+		<ejb>gestione-noleggi.jar</ejb>
 	</module>
 	<module>
 		<ejb>smartflower.jar</ejb>
 	</module>
 	<module>
 		<web>
-			<web-uri>prenotazioniScooter.war</web-uri>
-			<context-root>/prenotazioniScooter</context-root>
+			<web-uri>gestione-noleggi.war</web-uri>
+			<context-root>/gestione-noleggi</context-root>
 		</web>
 	</module>
 </application>
