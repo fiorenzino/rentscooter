@@ -68,6 +68,7 @@ public class ScootersHandler extends JSFHandler implements Serializable {
 		JNDIUtils.getScooterManager().persist(this.scooter);
 		aggModel();
 		this.scootersItems = null;
+		this.cilindrateItems=null;
 		return "/scooters/scheda-scooter.xhtml";
 	}
 
@@ -84,6 +85,7 @@ public class ScootersHandler extends JSFHandler implements Serializable {
 		JNDIUtils.getScooterManager().update(this.scooter);
 		aggModel();
 		this.scootersItems = null;
+		this.cilindrateItems=null;
 		return "/scooters/scheda-scooter.xhtml";
 	}
 
@@ -91,6 +93,7 @@ public class ScootersHandler extends JSFHandler implements Serializable {
 		JNDIUtils.getScooterManager().update(this.scooter);
 		aggModel();
 		this.scootersItems = null;
+		this.cilindrateItems=null;
 		return "/scooters/scheda-scooter.xhtml";
 	}
 

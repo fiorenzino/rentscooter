@@ -31,11 +31,11 @@ public class TestHandler implements Serializable {
 	private Contratto contratto;
 
 	public List<MiniPre[]> getModel() {
-		Map<String, Map<String, MiniPre>> mappa = JNDIUtils
+		Map<Long, Map<String, MiniPre>> mappa = JNDIUtils
 				.getPrenotazioniManager().getReservationList(getDal(), getAl(),
 						getCil());
 		model = new ArrayList<MiniPre[]>();
-		for (String nome : mappa.keySet()) {
+		for (Long nome : mappa.keySet()) {
 			MiniPre[] sco = new MiniPre[getColonne().size() + 1];
 
 			Map<String, MiniPre> occ = mappa.get(nome);

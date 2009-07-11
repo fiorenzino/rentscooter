@@ -18,11 +18,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Named;
 import javax.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Current;
 
 @SessionScoped
@@ -47,22 +50,25 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 	OrganizerHandler organizerHandler;
 
 	public List<MiniPre[]> getSearchModel() {
-		Map<String, Map<String, MiniPre>> mappa = JNDIUtils
+		Map<Long, Map<String, MiniPre>> mappa = JNDIUtils
 				.getPrenotazioniManager().getReservationList(
 						getContratto().getDataInit(),
 						getContratto().getDataEnd(), getCil());
 		searchModel = new ArrayList<MiniPre[]>();
-		for (String nome : mappa.keySet()) {
+		for (Long nome : mappa.keySet()) {
+			System.out.println("ID SCO: " + nome);
 			MiniPre[] sco = new MiniPre[getColonne().size() + 1];
 
 			Map<String, MiniPre> occ = mappa.get(nome);
 			int l = 1;
 			for (String key : occ.keySet()) {
+				System.out.println("DATA: " + key);
 				if (l == 1) {
 					sco[0] = occ.get(key);
 				}
 				sco[l++] = occ.get(key);
 			}
+			System.out.println("--------------");
 			searchModel.add(sco);
 		}
 		return searchModel;
@@ -83,7 +89,7 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 	}
 
 	public void aggColonne() {
-		colonne = new ArrayList<String>();
+		colonne = new LinkedList<String>();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(getContratto().getDataInit());
 		colonne.add("scooter");
@@ -92,20 +98,22 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 			// + "-" + cal.get(Calendar.MONTH) + "-"
 			// + cal.get(Calendar.YEAR));
 			colonne.add(cal.get(Calendar.DAY_OF_MONTH) + "-"
-					+ cal.get(Calendar.MONTH) + "-" + cal.get(Calendar.YEAR));
+					+ (cal.get(Calendar.MONTH) + 1) + "-"
+					+ cal.get(Calendar.YEAR));
 			cal.add(Calendar.DAY_OF_MONTH, 1);
 		}
 	}
 
 	public String addContratto1() {
 		this.contratto = new Contratto();
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(new Date());
-		this.contratto.setDataInit(cal.getTime());
-		cal.add(Calendar.DAY_OF_MONTH, 5);
-		this.contratto.setDataEnd(cal.getTime());
-		this.contratto.setDataRiconsegna(cal.getTime());
+		// Calendar cal = Calendar.getInstance();
+		// cal.setTime(new Date());
+		// this.contratto.setDataInit(cal.getTime());
+		// cal.add(Calendar.DAY_OF_MONTH, 5);
+		// this.contratto.setDataEnd(cal.getTime());
+		// this.contratto.setDataRiconsegna(cal.getTime());
 		this.contratto.setAperto(true);
+
 		this.editMode = false;
 		return "/contratti/gestione-contratto.xhtml";
 	}
@@ -133,7 +141,14 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 	}
 
 	public void calcolaSomma() {
-		if (this.contratto.getScooter().getId() > 0
+		if (this.contratto.getScooter().getId() < 1) {
+			System.out.println("NON HAI SELEZIONATO LO SCOOTER ");
+			FacesContext context = FacesContext.getCurrentInstance();
+			FacesMessage message = new FacesMessage();
+			message.setSeverity(FacesMessage.SEVERITY_ERROR);
+			message.setSummary("Scooter non valido!");
+			context.addMessage("form:scooter", message);
+		} else if (this.contratto.getScooter().getId() > 0
 				&& this.contratto.getCliente().getId() > 0) {
 			System.out
 					.println("SCO ID: " + this.contratto.getScooter().getId());
@@ -152,9 +167,21 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 						tariffa);
 				System.out.println("IMPORTO INIZIALE: " + importoIniziale);
 				this.contratto.setImportoIniziale(importoIniziale);
+			} else {
+				System.out.println("DATE NON VALIDE ");
+				FacesContext context = FacesContext.getCurrentInstance();
+				FacesMessage message = new FacesMessage();
+				message.setSeverity(FacesMessage.SEVERITY_ERROR);
+				message.setSummary("Data Finale non valida");
+				context.addMessage("cercaScooter:dataEnd", message);
 			}
 		} else {
-			System.out.println("NON HAI SELEZIONATO CLIENTE E SCOOTER");
+			System.out.println("NON HAI SELEZIONATO CLIENTE ");
+			FacesContext context = FacesContext.getCurrentInstance();
+			FacesMessage message = new FacesMessage();
+			message.setSeverity(FacesMessage.SEVERITY_ERROR);
+			message.setSummary("Cliente non valido!");
+			context.addMessage("form:cliente", message);
 		}
 	}
 
@@ -168,16 +195,25 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 				this.contratto.getScooter().getId());
 		Cliente cli = JNDIUtils.getClientiManager().find(
 				this.contratto.getCliente().getId());
+		try {
+			sco.setKmFatti(this.contratto.getKmFinali());
+			JNDIUtils.getScooterManager().update(sco);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
 		this.contratto.setScooter(sco);
 		this.contratto.setCliente(cli);
 		this.contratto.setAperto(false);
-		this.contratto.setDataRiconsegna(this.contratto.getDataEnd());
+		// this.contratto.setDataRiconsegna(this.contratto.getDataEnd());
 		// DEVO CREARE I GG SINGOLI DI PRENOTAZIONE
 		// VEDI PrenotazioniManagerBean.getReservationList
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(this.contratto.getDataInit());
+		this.contratto.setPrenotazioni(null);
+
 		List<Prenotazione> prenotazioni = new ArrayList<Prenotazione>();
-		while (cal.getTime().compareTo(this.contratto.getDataEnd()) <= 0) {
+		while (cal.getTime().compareTo(this.contratto.getDataRiconsegna()) <= 0) {
 			System.out.println("DATA: " + cal.getTime());
 			Prenotazione pre = new Prenotazione();
 			pre.setContratto(this.contratto);
@@ -189,7 +225,7 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 			cal.add(Calendar.DAY_OF_MONTH, 1);
 		}
 		this.contratto.setPrenotazioni(prenotazioni);
-		JNDIUtils.getContrattiManager().update(this.contratto);
+		JNDIUtils.getContrattiManager().updateSpecial(this.contratto);
 		aggModel();
 		Util.valorizzaCliente(this.contratto.getCliente());
 		organizerHandler.reset();

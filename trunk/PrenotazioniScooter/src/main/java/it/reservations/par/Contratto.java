@@ -4,6 +4,7 @@ import it.reservations.ejb3.utils.TimeUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -43,8 +44,8 @@ public class Contratto implements Serializable {
 	private Float benzinaExtra;
 	private Float cascoExtra;
 	private Float kmExtra;
-	private Float kmIniziali;
-	private Float kmFinali;
+	private String kmIniziali;
+	private String kmFinali;
 	private Float sconto;
 	private Boolean aperto;
 	private List<Prenotazione> prenotazioni;
@@ -60,8 +61,13 @@ public class Contratto implements Serializable {
 	}
 
 	public Date getDataInit() {
-		if (dataInit == null)
-			dataInit = new Date();
+		if (dataInit == null) {
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(new Date());
+			cal.set(Calendar.HOUR_OF_DAY, 0);
+			cal.set(Calendar.MINUTE, 0);
+			dataInit = cal.getTime();
+		}
 		return dataInit;
 	}
 
@@ -70,8 +76,12 @@ public class Contratto implements Serializable {
 	}
 
 	public Date getDataEnd() {
-		if (dataEnd == null)
-			dataEnd = getDataInit();
+		if (dataEnd == null) {
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(getDataInit());
+			cal.add(Calendar.DAY_OF_MONTH, 6);
+			dataEnd = cal.getTime();
+		}
 		return dataEnd;
 	}
 
@@ -119,13 +129,38 @@ public class Contratto implements Serializable {
 		this.importoFinale = importoFinale;
 	}
 
+	@Transient
+	public Long getNumGiorniTotal() {
+		try {
+			return TimeUtil.getDiffDays(getDataInit(), getDataRiconsegna());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new Long(0);
+		}
+
+	}
+
+	@Transient
+	public Long getNumGiorniExtra() {
+		try {
+			Long tot = TimeUtil.getDiffDays(getDataInit(), getDataRiconsegna());
+			Long ini = TimeUtil.getDiffDays(getDataInit(), getDataEnd());
+			return tot - ini;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new Long(0);
+		}
+
+	}
+
+	@Transient
 	public Float getExtra() {
 		if (extra == null)
 			extra = new Float(0);
 		try {
-			Long extraG = TimeUtil.getDiffDays(getDataEnd(),
-					getDataRiconsegna());
-			return extraG * getScooter().getTariffa().getD1ex();
+			return getNumGiorniExtra() * getScooter().getTariffa().getD1ex();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -148,14 +183,14 @@ public class Contratto implements Serializable {
 						+ getBenzinaExtra()
 						+ getCascoExtra()
 						+ getImportokmExtra()
-						+ getImportoCaparra()
 						+ getImportoDanni()
-						+ getImportoRitiroMezzo() + getImportoSottoCasco();
+						+ getImportoRitiroMezzo()
+						+ getImportoSottoCasco();
 			}
 			return getImportoIniziale() + getImportoFinale() + getExtra()
 					+ getBenzinaExtra() + getCascoExtra() + getImportokmExtra()
-					+ getImportoCaparra() + getImportoDanni()
-					+ getImportoRitiroMezzo() + getImportoSottoCasco();
+					+ getImportoDanni() + getImportoRitiroMezzo()
+					+ getImportoSottoCasco();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -186,7 +221,7 @@ public class Contratto implements Serializable {
 
 	@Transient
 	public Float getTotaleChiusura() {
-		return getTotale() - getTotaleParziale() ;
+		return getTotale() - getImportoCaparra();
 	}
 
 	public void setTotaleChiusura(Float totaleChiusura) {
@@ -264,17 +299,32 @@ public class Contratto implements Serializable {
 	}
 
 	@Transient
-	public Float getKmExtra() {
-		if ((kmIniziali != null) && (kmFinali != null)
-				&& (kmFinali > kmIniziali)) {
-			Long kmMax = getScooter().getTariffa().getMaxKm();
-			Float kmInPiu = kmFinali - kmIniziali;
-			if ((kmInPiu != null) && (kmInPiu > 0) && (kmInPiu > kmMax))
-				return kmInPiu - kmMax;
-		}
-		return new Float(0);
+	public Long getKmMaxTot() {
+		return getScooter().getTariffa().getMaxKm() * getNumGiorniTotal();
+
 	}
 
+	@Transient
+	public Float getKmExtra() {
+		try {
+			Float KmI = Float.parseFloat(kmIniziali);
+			Float KmF = Float.parseFloat(kmFinali);
+			if ((kmIniziali != null) && (kmFinali != null) && (KmF > KmI)) {
+				Long kmMax = getKmMaxTot();
+				Float kmFatti = KmF - KmI;
+				if ((kmFatti != null) && (kmFatti > 0) && (kmFatti > kmMax))
+					return kmFatti - kmMax;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return new Float(0);
+
+	}
+
+	@Transient
 	public Float getImportokmExtra() {
 		if (importokmExtra == null)
 			importokmExtra = new Float(0);
@@ -334,19 +384,19 @@ public class Contratto implements Serializable {
 		this.dataStipula = dataStipula;
 	}
 
-	public Float getKmIniziali() {
+	public String getKmIniziali() {
 		return kmIniziali;
 	}
 
-	public void setKmIniziali(Float kmIniziali) {
+	public void setKmIniziali(String kmIniziali) {
 		this.kmIniziali = kmIniziali;
 	}
 
-	public Float getKmFinali() {
+	public String getKmFinali() {
 		return kmFinali;
 	}
 
-	public void setKmFinali(Float kmFinali) {
+	public void setKmFinali(String kmFinali) {
 		this.kmFinali = kmFinali;
 	}
 

@@ -129,14 +129,26 @@ public class Util {
 	public static void valorizzaCliente(Cliente cliente) {
 		cliente.setProvinciaName(Util.getArrayValue("Province", cliente
 				.getProvincia()));
-		cliente.setCityName(Util.getArrayValue("Comuni", cliente.getCity()));
+		if (cliente.getProvincia() != 109) {
+			cliente
+					.setCityName(Util
+							.getArrayValue("Comuni", cliente.getCity()));
+		}
+
 		cliente.setNazioneName(Util.getArrayValue("Nazioni", cliente
 				.getNazione()));
 
 		cliente.setProvinciaNascitaName(Util.getArrayValue("Province", cliente
 				.getProvinciaNascita()));
-		cliente.setCityNascitaName(Util.getArrayValue("Comuni", cliente
-				.getCityNascita()));
+		if (cliente.getProvinciaNascita() != 109) {
+			cliente.setCityNascitaName(Util.getArrayValue("Comuni", cliente
+					.getCityNascita()));
+		}
+
+		if (cliente.getCap() == 0) {
+			cliente.setCap(null);
+		}
+
 		cliente.setNazioneNascitaName(Util.getArrayValue("Nazioni", cliente
 				.getNazioneNascita()));
 	}
