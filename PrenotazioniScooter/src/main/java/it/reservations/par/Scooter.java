@@ -28,6 +28,7 @@ public class Scooter implements Serializable {
 	private String targa;
 	private Date scadenzaAssicurazione;
 	private String scadenza;
+	private String kmFatti;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -124,6 +125,14 @@ public class Scooter implements Serializable {
 
 	public void setScadenza(String scadenza) {
 		this.scadenza = scadenza;
+	}
+
+	public String getKmFatti() {
+		return kmFatti;
+	}
+
+	public void setKmFatti(String kmFatti) {
+		this.kmFatti = kmFatti;
 	}
 
 }

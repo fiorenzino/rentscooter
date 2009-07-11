@@ -75,6 +75,7 @@ public class ClientiHandler extends JSFHandler implements Serializable {
 		}
 
 		aggModel();
+		clientiItems =null;
 		return "/clienti/clienti.xhtml";
 	}
 

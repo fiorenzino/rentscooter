@@ -26,7 +26,7 @@ public class JNDIUtils {
 			try {
 				InitialContext ctx = new InitialContext();
 				prenotazioniManager = (PrenotazioniManager) ctx
-						.lookup("prenotazioniScooter/PrenotazioniManagerBean/local");
+						.lookup("gestione-noleggi/PrenotazioniManagerBean/local");
 				if (prenotazioniManager != null) {
 					log.info("comp: " + contrattiManager);
 				}
@@ -45,7 +45,7 @@ public class JNDIUtils {
 			try {
 				InitialContext ctx = new InitialContext();
 				contrattiManager = (ContrattiManager) ctx
-						.lookup("prenotazioniScooter/ContrattiManagerBean/local");
+						.lookup("gestione-noleggi/ContrattiManagerBean/local");
 				if (contrattiManager != null) {
 					log.info("comp: " + contrattiManager);
 				}
@@ -64,7 +64,7 @@ public class JNDIUtils {
 			try {
 				InitialContext ctx = new InitialContext();
 				tariffeManager = (TariffeManager) ctx
-						.lookup("prenotazioniScooter/TariffeManagerBean/local");
+						.lookup("gestione-noleggi/TariffeManagerBean/local");
 				if (tariffeManager != null) {
 					log.info("comp: " + tariffeManager);
 				}
@@ -83,7 +83,7 @@ public class JNDIUtils {
 			try {
 				InitialContext ctx = new InitialContext();
 				clientiManager = (ClientiManager) ctx
-						.lookup("prenotazioniScooter/ClientiManagerBean/local");
+						.lookup("gestione-noleggi/ClientiManagerBean/local");
 				if (clientiManager != null) {
 					log.info("comp: " + clientiManager);
 				}
@@ -102,7 +102,7 @@ public class JNDIUtils {
 			try {
 				InitialContext ctx = new InitialContext();
 				scooterManager = (ScooterManager) ctx
-						.lookup("prenotazioniScooter/ScooterManagerBean/local");
+						.lookup("gestione-noleggi/ScooterManagerBean/local");
 				if (clientiManager != null) {
 					log.info("comp: " + scooterManager);
 				}

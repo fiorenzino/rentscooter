@@ -18,9 +18,9 @@ public class Cliente implements Serializable {
 	private String cognome;
 	private String nomeCognome;
 	private Date dataInsert;
-	
+
 	private String codicefiscale;
-	
+
 	private String indirizzo;
 	private Long city;
 	private String cityName;
@@ -49,7 +49,7 @@ public class Cliente implements Serializable {
 		this.provincia = new Long(5);
 		this.city = new Long(381);
 		this.nazione = new Long(104);
-		
+
 		this.provinciaNascita = new Long(5);
 		this.cityNascita = new Long(381);
 		this.nazioneNascita = new Long(104);
@@ -221,7 +221,6 @@ public class Cliente implements Serializable {
 		this.nazioneNascita = nazioneNascita;
 	}
 
-	@Transient
 	public String getCityNascitaName() {
 		return cityNascitaName;
 	}
@@ -255,6 +254,7 @@ public class Cliente implements Serializable {
 	public void setPatente(String patente) {
 		this.patente = patente;
 	}
+
 	@Lob
 	public String getLuogoRilascio() {
 		return luogoRilascio;

@@ -2,6 +2,7 @@ package it.reservations.ejb3;
 
 import java.util.List;
 
+import it.reservations.ejb3.utils.JNDIUtils;
 import it.reservations.par.Cliente;
 import it.reservations.par.Contratto;
 import it.reservations.par.Prenotazione;
@@ -33,7 +34,6 @@ public class ContrattiManagerBean extends EJBManagerBean implements
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void persist(Contratto contratto) {
@@ -65,7 +65,21 @@ public class ContrattiManagerBean extends EJBManagerBean implements
 		}
 		return numContratti;
 	}
-	
-	
+
+	public Contratto updateSpecial(Contratto contratto) {
+		try {
+			Contratto oldContratto = em
+					.find(Contratto.class, contratto.getId());
+			for (Prenotazione prenotazione : oldContratto.getPrenotazioni()) {
+				em.remove(prenotazione);
+			}
+			oldContratto = contratto;
+			em.merge(oldContratto);
+			return oldContratto;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }

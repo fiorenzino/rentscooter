@@ -6,25 +6,28 @@ public class MiniPre implements Serializable {
 	private Long id;
 	private String nome;
 	private boolean occupato;
+	private String kmFatti;
 
 	public String getStyleClass() {
 		return getOccupato() ? "occupato" : "libero";
 	}
 
 	public String getSymbol() {
-		return getOccupato() ? "x" : "o";
+		return getOccupato() ? "-X-" : "-O-";
 	}
 
-	public MiniPre(Long id, String nome) {
+	public MiniPre(Long id, String nome, String kmFatti) {
 		this.id = id;
 		this.nome = nome;
 		this.occupato = false;
+		this.kmFatti = kmFatti;
 	}
 
-	public MiniPre(Long id, String nome, Boolean occupato) {
+	public MiniPre(Long id, String nome, Boolean occupato, String kmFatti) {
 		this.id = id;
 		this.nome = nome;
 		this.occupato = occupato;
+		this.kmFatti = kmFatti;
 	}
 
 	public Long getId() {
@@ -49,5 +52,13 @@ public class MiniPre implements Serializable {
 
 	public void setOccupato(boolean occupato) {
 		this.occupato = occupato;
+	}
+
+	public String getKmFatti() {
+		return kmFatti;
+	}
+
+	public void setKmFatti(String kmFatti) {
+		this.kmFatti = kmFatti;
 	}
 }
