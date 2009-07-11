@@ -1,0 +1,16 @@
+#Libraries used in this project
+
+---- 
+  *jsf-api-1.2_09.jar
+  *jsf-facelets-1.1.14.jar
+  *jsf-impl-1.2_09.jar
+  *commons-beanutils-1.7.0.jar
+  *commons-digester-1.8.1.jar
+  *core-renderer-minimal.jar
+  *el-ri-1.2.jar
+  *jsf-facelets-1.1.15.B1.jar
+  *jsr250-api-1.0.jar
+  *nekohtml-0.9.5.jar
+  *webbeans-logger.jar
+  *webbeans-logging.jar
+---- 
