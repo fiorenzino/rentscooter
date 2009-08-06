@@ -149,7 +149,8 @@ public class Contratto implements Serializable {
 			return tot - ini;
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			System.out.println("getNumGiorniExtra ERROR");
 			return new Long(0);
 		}
 
@@ -163,7 +164,7 @@ public class Contratto implements Serializable {
 			return getNumGiorniExtra() * getScooter().getTariffa().getD1ex();
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("getExtra ERROR");
 		}
 		return new Float(0);
 	}
@@ -177,9 +178,9 @@ public class Contratto implements Serializable {
 		try {
 			if (getSconto() != 0) {
 				return (getImportoIniziale() - (getSconto()
-						* getImportoIniziale() / new Float(100)))
-						+ getImportoFinale()
-						+ getExtra()
+				// * getImportoIniziale() / new Float(100)
+						))
+						+ getImportoFinale() + getExtra()
 						+ getBenzinaExtra()
 						+ getCascoExtra()
 						+ getImportokmExtra()
@@ -192,7 +193,7 @@ public class Contratto implements Serializable {
 					+ getImportoDanni() + getImportoRitiroMezzo()
 					+ getImportoSottoCasco();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("getTotale ERROR");
 		}
 		return new Float(0);
 
@@ -205,8 +206,9 @@ public class Contratto implements Serializable {
 	@Transient
 	public Float getTotaleParziale() {
 		if (getSconto() != 0) {
-			return (getImportoIniziale() - (getSconto() * getImportoIniziale() / new Float(
-					100)))
+			return (getImportoIniziale() - (getSconto()
+			// * getImportoIniziale() / new Float(100)
+					))
 					+ getCascoExtra()
 					+ getImportoCaparra()
 					+ getImportoSottoCasco();
@@ -317,7 +319,7 @@ public class Contratto implements Serializable {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("getKmExtra");
 
 		}
 		return new Float(0);

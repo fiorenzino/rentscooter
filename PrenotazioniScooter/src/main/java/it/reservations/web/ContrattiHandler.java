@@ -46,6 +46,8 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 	private int begin;
 	private int end;
 
+	private Float preventivo;
+
 	@Current
 	OrganizerHandler organizerHandler;
 
@@ -89,6 +91,7 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 	}
 
 	public void aggColonne() {
+		this.preventivo = null;
 		colonne = new LinkedList<String>();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(getContratto().getDataInit());
@@ -357,6 +360,14 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 
 	public void setEnd(int end) {
 		this.end = end;
+	}
+
+	public Float getPreventivo() {
+		return preventivo;
+	}
+
+	public void setPreventivo(Float preventivo) {
+		this.preventivo = preventivo;
 	}
 
 }
