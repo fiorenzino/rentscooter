@@ -132,7 +132,7 @@ public class Cliente implements Serializable {
 
 	@Transient
 	public String getNomeCognome() {
-		return getNome() + " " + getCognome();
+		return getCognome() + " " + getNome();
 	}
 
 	public void setNomeCognome(String nomeCognome) {
