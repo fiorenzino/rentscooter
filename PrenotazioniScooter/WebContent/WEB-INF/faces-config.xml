@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
 
 	<application>
 		<view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
 	</application>
 	<application>
-		<navigation-handler>it.reservations.web.navigation.NavigationHandler</navigation-handler>
+		<navigation-handler>
+			it.reservations.web.navigation.NavigationHandler
+		</navigation-handler>
 	</application>
 	<converter>
 		<converter-for-class>java.util.Date</converter-for-class>
-		<converter-class>it.reservations.web.utils.CustomDateTimeConverter</converter-class>
+		<converter-class>
+			it.reservations.web.utils.CustomDateTimeConverter
+		</converter-class>
+	</converter>
+	<converter>
+		<converter-id>CustomFloatConverter</converter-id>
+		<converter-class>
+			it.reservations.web.utils.CustomFloatConverter
+		</converter-class>
 	</converter>
 
 </faces-config>
