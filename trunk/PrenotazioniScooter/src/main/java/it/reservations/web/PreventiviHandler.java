@@ -30,7 +30,7 @@ import javax.inject.Current;
 
 @SessionScoped
 @Named
-public class ContrattiHandler extends JSFHandler implements Serializable {
+public class PreventiviHandler extends JSFHandler implements Serializable {
 
 	private Contratto contratto;
 
@@ -188,112 +188,6 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 		}
 	}
 
-	public String chiudiContratto1() {
-
-		return "/contratti/chiusura-contratto.xhtml";
-	}
-
-	public String chiudiContratto2() {
-		Scooter sco = JNDIUtils.getScooterManager().find(
-				this.contratto.getScooter().getId());
-		Cliente cli = JNDIUtils.getClientiManager().find(
-				this.contratto.getCliente().getId());
-		try {
-			sco.setKmFatti(this.contratto.getKmFinali());
-			JNDIUtils.getScooterManager().update(sco);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
-		this.contratto.setScooter(sco);
-		this.contratto.setCliente(cli);
-		this.contratto.setAperto(false);
-		// this.contratto.setDataRiconsegna(this.contratto.getDataEnd());
-		// DEVO CREARE I GG SINGOLI DI PRENOTAZIONE
-		// VEDI PrenotazioniManagerBean.getReservationList
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(this.contratto.getDataInit());
-		this.contratto.setPrenotazioni(null);
-
-		List<Prenotazione> prenotazioni = new ArrayList<Prenotazione>();
-		while (cal.getTime().compareTo(this.contratto.getDataRiconsegna()) <= 0) {
-			System.out.println("DATA: " + cal.getTime());
-			Prenotazione pre = new Prenotazione();
-			pre.setContratto(this.contratto);
-			pre.setSingleDay(cal.getTime());
-			pre.setSingleDayName(cal.get(Calendar.DAY_OF_MONTH) + "-"
-					+ (cal.get(Calendar.MONTH) + 1) + "-"
-					+ cal.get(Calendar.YEAR));
-			prenotazioni.add(pre);
-			cal.add(Calendar.DAY_OF_MONTH, 1);
-		}
-		this.contratto.setPrenotazioni(prenotazioni);
-		JNDIUtils.getContrattiManager().updateSpecial(this.contratto);
-		aggModel();
-		Util.valorizzaCliente(this.contratto.getCliente());
-		organizerHandler.reset();
-		return "/contratti/scheda-contratto.xhtml";
-	}
-
-	public String addContratto2() {
-		Scooter sco = JNDIUtils.getScooterManager().find(
-				this.contratto.getScooter().getId());
-		Cliente cli = JNDIUtils.getClientiManager().find(
-				this.contratto.getCliente().getId());
-		this.contratto.setScooter(sco);
-		this.contratto.setCliente(cli);
-		this.contratto.setDataStipula(new Date());
-		this.contratto.setDataRiconsegna(this.contratto.getDataEnd());
-		// DEVO CREARE I GG SINGOLI DI PRENOTAZIONE
-		// VEDI PrenotazioniManagerBean.getReservationList
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(this.contratto.getDataInit());
-		List<Prenotazione> prenotazioni = new ArrayList<Prenotazione>();
-		while (cal.getTime().compareTo(this.contratto.getDataEnd()) <= 0) {
-			System.out.println("DATA: " + cal.getTime());
-			Prenotazione pre = new Prenotazione();
-			pre.setContratto(this.contratto);
-			pre.setSingleDay(cal.getTime());
-			pre.setSingleDayName(cal.get(Calendar.DAY_OF_MONTH) + "-"
-					+ (cal.get(Calendar.MONTH) + 1) + "-"
-					+ cal.get(Calendar.YEAR));
-			prenotazioni.add(pre);
-			cal.add(Calendar.DAY_OF_MONTH, 1);
-		}
-		this.contratto.setPrenotazioni(prenotazioni);
-		JNDIUtils.getContrattiManager().persist(this.contratto);
-		aggModel();
-		Util.valorizzaCliente(this.contratto.getCliente());
-		organizerHandler.reset();
-		return "/contratti/scheda-contratto.xhtml";
-	}
-
-	public String modContratto1() {
-		this.contratto = (Contratto) getModel().getRowData();
-		this.editMode = true;
-		return "/contratti/gestione-contratto.xhtml";
-	}
-
-	public String modContratto2() {
-		JNDIUtils.getContrattiManager().update(this.contratto);
-		aggModel();
-		Util.valorizzaCliente(this.contratto.getCliente());
-		return "/contratti/scheda-contratto.xhtml";
-	}
-
-	public String delContratto() {
-		JNDIUtils.getContrattiManager().delete(this.contratto);
-		aggModel();
-		return "/contratti/contratti.xhtml";
-	}
-
-	public String detailContratto() {
-		System.out.println("ABS: " + Util.getAbsolutePath());
-		this.contratto = (Contratto) getModel().getRowData();
-		Util.valorizzaCliente(this.contratto.getCliente());
-		return "/contratti/scheda-contratto.xhtml";
-	}
-
 	@Override
 	public void initRicerca() {
 		try {
@@ -304,7 +198,7 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 		}
 	}
 
-	public ContrattiHandler() {
+	public PreventiviHandler() {
 		eJBManager = JNDIUtils.getContrattiManager();
 		rowsPerPage = 10;
 		initRicerca();
@@ -323,19 +217,6 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 	public int getNumDays() {
 		return TimeUtil.getDiffDays(this.contratto.getDataInit(),
 				this.contratto.getDataEnd()).intValue();
-	}
-
-	public int getNumDaysExtra() {
-		return TimeUtil.getDiffDays(this.contratto.getDataEnd(),
-				this.contratto.getDataRiconsegna()).intValue();
-	}
-
-	public boolean isWithCaparra() {
-		return withCaparra;
-	}
-
-	public void setWithCaparra(boolean withCaparra) {
-		this.withCaparra = withCaparra;
 	}
 
 	public String getCil() {

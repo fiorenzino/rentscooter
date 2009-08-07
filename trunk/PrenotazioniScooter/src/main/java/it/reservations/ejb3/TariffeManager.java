@@ -16,4 +16,6 @@ public interface TariffeManager extends EJBManager {
 
 	public Tariffa find(Long id);
 
+	public Tariffa getTariffaByCilindrata(String cilindrata);
+
 }

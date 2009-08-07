@@ -3,6 +3,7 @@ package it.reservations.ejb3;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.reservations.par.Scooter;
 import it.reservations.par.Tariffa;
 import it.smartflower.ejb3.EJBManagerBean;
 
@@ -25,7 +26,6 @@ public class TariffeManagerBean extends EJBManagerBean implements
 		return em;
 	}
 
-	@Override
 	public void persist(Tariffa tariffa) {
 		try {
 			em.persist(tariffa);
@@ -35,7 +35,6 @@ public class TariffeManagerBean extends EJBManagerBean implements
 
 	}
 
-	@Override
 	public void update(Tariffa tariffa) {
 		try {
 			em.merge(tariffa);
@@ -45,7 +44,6 @@ public class TariffeManagerBean extends EJBManagerBean implements
 
 	}
 
-	@Override
 	public void remove(Tariffa tariffa) {
 		try {
 			Tariffa tar = em.find(Tariffa.class, tariffa.getId());
@@ -56,7 +54,6 @@ public class TariffeManagerBean extends EJBManagerBean implements
 
 	}
 
-	@Override
 	public List<Tariffa> getAllTariffe() {
 		List<Tariffa> result = new ArrayList<Tariffa>();
 		try {
@@ -69,7 +66,6 @@ public class TariffeManagerBean extends EJBManagerBean implements
 		return result;
 	}
 
-	@Override
 	public Tariffa find(Long id) {
 		try {
 			return em.find(Tariffa.class, id);
@@ -77,5 +73,22 @@ public class TariffeManagerBean extends EJBManagerBean implements
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public Tariffa getTariffaByCilindrata(String cilindrata) {
+		System.out.println("GET SCOOTER BY CILINDRATA");
+		List<Scooter> result = new ArrayList<Scooter>();
+		try {
+			result = em.createQuery(
+					"select t from Scooter t where t.cilindrata = :CIL")
+					.setParameter("CIL", cilindrata).getResultList();
+			if (result.size() > 0 && result.get(0) != null)
+				return result.get(0).getTariffa();
+		} catch (Exception e) {
+			System.out.println("GET SCOOTER BY CILINDRATA EXC");
+			e.printStackTrace();
+			return null;
+		}
+		return null;
 	}
 }
