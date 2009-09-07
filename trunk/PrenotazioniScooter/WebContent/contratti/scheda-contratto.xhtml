@@ -150,7 +150,7 @@
                     <h:outputText value="-------------"
                         rendered="#{not contrattiHandler.contratto.aperto}" />
 
-                    <a:fieldView id="totaleSomma" label="Somma Totale:"
+                    <a:fieldView id="totaleSomma" label="Somma Totale (COMPRESO QUELLO GIA' VERSATO):"
                         fieldName="totale" entity="#{contrattiHandler.contratto}"
                         rendered="#{not contrattiHandler.contratto.aperto}" />
 
@@ -160,7 +160,7 @@
                         rendered="#{not contrattiHandler.contratto.aperto}" />
 
                     <a:fieldView id="totaleChiusura"
-                        label="Totale dovuto per Chiusura Contratto:"
+                        label="Totale dovuto per Chiusura Contratto (DA VERSARE!!):"
                         fieldName="totaleChiusura" entity="#{contrattiHandler.contratto}"
                         rendered="#{not contrattiHandler.contratto.aperto}" />
 
