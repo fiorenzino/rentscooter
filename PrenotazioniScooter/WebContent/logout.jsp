@@ -14,8 +14,9 @@
 		e.printStackTrace();
 	}
 	log.info("logout: end");
-
-	String redirectURL = getServletContext().getContextPath()
-			+ "/index.jsf";
-	response.sendRedirect(redirectURL);
 %>
+<html>
+<head>
+<meta http-equiv="Refresh" content="0; URL=contratti/contratti.jsf">
+</head>
+</html>
