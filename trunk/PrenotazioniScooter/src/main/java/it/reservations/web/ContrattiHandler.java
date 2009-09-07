@@ -28,9 +28,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Current;
 
+import org.jboss.logging.Logger;
+
 @SessionScoped
 @Named
 public class ContrattiHandler extends JSFHandler implements Serializable {
+
+	Logger log = Logger.getLogger(ContrattiHandler.class.getName());
 
 	private Contratto contratto;
 
@@ -64,13 +68,13 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 			Map<String, MiniPre> occ = mappa.get(nome);
 			int l = 1;
 			for (String key : occ.keySet()) {
-				System.out.println("DATA: " + key);
+				log.info("DATA: " + key);
 				if (l == 1) {
 					sco[0] = occ.get(key);
 				}
 				sco[l++] = occ.get(key);
 			}
-			System.out.println("--------------");
+			log.info("--------------");
 			searchModel.add(sco);
 		}
 		return searchModel;
@@ -97,7 +101,7 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 		cal.setTime(getContratto().getDataInit());
 		colonne.add("scooter");
 		while (cal.getTime().compareTo(getContratto().getDataEnd()) <= 0) {
-			// System.out.println("COLDATA: " + cal.get(Calendar.DAY_OF_MONTH)
+			// log.info("COLDATA: " + cal.get(Calendar.DAY_OF_MONTH)
 			// + "-" + cal.get(Calendar.MONTH) + "-"
 			// + cal.get(Calendar.YEAR));
 			colonne.add(cal.get(Calendar.DAY_OF_MONTH) + "-"
@@ -126,26 +130,25 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 				this.contratto.getDataRiconsegna()) != 0) {
 			Scooter sco = JNDIUtils.getScooterManager().find(
 					this.contratto.getScooter().getId());
-			System.out.println("SCCOTER: " + sco.getMarcaModello() + " ."
-					+ sco.getId());
+			log.info("SCCOTER: " + sco.getMarcaModello() + " ." + sco.getId());
 			Tariffa tariffa = sco.getTariffa();
-			System.out.println("TARIFFA :" + tariffa.getId());
+			log.info("TARIFFA :" + tariffa.getId());
 			Float extra = TariffeUtil.calcolaExtra(TimeUtil.getDiffDays(
 					this.contratto.getDataEnd(),
 					this.contratto.getDataRiconsegna()).intValue(), tariffa);
-			System.out.println("IMPORTO EXTRA: " + extra);
+			log.info("IMPORTO EXTRA: " + extra);
 			this.contratto.setExtra(extra);
 			Float kmExtra = TariffeUtil.calcolaKmExtra(this.contratto
 					.getKmExtra(), tariffa);
 			this.contratto.setImportokmExtra(kmExtra);
 		} else {
-			System.out.println("DATA END = DATA RICONSEGNA!!");
+			log.info("DATA END = DATA RICONSEGNA!!");
 		}
 	}
 
 	public void calcolaSomma() {
 		if (this.contratto.getScooter().getId() < 1) {
-			System.out.println("NON HAI SELEZIONATO LO SCOOTER ");
+			log.info("NON HAI SELEZIONATO LO SCOOTER ");
 			FacesContext context = FacesContext.getCurrentInstance();
 			FacesMessage message = new FacesMessage();
 			message.setSeverity(FacesMessage.SEVERITY_ERROR);
@@ -160,18 +163,18 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 			if (this.contratto.getDataEnd().after(this.contratto.getDataInit())) {
 				Scooter sco = JNDIUtils.getScooterManager().find(
 						this.contratto.getScooter().getId());
-				System.out.println("SCCOTER: " + sco.getMarcaModello() + " ."
+				log.info("SCCOTER: " + sco.getMarcaModello() + " ."
 						+ sco.getId());
 				Tariffa tariffa = sco.getTariffa();
-				System.out.println("TARIFFA :" + tariffa.getId());
+				log.info("TARIFFA :" + tariffa.getId());
 				Float importoIniziale = TariffeUtil.calcolaTariffa(TimeUtil
 						.getDiffDays(this.contratto.getDataInit(),
 								this.contratto.getDataEnd()).intValue(),
 						tariffa);
-				System.out.println("IMPORTO INIZIALE: " + importoIniziale);
+				log.info("IMPORTO INIZIALE: " + importoIniziale);
 				this.contratto.setImportoIniziale(importoIniziale);
 			} else {
-				System.out.println("DATE NON VALIDE ");
+				log.info("DATE NON VALIDE ");
 				FacesContext context = FacesContext.getCurrentInstance();
 				FacesMessage message = new FacesMessage();
 				message.setSeverity(FacesMessage.SEVERITY_ERROR);
@@ -179,7 +182,7 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 				context.addMessage("cercaScooter:dataEnd", message);
 			}
 		} else {
-			System.out.println("NON HAI SELEZIONATO CLIENTE ");
+			log.info("NON HAI SELEZIONATO CLIENTE ");
 			FacesContext context = FacesContext.getCurrentInstance();
 			FacesMessage message = new FacesMessage();
 			message.setSeverity(FacesMessage.SEVERITY_ERROR);
@@ -217,7 +220,7 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 
 		List<Prenotazione> prenotazioni = new ArrayList<Prenotazione>();
 		while (cal.getTime().compareTo(this.contratto.getDataRiconsegna()) <= 0) {
-			System.out.println("DATA: " + cal.getTime());
+			log.info("DATA: " + cal.getTime());
 			Prenotazione pre = new Prenotazione();
 			pre.setContratto(this.contratto);
 			pre.setSingleDay(cal.getTime());
@@ -236,6 +239,21 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 	}
 
 	public String addContratto2() {
+		if (this.contratto.getScooter().getId() == 0) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Non hai scelto lo scooter!"));
+			return "";
+		}
+		if (this.contratto.getCliente().getId() == 0) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Non hai scelto il cliente!"));
+			return "";
+		}
+		if (this.contratto.getDataEnd().compareTo(this.contratto.getDataInit()) < 0) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("La date non sono corrette !"));
+			return "";
+		}
 		Scooter sco = JNDIUtils.getScooterManager().find(
 				this.contratto.getScooter().getId());
 		Cliente cli = JNDIUtils.getClientiManager().find(
@@ -250,7 +268,7 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 		cal.setTime(this.contratto.getDataInit());
 		List<Prenotazione> prenotazioni = new ArrayList<Prenotazione>();
 		while (cal.getTime().compareTo(this.contratto.getDataEnd()) <= 0) {
-			System.out.println("DATA: " + cal.getTime());
+			log.info("DATA: " + cal.getTime());
 			Prenotazione pre = new Prenotazione();
 			pre.setContratto(this.contratto);
 			pre.setSingleDay(cal.getTime());
@@ -288,7 +306,7 @@ public class ContrattiHandler extends JSFHandler implements Serializable {
 	}
 
 	public String detailContratto() {
-		System.out.println("ABS: " + Util.getAbsolutePath());
+		log.info("ABS: " + Util.getAbsolutePath());
 		this.contratto = (Contratto) getModel().getRowData();
 		Util.valorizzaCliente(this.contratto.getCliente());
 		return "/contratti/scheda-contratto.xhtml";

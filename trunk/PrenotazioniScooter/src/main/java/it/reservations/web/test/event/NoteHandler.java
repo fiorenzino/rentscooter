@@ -2,6 +2,7 @@ package it.reservations.web.test.event;
 
 import it.reservations.par.Created;
 import it.reservations.par.Updated;
+import it.reservations.web.printer.RendererFilter;
 
 import java.io.Serializable;
 
@@ -12,9 +13,13 @@ import javax.inject.AnnotationLiteral;
 import javax.inject.Current;
 import javax.inject.manager.Manager;
 
+import org.jboss.logging.Logger;
+
 @Named
 @SessionScoped
 public class NoteHandler implements Serializable {
+
+	Logger log = Logger.getLogger(RendererFilter.class.getName());
 
 	private String note;
 
@@ -23,25 +28,25 @@ public class NoteHandler implements Serializable {
 	@Current
 	Manager manager;
 
-//	@Fires
-//	Event<ChangeNoteEvent> event;
+	// @Fires
+	// Event<ChangeNoteEvent> event;
 
 	public NoteHandler() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public String addNote1() {
-		System.out.println("addNote1");
+		log.info("addNote1");
 		setNote("");
 		setEditMode(false);
 		return "/test/test.xhtml";
 	}
 
 	public String addNote2() {
-		System.out.println("addNote2");
-//		event.fire(new ChangeNoteEvent(getNote()),
-//				new AnnotationLiteral<Created>() {
-//				});
+		log.info("addNote2");
+		// event.fire(new ChangeNoteEvent(getNote()),
+		// new AnnotationLiteral<Created>() {
+		// });
 		manager.fireEvent(new ChangeNoteEvent(getNote()),
 				new AnnotationLiteral<Created>() {
 				});
@@ -49,20 +54,20 @@ public class NoteHandler implements Serializable {
 	}
 
 	public String modNote1() {
-		System.out.println("modNote1");
+		log.info("modNote1");
 		setEditMode(true);
 		return "/test/test.xhtml";
 	}
 
 	public String modNote2() {
-		System.out.println("modNote2");
+		log.info("modNote2");
 		setEditMode(false);
 		manager.fireEvent(new ChangeNoteEvent(getNote()),
 				new AnnotationLiteral<Updated>() {
 				});
-//		event.fire(new ChangeNoteEvent(getNote()),
-//				new AnnotationLiteral<Updated>() {
-//				});
+		// event.fire(new ChangeNoteEvent(getNote()),
+		// new AnnotationLiteral<Updated>() {
+		// });
 		return "/test/testOk.xhtml";
 	}
 
@@ -71,17 +76,17 @@ public class NoteHandler implements Serializable {
 	}
 
 	public void setNote(String note) {
-		System.out.println("setNote: " + note);
+		log.info("setNote: " + note);
 		this.note = note;
 
 	}
 
 	public void afterCreated(@Observes @Created ChangeNoteEvent event) {
-		System.out.println("Osservato - CREAZIONE: " + event.getNote());
+		log.info("Osservato - CREAZIONE: " + event.getNote());
 	}
 
 	public void afterUpdated(@Observes @Updated ChangeNoteEvent event) {
-		System.out.println("Osservato - UPDATE: " + event.getNote());
+		log.info("Osservato - UPDATE: " + event.getNote());
 	}
 
 	public boolean isEditMode() {

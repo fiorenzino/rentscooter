@@ -1,15 +1,13 @@
 package it.reservations.ejb3;
 
-import java.util.List;
-
-import it.reservations.ejb3.utils.JNDIUtils;
-import it.reservations.par.Cliente;
 import it.reservations.par.Contratto;
 import it.reservations.par.Prenotazione;
 import it.smartflower.ejb3.EJBManagerBean;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -27,6 +25,7 @@ public class ContrattiManagerBean extends EJBManagerBean implements
 		return em;
 	}
 
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void delete(Contratto contratto) {
 		try {
 			Contratto cl = em.find(Contratto.class, contratto.getId());
@@ -36,6 +35,7 @@ public class ContrattiManagerBean extends EJBManagerBean implements
 		}
 	}
 
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void persist(Contratto contratto) {
 		try {
 			em.persist(contratto);
@@ -45,6 +45,7 @@ public class ContrattiManagerBean extends EJBManagerBean implements
 
 	}
 
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void update(Contratto contratto) {
 		try {
 			em.merge(contratto);
@@ -66,6 +67,7 @@ public class ContrattiManagerBean extends EJBManagerBean implements
 		return numContratti;
 	}
 
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Contratto updateSpecial(Contratto contratto) {
 		try {
 			Contratto oldContratto = em

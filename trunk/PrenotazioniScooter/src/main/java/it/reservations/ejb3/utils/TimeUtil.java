@@ -3,10 +3,13 @@ package it.reservations.ejb3.utils;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.jboss.logging.Logger;
+
 public class TimeUtil {
+	static Logger log = Logger.getLogger(TimeUtil.class.getName());
 
 	public static Long getDiffDays(Date dataInit, Date dataEnd) {
-		System.out.println("DATE: " + dataInit + "-" + dataEnd);
+		log.info("DATE: " + dataInit + "-" + dataEnd);
 		if (dataEnd.after(dataInit)) {
 			Calendar cal1 = Calendar.getInstance();
 			cal1.setTime(dataInit);
