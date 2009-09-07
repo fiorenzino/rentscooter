@@ -1,6 +1,7 @@
 package it.reservations.par;
 
 import it.reservations.ejb3.utils.TimeUtil;
+import it.reservations.web.utils.LogUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -164,7 +165,7 @@ public class Contratto implements Serializable {
 			return getNumGiorniExtra() * getScooter().getTariffa().getD1ex();
 
 		} catch (Exception e) {
-			System.out.println("getExtra ERROR");
+			LogUtils.logga(Contratto.class, "getExtra ERROR");
 		}
 		return new Float(0);
 	}
@@ -177,15 +178,12 @@ public class Contratto implements Serializable {
 	public Float getTotale() {
 		try {
 			if (getSconto() != 0) {
-				return (getImportoIniziale() - (getSconto()
-				// * getImportoIniziale() / new Float(100)
-						))
-						+ getImportoFinale() + getExtra()
-						+ getBenzinaExtra()
-						+ getCascoExtra()
-						+ getImportokmExtra()
-						+ getImportoDanni()
-						+ getImportoRitiroMezzo()
+				return (getImportoIniziale() - getSconto())
+						// * getImportoIniziale() / new Float(100)
+						// ))
+						+ getImportoFinale() + getExtra() + getBenzinaExtra()
+						+ getCascoExtra() + getImportokmExtra()
+						+ getImportoDanni() + getImportoRitiroMezzo()
 						+ getImportoSottoCasco();
 			}
 			return getImportoIniziale() + getImportoFinale() + getExtra()
@@ -193,7 +191,7 @@ public class Contratto implements Serializable {
 					+ getImportoDanni() + getImportoRitiroMezzo()
 					+ getImportoSottoCasco();
 		} catch (Exception e) {
-			System.out.println("getTotale ERROR");
+			LogUtils.logga(Contratto.class, "getTotale ERROR");
 		}
 		return new Float(0);
 
@@ -223,7 +221,12 @@ public class Contratto implements Serializable {
 
 	@Transient
 	public Float getTotaleChiusura() {
-		return getTotale() - getImportoCaparra();
+		if (getSconto() != 0) {
+			return getTotale() - getImportoIniziale() + getSconto()
+					- getCascoExtra() - getImportoSottoCasco();
+		}
+		return getTotale() - getImportoIniziale() - getCascoExtra()
+				- getImportoCaparra() - getImportoSottoCasco();
 	}
 
 	public void setTotaleChiusura(Float totaleChiusura) {
