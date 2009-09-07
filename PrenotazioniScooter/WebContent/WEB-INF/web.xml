@@ -92,9 +92,7 @@
 
 	<filter>
 		<filter-name>RendererFilter</filter-name>
-		<filter-class>
-			it.reservations.web.printer.RendererFilter
-		</filter-class>
+		<filter-class>it.reservations.web.printer.RendererFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>RendererFilter</filter-name>
@@ -153,5 +151,42 @@
 		<error-code>400</error-code>
 		<location>/index.jsf</location>
 	</error-page>
+
+
+	<security-constraint>
+		<display-name>require valid user</display-name>
+		<web-resource-collection>
+			<web-resource-name>internal application</web-resource-name>
+			<url-pattern>/contratti/*</url-pattern>
+			<url-pattern>/clienti/*</url-pattern>
+			<url-pattern>/dinamico/*</url-pattern>
+			<url-pattern>/pdf/*</url-pattern>
+			<url-pattern>/prenotazioni/*</url-pattern>
+			<url-pattern>/scooters/*</url-pattern>
+			<url-pattern>/tariffe/*</url-pattern>
+			<url-pattern>/index.xhtml</url-pattern>
+			<url-pattern>/index.jsf</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>user</role-name>
+			<role-name>admin</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<realm-name>Login</realm-name>
+		<form-login-config>
+			<form-login-page>/login.jsf</form-login-page>
+			<form-error-page>/login.jsf</form-error-page>
+		</form-login-config>
+	</login-config>
+
+	<security-role>
+		<role-name>user</role-name>
+	</security-role>
 
 </web-app>
