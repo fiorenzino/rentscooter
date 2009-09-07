@@ -15,7 +15,7 @@
 		</loader-repository>
 	</class-loading>
 
-	<security-domain>java:/jaas/jmx-console</security-domain>
+	<security-domain>java:/jaas/RentScooterSecurityDomain</security-domain>
 	<context-root>gestione-noleggi</context-root>
 
 </jboss-web>

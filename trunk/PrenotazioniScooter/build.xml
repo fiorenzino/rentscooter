@@ -19,7 +19,7 @@
 	<property name="lib.dir" location="${web.dir}/WEB-INF/lib" />
 	<property name="lib.deploy" location="lib/deploy" />
 	<property name="jboss.home" value="/usr/jboss/jboss-5.1.0.GA" />
-	<property name="jboss.server" value="webbeans" />
+	<property name="jboss.server" value="default" />
 	<property name="jboss.deploy.dir" location="${jboss.home}/server/${jboss.server}/deploy" />
 	<property name="jboss.conf.dir" location="${jboss.home}/server/${jboss.server}/conf" />
 
