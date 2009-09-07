@@ -1,5 +1,6 @@
 package it.reservations.web.printer;
 
+import it.reservations.web.navigation.NavigationHandler;
 import it.reservations.web.utils.Util;
 
 import java.io.File;
@@ -21,6 +22,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
+import org.jboss.logging.Logger;
 import org.w3c.dom.Document;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 import org.xml.sax.InputSource;
@@ -29,7 +31,7 @@ import org.xml.sax.SAXException;
 import com.lowagie.text.DocumentException;
 
 public class RendererFilter implements Filter {
-
+	Logger log = Logger.getLogger(RendererFilter.class.getName());
 	FilterConfig config;
 	private DocumentBuilder documentBuilder;
 
@@ -51,7 +53,7 @@ public class RendererFilter implements Filter {
 
 	public void doFilter(ServletRequest req, ServletResponse resp,
 			FilterChain filterChain) throws IOException, ServletException {
-		System.out.println("PRINTER PDF");
+		log.info("PRINTER PDF");
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
 

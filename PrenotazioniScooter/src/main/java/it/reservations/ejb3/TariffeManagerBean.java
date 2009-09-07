@@ -5,6 +5,7 @@ import java.util.List;
 
 import it.reservations.par.Scooter;
 import it.reservations.par.Tariffa;
+import it.reservations.web.utils.TariffeUtil;
 import it.smartflower.ejb3.EJBManagerBean;
 
 import javax.ejb.Local;
@@ -12,10 +13,14 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.jboss.logging.Logger;
+
 @Stateless
 @Local(TariffeManager.class)
 public class TariffeManagerBean extends EJBManagerBean implements
 		TariffeManager {
+
+	Logger log = Logger.getLogger(TariffeManagerBean.class.getName());
 
 	@PersistenceContext(unitName = "TestManager")
 	EntityManager em;
@@ -76,7 +81,7 @@ public class TariffeManagerBean extends EJBManagerBean implements
 	}
 
 	public Tariffa getTariffaByCilindrata(String cilindrata) {
-		System.out.println("GET SCOOTER BY CILINDRATA");
+		log.info("GET SCOOTER BY CILINDRATA");
 		List<Scooter> result = new ArrayList<Scooter>();
 		try {
 			result = em.createQuery(
@@ -85,7 +90,7 @@ public class TariffeManagerBean extends EJBManagerBean implements
 			if (result.size() > 0 && result.get(0) != null)
 				return result.get(0).getTariffa();
 		} catch (Exception e) {
-			System.out.println("GET SCOOTER BY CILINDRATA EXC");
+			log.error("GET SCOOTER BY CILINDRATA EXC");
 			e.printStackTrace();
 			return null;
 		}

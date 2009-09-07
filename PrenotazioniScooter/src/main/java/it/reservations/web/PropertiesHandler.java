@@ -24,7 +24,7 @@ import org.jboss.logging.Logger;
 @Named
 public class PropertiesHandler implements Serializable {
 
-	Logger log = Logger.getLogger(getClass().getName());
+	Logger log = Logger.getLogger(PropertiesHandler.class.getName());
 
 	private TreeMap<Long, Comune> comuni;
 
@@ -229,7 +229,7 @@ public class PropertiesHandler implements Serializable {
 	}
 
 	public String getAbsolutePath() {
-		// System.out.println("ABS: " + Util.getAbsolutePath());
+		// log.info("ABS: " + Util.getAbsolutePath());
 		return Util.getAbsolutePath();
 	}
 
@@ -237,11 +237,11 @@ public class PropertiesHandler implements Serializable {
 		String dove = it.reservations.web.utils.Util.getCurrentPage().trim();
 		String path = it.reservations.web.utils.Util.getContextPath().replace(
 				"/", "").trim();
-		// System.out.println("PATH: " + path + "- DOVE: " + dove);
+		// log.info("PATH: " + path + "- DOVE: " + dove);
 		String[] dovs = dove.split("/");
 		StringBuffer res = new StringBuffer();
 		for (int i = 0; i < dovs.length; i++) {
-			// System.out.println(i + ")" + dovs[i] + ".");
+			// log.info(i + ")" + dovs[i] + ".");
 			if (i == 0) {
 				res.append("<a href=\"/" + path + "\">home</a>");
 			}
@@ -250,7 +250,7 @@ public class PropertiesHandler implements Serializable {
 					&& (dovs[i].trim().compareTo(path) != 0)) {
 				if ((dovs[i].trim().compareTo("") != 0)
 						&& (dovs[i].trim().compareTo(path) != 0)) {
-					// System.out.println("SCRIVO -");
+					// log.info("SCRIVO -");
 					res.append(" - ");
 				}
 				if (dovs[i].endsWith(".jsf")) {

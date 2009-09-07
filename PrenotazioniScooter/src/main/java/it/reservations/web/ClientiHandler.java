@@ -15,6 +15,8 @@ import javax.annotation.Named;
 import javax.context.SessionScoped;
 import javax.faces.model.SelectItem;
 
+import org.jboss.logging.Logger;
+
 @SessionScoped
 @Named
 public class ClientiHandler extends JSFHandler implements Serializable {
@@ -22,6 +24,8 @@ public class ClientiHandler extends JSFHandler implements Serializable {
 	private Cliente cliente;
 
 	private SelectItem[] clientiItems;
+
+	Logger log = Logger.getLogger(ClientiHandler.class.getName());
 
 	public SelectItem[] getClientiItems() {
 		if (clientiItems == null) {
@@ -32,7 +36,7 @@ public class ClientiHandler extends JSFHandler implements Serializable {
 			int i = 1;
 			for (Cliente cliente : clienti) {
 				items[i++] = new SelectItem(cliente.getId(), cliente
-						.getNomeCognome());
+						.getNomeCognome().toUpperCase());
 			}
 			clientiItems = items;
 		}
@@ -75,7 +79,7 @@ public class ClientiHandler extends JSFHandler implements Serializable {
 		}
 
 		aggModel();
-		clientiItems =null;
+		clientiItems = null;
 		return "/clienti/clienti.xhtml";
 	}
 
@@ -100,7 +104,7 @@ public class ClientiHandler extends JSFHandler implements Serializable {
 		try {
 			this.ricerca = (RicercaI) ClassCreator
 					.creaRicerca("it.reservations.par.RicercaClienti");
-			System.out.println("ecco qui: " + this.ricerca.getQuery());
+			log.info("ecco qui: " + this.ricerca.getQuery());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

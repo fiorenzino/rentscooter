@@ -14,9 +14,13 @@ import javax.annotation.Named;
 import javax.context.SessionScoped;
 import javax.faces.model.SelectItem;
 
+import org.jboss.logging.Logger;
+
 @SessionScoped
 @Named
 public class ScootersHandler extends JSFHandler implements Serializable {
+
+	Logger log = Logger.getLogger(ScootersHandler.class.getName());
 
 	private Scooter scooter;
 
@@ -68,7 +72,7 @@ public class ScootersHandler extends JSFHandler implements Serializable {
 		JNDIUtils.getScooterManager().persist(this.scooter);
 		aggModel();
 		this.scootersItems = null;
-		this.cilindrateItems=null;
+		this.cilindrateItems = null;
 		return "/scooters/scheda-scooter.xhtml";
 	}
 
@@ -85,7 +89,7 @@ public class ScootersHandler extends JSFHandler implements Serializable {
 		JNDIUtils.getScooterManager().update(this.scooter);
 		aggModel();
 		this.scootersItems = null;
-		this.cilindrateItems=null;
+		this.cilindrateItems = null;
 		return "/scooters/scheda-scooter.xhtml";
 	}
 
@@ -93,7 +97,7 @@ public class ScootersHandler extends JSFHandler implements Serializable {
 		JNDIUtils.getScooterManager().update(this.scooter);
 		aggModel();
 		this.scootersItems = null;
-		this.cilindrateItems=null;
+		this.cilindrateItems = null;
 		return "/scooters/scheda-scooter.xhtml";
 	}
 

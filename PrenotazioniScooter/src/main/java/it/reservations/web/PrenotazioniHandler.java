@@ -15,9 +15,13 @@ import javax.context.SessionScoped;
 import javax.faces.model.ArrayDataModel;
 import javax.faces.model.DataModel;
 
+import org.jboss.logging.Logger;
+
 @SessionScoped
 @Named
 public class PrenotazioniHandler implements Serializable {
+
+	Logger log = Logger.getLogger(PrenotazioniHandler.class.getName());
 
 	private ArrayList<Prenotazione[]> lista;
 
@@ -49,7 +53,7 @@ public class PrenotazioniHandler implements Serializable {
 		Facet fac = new Facet("SCOOTER", cal.getTime());
 		columns.add(fac);
 		while (cal.getTime().compareTo(getAl()) <= 0) {
-			// System.out.println("DATA: " + cal.getTime());
+			// log.info("DATA: " + cal.getTime());
 			fac = new Facet(cal.get(Calendar.DAY_OF_MONTH) + "-"
 					+ (cal.get(Calendar.MONTH) + 1) + "-"
 					+ cal.get(Calendar.YEAR), cal.getTime());
@@ -85,19 +89,19 @@ public class PrenotazioniHandler implements Serializable {
 	}
 
 	// riga[colonna][]
-	//riga[scooter1][giornoDAL] - riga[scooter1][giornoAL]
-	//riga[scooter2][giornoDAL] - riga[scooter2][giornoAL]
+	// riga[scooter1][giornoDAL] - riga[scooter1][giornoAL]
+	// riga[scooter2][giornoDAL] - riga[scooter2][giornoAL]
 	public ArrayList<Prenotazione[]> getModel() {
 		if (getDal() != null && getAl() != null) {
 
 			for (int i = 0; i < 10; i++) {
-				System.out.println("i:" + i);
+				log.info("i:" + i);
 				Prenotazione[] res = new Prenotazione[getColumns().size()];
 				for (int j = 0; j < getColumns().size(); j++) {
 					if (j == 0) {
 						res[j] = new Prenotazione();
 					} else {
-						System.out.println("j:" + j + "-"
+						log.info("j:" + j + "-"
 								+ getColumns().get(j).getHeader());
 						res[j] = new Prenotazione();
 
@@ -106,7 +110,7 @@ public class PrenotazioniHandler implements Serializable {
 				getLista().add(res);
 			}
 		} else {
-			System.out.println("DATE NULL");
+			log.info("DATE NULL");
 		}
 		return lista;
 	}
@@ -168,7 +172,6 @@ public class PrenotazioniHandler implements Serializable {
 	public void setReservationsList(List<Prenotazione> reservationsList) {
 		this.reservationsList = reservationsList;
 	}
-
 
 	public String getCilindrata() {
 		return cilindrata;

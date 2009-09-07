@@ -17,6 +17,7 @@ public class Tariffa implements Serializable {
 	private Float d3;
 	private Float d4;
 	private Float d5;
+	private Float d6;
 	private Float d7;
 	private Float d30;
 	private Float d1ex;
@@ -120,5 +121,13 @@ public class Tariffa implements Serializable {
 
 	public void setD1ex(Float d1ex) {
 		this.d1ex = d1ex;
+	}
+
+	public Float getD6() {
+		return d6;
+	}
+
+	public void setD6(Float d6) {
+		this.d6 = d6;
 	}
 }

@@ -8,9 +8,14 @@ import javax.annotation.Named;
 import javax.context.SessionScoped;
 import javax.faces.event.ValueChangeEvent;
 
+import org.jboss.logging.Logger;
+
 @SessionScoped
 @Named
 public class TabHandler implements Serializable {
+
+	Logger log = Logger.getLogger(TabHandler.class.getName());
+	
 	private String uno;
 	private String due;
 	private String tre;
@@ -40,24 +45,24 @@ public class TabHandler implements Serializable {
 	}
 
 	public void validateForm() {
-		System.out.println("VF UNO: " + getUno());
-		System.out.println("VF DUE: " + getDue());
-		System.out.println("VF TRE: " + getTre());
+		log.info("VF UNO: " + getUno());
+		log.info("VF DUE: " + getDue());
+		log.info("VF TRE: " + getTre());
 	}
 
 	public void valueChanged(ValueChangeEvent event) {
-		System.out.println("VC UNO: " + getUno());
-		System.out.println("VC DUE: " + getDue());
-		System.out.println("VC TRE: " + getTre());
-		System.out.println("PAGE: " + Util.getCurrentPage());
-		System.out.println("PATH: " + Util.getContextPath());
+		log.info("VC UNO: " + getUno());
+		log.info("VC DUE: " + getDue());
+		log.info("VC TRE: " + getTre());
+		log.info("PAGE: " + Util.getCurrentPage());
+		log.info("PATH: " + Util.getContextPath());
 
 	}
 
 	public String closeForm() {
-		System.out.println("CF UNO: " + getUno());
-		System.out.println("CF DUE: " + getDue());
-		System.out.println("CF TRE: " + getTre());
+		log.info("CF UNO: " + getUno());
+		log.info("CF DUE: " + getDue());
+		log.info("CF TRE: " + getTre());
 		return "/tabForm.xhtml";
 	}
 }

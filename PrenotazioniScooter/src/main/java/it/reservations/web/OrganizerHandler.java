@@ -18,6 +18,7 @@ import javax.ejb.EJB;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
+import org.jboss.logging.Logger;
 import org.richfaces.event.CurrentDateChangeEvent;
 import org.richfaces.model.CalendarDataModel;
 import org.richfaces.model.CalendarDataModelItem;
@@ -25,6 +26,9 @@ import org.richfaces.model.CalendarDataModelItem;
 @SessionScoped
 @Named
 public class OrganizerHandler implements CalendarDataModel, Serializable {
+
+	Logger log = Logger.getLogger(OrganizerHandler.class.getName());
+
 	@EJB
 	PrenotazioniManager prenotazioniManager;
 	private CalendarDataModelItem[] items = null;
@@ -66,13 +70,13 @@ public class OrganizerHandler implements CalendarDataModel, Serializable {
 	}
 
 	public void controllaDate(ActionEvent event) {
-		System.out.println("DATA SCELTA: " + currentDate);
+		log.info("DATA SCELTA: " + currentDate);
 		items = null;
 
 	}
 
 	public void reset() {
-		System.out.println("RESET");
+		log.info("RESET");
 		items = null;
 
 	}
@@ -88,8 +92,8 @@ public class OrganizerHandler implements CalendarDataModel, Serializable {
 		}
 		if (items == null) {
 			if (dateArray.length != 0) {
-				// System.out.println("DATA INIT: " + dateArray[0]);
-				// System.out.println("DATA END: "
+				// log.info("DATA INIT: " + dateArray[0]);
+				// log.info("DATA END: "
 				// + dateArray[dateArray.length - 1]);
 				if (dateArray[0].before(getDataInit())
 						|| dateArray[dateArray.length - 1].after(getDataEnd())) {
@@ -115,7 +119,7 @@ public class OrganizerHandler implements CalendarDataModel, Serializable {
 		Map<String, DaySummary> mapp = prenotazioniManager.getReservationData(
 				scooterFilter, init, end);
 		for (String data : mapp.keySet()) {
-			// System.out.println("DATA: " + data);
+			// log.info("DATA: " + data);
 			DaySummary dayS = mapp.get(data);
 			lista.add(createDataModelItem(dayS.getData(), "scooter:"
 					+ dayS.getNum(), dayS.getDescription(), dayS.getNum()));
@@ -182,7 +186,7 @@ public class OrganizerHandler implements CalendarDataModel, Serializable {
 	 *            handling
 	 */
 	public void valueChanged(ValueChangeEvent event) {
-		System.out.println(event.getNewValue() + "selected");
+		log.info(event.getNewValue() + "selected");
 		setCurrentDate((Date) event.getNewValue());
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(getCurrentDate());
@@ -191,12 +195,11 @@ public class OrganizerHandler implements CalendarDataModel, Serializable {
 		setCurrentShortDescription((String) ((HashMap) items[calendar
 				.get(Calendar.DAY_OF_MONTH) - 1].getData())
 				.get("shortDescription"));
-		
 
 	}
 
 	public void changeEvent(CurrentDateChangeEvent event) {
-		System.out.println(event.getCurrentDateString() + "CHANGE");
+		log.info(event.getCurrentDateString() + "CHANGE");
 
 	}
 

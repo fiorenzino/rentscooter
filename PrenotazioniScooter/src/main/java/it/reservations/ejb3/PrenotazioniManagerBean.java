@@ -1,6 +1,5 @@
 package it.reservations.ejb3;
 
-import it.reservations.par.Contratto;
 import it.reservations.par.DaySummary;
 import it.reservations.par.MiniPre;
 import it.reservations.par.Prenotazione;
@@ -13,15 +12,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 import java.util.TreeMap;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import org.jboss.logging.Logger;
 
 @Stateless
 @Local(PrenotazioniManager.class)
@@ -30,6 +28,8 @@ public class PrenotazioniManagerBean extends EJBManagerBean implements
 
 	@PersistenceContext(unitName = "TestManager")
 	EntityManager em;
+
+	Logger log = Logger.getLogger(PrenotazioniManagerBean.class.getName());
 
 	SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
 
@@ -42,22 +42,22 @@ public class PrenotazioniManagerBean extends EJBManagerBean implements
 			lista = (List<Scooter>) em.createNamedQuery(
 					"GET_SCOOTER_BY_CILINDRATA").setParameter("CILINDRATA",
 					cilindrata).getResultList();
-			// System.out.println("PER CIL: " + cilindrata + " " +
+			// log.info("PER CIL: " + cilindrata + " " +
 			// lista.size());
 		} else {
 			lista = (List<Scooter>) em.createNamedQuery("GET_ALL_SCOOTER")
 					.getResultList();
-			// System.out.println("TUTTI GLI SCOOTER: " + lista.size());
+			// log.info("TUTTI GLI SCOOTER: " + lista.size());
 		}
 		Map<Long, Map<String, MiniPre>> prenotazioniTot = new TreeMap<Long, Map<String, MiniPre>>();
 		for (Scooter scooter : lista) {
-			// System.out.println("SCOOTER" + scooter.getMarcaModello());
+			// log.info("SCOOTER" + scooter.getMarcaModello());
 			Map<String, MiniPre> resMap = new TreeMap<String, MiniPre>();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(dal);
 
 			while (cal.getTime().compareTo(al) <= 0) {
-				// System.out.println("DATA: " + cal.getTime());
+				// log.info("DATA: " + cal.getTime());
 
 				resMap.put(format1.format(cal.getTime()), new MiniPre(scooter
 						.getId(), scooter.getMarcaModello(), scooter
@@ -83,7 +83,7 @@ public class PrenotazioniManagerBean extends EJBManagerBean implements
 		for (Prenotazione reservation : prenotazioni) {
 			if (prenotazioniTot.containsKey(reservation.getContratto()
 					.getScooter().getId())) {
-				// System.out.println("TROVO: "
+				// log.info("TROVO: "
 				// + reservation.getContratto().getScooter()
 				// .getMarcaModello());
 				Map<String, MiniPre> listaPre = prenotazioniTot.get(reservation
@@ -97,7 +97,7 @@ public class PrenotazioniManagerBean extends EJBManagerBean implements
 				prenotazioniTot.put(reservation.getContratto().getScooter()
 						.getId(), listaPre);
 			} else {
-				// System.out.println("NON TROVO: "
+				// log.info("NON TROVO: "
 				// + reservation.getContratto().getScooter()
 				// .getMarcaModello());
 			}
@@ -117,16 +117,16 @@ public class PrenotazioniManagerBean extends EJBManagerBean implements
 			// tz.setDefault(TimeZone.getTimeZone("GMT+2"));
 			// cal.setTimeZone(tz);
 			while (cal.getTime().compareTo(al) <= 0) {
-				System.out.println("DATA: " + cal.getTime());
+				log.info("DATA: " + cal.getTime());
 				cal.set(Calendar.HOUR_OF_DAY, 0);
 				cal.set(Calendar.MINUTE, 0);
 				resMap.put(format1.format(cal.getTime()), new DaySummary(
 						new Long(0), "", cal.getTime()));
 				cal.add(Calendar.DAY_OF_MONTH, 1);
 			}
-			System.out.println("DAL: " + dal);
-			System.out.println("AL: " + al);
-			System.out.println("FILTER: " + scooterFilter);
+			log.info("DAL: " + dal);
+			log.info("AL: " + al);
+			log.info("FILTER: " + scooterFilter);
 
 			List<Prenotazione> prenotazioni = new ArrayList<Prenotazione>();
 			if (scooterFilter != null && scooterFilter > 0) {
@@ -137,26 +137,26 @@ public class PrenotazioniManagerBean extends EJBManagerBean implements
 						"DAL", dal).setParameter("AL", al).setParameter(
 						"IDSCOOTER", scooterFilter).getResultList();
 			} else {
-				System.out.println("QUERY GET_RESERVATIONS_BY_DATA");
+				log.info("QUERY GET_RESERVATIONS_BY_DATA");
 				prenotazioni = (List<Prenotazione>) em.createNamedQuery(
 						"GET_RESERVATIONS_BY_DATA").setParameter("DAL", dal)
 						.setParameter("AL", al).getResultList();
 			}
-			System.out.println("NUM RES: " + prenotazioni.size());
+			log.info("NUM RES: " + prenotazioni.size());
 			for (Prenotazione reservation : prenotazioni) {
 				cal.setTime(reservation.getSingleDay());
 				cal.set(Calendar.HOUR_OF_DAY, 0);
 				cal.set(Calendar.MINUTE, 0);
-				System.out.println("RES. DAY: " + cal.getTime());
+				log.info("RES. DAY: " + cal.getTime());
 				if (resMap.containsKey(format1.format(cal.getTime()))) {
-					System.out.println("reservation ok");
+					log.info("reservation ok");
 					DaySummary day = resMap.get(format1.format(cal.getTime()));
 					day.inc();
 					day.addDescription(reservation.getContratto().getScooter()
 							.getMarcaModello());
 					resMap.put(format1.format(cal.getTime()), day);
 				} else {
-					System.out.println("reservation ko");
+					log.info("reservation ko");
 					DaySummary day = new DaySummary(new Long(1), reservation
 							.getContratto().getScooter().getMarcaModello(), cal
 							.getTime());
@@ -180,7 +180,7 @@ public class PrenotazioniManagerBean extends EJBManagerBean implements
 	// em.persist(reservation);
 	// }
 	// // while (cal.getTime().compareTo(al) <= 0) {
-	// // System.out.println("DATA: " + cal.getTime());
+	// // log.info("DATA: " + cal.getTime());
 	// // cal.set(Calendar.HOUR_OF_DAY, 0);
 	// // cal.set(Calendar.MINUTE, 0);
 	// // Reservation res = new Reservation();

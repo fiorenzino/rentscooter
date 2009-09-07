@@ -2,13 +2,16 @@ package it.reservations.web.navigation;
 
 import java.io.IOException;
 
-import javax.faces.FacesException;
 import javax.faces.application.ViewHandler;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import org.jboss.logging.Logger;
+
 public class NavigationHandler extends
 		javax.faces.application.NavigationHandler {
+
+	static Logger log = Logger.getLogger(NavigationHandler.class.getName());
 
 	public final static String REDIRECT_PREFIX = "redirect";
 
@@ -16,7 +19,7 @@ public class NavigationHandler extends
 			String outcome) {
 		if (outcome == null || outcome.compareTo("") == 0)
 			return; // no navigation
-		System.out.println("from: " + fromAction + " - outcome:" + outcome);
+		log.info("from: " + fromAction + " - outcome:" + outcome);
 		ViewHandler viewHandler = facesContext.getApplication()
 				.getViewHandler();
 		String targetViewId = getTargetViewId(facesContext, outcome);
@@ -25,7 +28,7 @@ public class NavigationHandler extends
 		ExternalContext externalContext = facesContext.getExternalContext();
 		String redirectPath = viewHandler.getActionURL(facesContext,
 				targetViewId);
-		System.out.println("redirectPath: " + redirectPath);
+		log.info("redirectPath: " + redirectPath);
 		try {
 			externalContext.redirect(externalContext
 					.encodeActionURL(redirectPath));
